@@ -6,6 +6,11 @@
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Dropzone.js -->
   <link href="/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+    <style>
+        #loader{
+        visibility:hidden;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -82,40 +87,50 @@
                   </ul>
                     <div id="step-1">
                       <div class="form-horizontal form-label-left">
-
+                        {{-- @foreach($datosAlumno as $key => $data) --}}
+                        {{-- @foreach($datosAlumno as $data)
+                            <tr>
+                                <th>{{$data->nombre_alum}}</th>
+                                <th>{{$data['correo_alum']}}</th>
+                            </tr>
+                        @endforeach --}}
+                        {{-- {{$datosAlumno->CORREO_ALUM}} --}}
+                        {{-- {{ print_r($datosAlumno, true) }} --}}
+                        {{-- {{ print_r($infoCursos, true) }} --}}
+                        {{-- {{$datosAlumno->'correo_alum'}} --}}
                         <h2 class="StepTitle">Mis datos Academicos</h2>
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly" placeholder="Nombre">
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly" placeholder="{{$datosAlumno->NOMBRE_ALUM}}">
                           <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="text" class="form-control" id="inputSuccess3" readonly="readonly" placeholder="Apellido">
+                          <input type="text" class="form-control" id="inputSuccess3" readonly="readonly" placeholder="{{$datosAlumno->APEP_ALUM}}">
                           <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="text" class="form-control has-feedback-left" id="inputSuccess4" readonly="readonly" placeholder="Email">
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess4" readonly="readonly" placeholder="{{$datosAlumno->CORREO_ALUM}}">
                           <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="number" class="form-control" id="inputSuccess5"  placeholder="Telefono/Celular">
+                          <input type="number" class="form-control" id="inputSuccess5"  placeholder="Telefono/Celular" name="celular" value="{{$datosAlumno->CELULAR}}">
                           <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                           <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="Cordinador">
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
-                        </div>
+                        </div> -->
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="text" class="form-control" id="inputSuccess7" readonly="readonly" placeholder="Carrera">
+                          <input type="text" class="form-control" id="inputSuccess7" readonly="readonly" placeholder="{{$datosAlumno->CARRERA}}">
                           <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="text" class="form-control" id="inputSuccess8" readonly="readonly" placeholder="Jornada">
+                          <input type="text" class="form-control" id="inputSuccess8" readonly="readonly" placeholder="{{$datosAlumno->JORNADA}}">
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
@@ -136,16 +151,29 @@
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <select class="form-control" name="asignatura">
-                                 <option>Seleciona una asignatura</option>
-                                 <option>Programacion de base de datos</option>
-                                 <option>DAI</option>
-                                 <option>Soporte en hardware</option>
-                                 <option>Desarrollo en Java</option>
-                               </select>
-                        <span class="fa fa-folder form-control-feedback right" aria-hidden="true"></span>
+                        <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="Nombre Cordinador" name="nombreCoordinador">
+                        <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                       </div>
-
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            {{-- {!! Form::label('item', 'Item:') !!} --}}
+                            {{-- {!! Form::select('asignatura', ['L' => 'Large', 'S' => 'Small'], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
+                            {{-- {!! Form::select('asignatura', [$infoCursos['NOM_ASIG']], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
+                        <select class="form-control" name="asignatura" placeholder="Asignatura">
+                            <option value=''>Seleccionar asignatura</option>
+                            @foreach($infoCursos as $item)
+                                <option value="{{$item['NOM_ASIG']}}">{{$item['NOM_ASIG']}}</option>
+                            @endforeach
+                        </select>
+                        {{-- <select class="form-control" name="asignatura">
+                            <option>Seleciona una asignatura</option>
+                            <option>Programacion de base de datos</option>
+                            <option>DAI</option>
+                            <option>Soporte en hardware</option>
+                            <option>Desarrollo en Java</option>
+                        </select> --}}
+                        <span class="fa fa-folder form-control-feedback right" aria-hidden="true"></span>
+                        <span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
+                      </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <select class="form-control" name="motivo">
                                <option>Seleciona un motivo</option>
@@ -230,6 +258,7 @@
     maxFilesize: 3,
   };
   </script>
+  <script src="{{ asset('js/selectProfeCord.js') }}"></script>
 
 
 @endsection

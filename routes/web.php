@@ -12,6 +12,7 @@
 */
 
 Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
+// Route::get('/', function () { if(DB::connection()->getDatabaseName()) { echo "Yes! successfully connected to the DB: " . DB::connection()->getDatabaseName(); } });
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -19,6 +20,22 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::middleware(['auth'])->group(function(){
+
+  // Alumno
+  Route::get('/alumno/index','AlumnoController@index')->name('alumno');
+  Route::get('/alumno/nuevaJustificacion','JustificacionController@create')->name('alumno');
+  Route::get('/alumno/revisarJustificacion','JustificacionController@revisar')->name('alumno');
+
+  Route::get('asignaturas/get/{asignaturaId}', 'JustificacionController@getAsignaturas');
+
+
+  // Administrador
+  Route::get('/administrador/index','AdministradorController@index')->name('administrador');
+
+
+  // Coordinador
+  Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
+
   //Roles
   Route::post('roles/store', 'RoleController@store')->name('roles.store')->middleware('permission:roles.create');
   Route::get('roles', 'RoleController@index')->name('roles.index')->middleware('permission:roles.index');
@@ -53,73 +70,72 @@ Route::middleware(['auth'])->group(function(){
 
 //-----------------------------------------------RUTAS DEL ADMINISTRADOR-----------------------------------------------------
 
-Route::get('/administrador/index', function () {
-    return view('administrador.index');
-});
+// Route::get('/administrador/index', function () {
+//     return view('administrador.index');
+// });
 
-Route::get('/administrador/registroCoordinadores', function () {
-    return view('administrador.registroCoordinadores');
-});
+// Route::get('/administrador/registroCoordinadores', function () {
+//     return view('administrador.registroCoordinadores');
+// });
 
-Route::get('/administrador/perfil', function () {
-    return view('administrador.perfil');
-});
+// Route::get('/administrador/perfil', function () {
+//     return view('administrador.perfil');
+// });
 
-Route::get('/administrador/estadisticas1', function () {
-    return view('administrador.estadisticas1');
-});
+// Route::get('/administrador/estadisticas1', function () {
+//     return view('administrador.estadisticas1');
+// });
 
-Route::get('/administrador/estadisticas2', function () {
-    return view('administrador.estadisticas2');
-});
+// Route::get('/administrador/estadisticas2', function () {
+//     return view('administrador.estadisticas2');
+// });
 
-Route::get('/administrador/estadisticas3', function () {
-    return view('administrador.estadisticas3');
-});
+// Route::get('/administrador/estadisticas3', function () {
+//     return view('administrador.estadisticas3');
+// });
 
-Route::get('/administrador/estadisticas4', function () {
-    return view('administrador.estadisticas4');
-});
+// Route::get('/administrador/estadisticas4', function () {
+//     return view('administrador.estadisticas4');
+// });
 //-----------------------------------------------RUTAS DEL ALUMNO-----------------------------------------------------
 
-Route::get('/alumno/index','JustificacionController@index')->name('alumno');
-Route::get('/alumno/nuevaJustificacion','JustificacionController@create');
-Route::post('/alumno/store', 'JustificacionController@store');
+// Route::get('/alumno/nuevaJustificacion','JustificacionController@create');
+// Route::post('/alumno/store', 'JustificacionController@store');
 
 
 
-Route::get('/alumno/misJustificaciones', function () {
-    return view('alumno.misJustificaciones');
-});
+// Route::get('/alumno/misJustificaciones', function () {
+//     return view('alumno.misJustificaciones');
+// });
 
 
-Route::get('/alumno/perfil', function () {
-    return view('alumno.perfil');
-});
+// Route::get('/alumno/perfil', function () {
+//     return view('alumno.perfil');
+// });
 
 
 
 
 //-----------------------------------------------RUTAS DEL COORDINADOR-----------------------------------------------------
 
-Route::get('/coordinador/index', function () {
-    return view('coordinador.index');
-});
+// Route::get('/coordinador/index', function () {
+//     return view('coordinador.index');
+// });
 
-Route::get('/coordinador/misJustificaciones', function () {
-    return view('coordinador.misEstadisticas');
-});
+// Route::get('/coordinador/misJustificaciones', function () {
+//     return view('coordinador.misEstadisticas');
+// });
 
-Route::get('/coordinador/perfil', function () {
-    return view('coordinador.perfil');
-});
+// Route::get('/coordinador/perfil', function () {
+//     return view('coordinador.perfil');
+// });
 
-Route::get('/coordinador/perfil', function () {
-    return view('coordinador.perfil');
-});
+// Route::get('/coordinador/perfil', function () {
+//     return view('coordinador.perfil');
+// });
 
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

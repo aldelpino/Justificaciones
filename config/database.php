@@ -116,5 +116,21 @@ return [
         ],
 
     ],
+    'mysql' => [
+        'read' => [
+            'host' => ['192.168.10.10'],
+        ],
+        'write' => [
+            'host' => ['196.168.10.10'],
+        ],
+        'sticky'    => true,
+        'driver'    => 'mysql',
+        'database'  => 'justificaciones',
+        'username'  => 'homestead',
+        'password'  => 'secret',
+        'charset'   => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix'    => '',
+    ],
 
 ];
