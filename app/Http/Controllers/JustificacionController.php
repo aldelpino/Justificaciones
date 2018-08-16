@@ -40,20 +40,20 @@ class JustificacionController extends Controller
         Log::debug($asignaturas[0]['NOM_ASIG']);
         // Log::debug($asignaturas[1]['NOM_ASIG']);
 
-        $result = DB::select('select * from datos_semestre where CORREO_ALUM = "b.torol@alumnos.duoc.cl"' );
+        $result = DB::select('select * from datos_semestre where CORREO_ALUM = "alumno@alumnos.duoc.cl"' );
         $result = array_map(function ($value) {
             return (array)$value;
         }, $result);
 
-        Log::debug($result[0]);
-        Log::debug($result[1]['NOM_ASIG']);
-        Log::debug($result[2]['NOM_ASIG']);
-        Log::debug($result[3]['NOM_ASIG']);
-        Log::debug($result[4]['NOM_ASIG']);
-        Log::debug($result[5]['NOM_ASIG']);
+        // Log::debug($result[0]);
+        // Log::debug($result[1]['NOM_ASIG']);
+        // Log::debug($result[2]['NOM_ASIG']);
+        // Log::debug($result[3]['NOM_ASIG']);
+        // Log::debug($result[4]['NOM_ASIG']);
+        // Log::debug($result[5]['NOM_ASIG']);
 
 
-        $datosAlumno = DB::table('datos_semestre')->where('correo_alum', 'b.torol@alumnos.duoc.cl')->first();
+        $datosAlumno = DB::table('datos_semestre')->where('correo_alum', 'alumno@alumnos.duoc.cl')->first();
         // $datosAlumno->listadoCursos = $result;
         return view('alumno.crearJustificacion', ['datosAlumno' => $datosAlumno, 'infoCursos' => $result]);
 

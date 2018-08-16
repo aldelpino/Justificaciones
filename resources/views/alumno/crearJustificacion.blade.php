@@ -147,10 +147,12 @@
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label for="nombreDocente" class="control-label">Docente:</label>
                         <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  placeholder="Nombre Docente" name="nombreDocente">
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label for="nombreDocente" class="control-label">Coordinador:</label>
                         <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="Nombre Cordinador" name="nombreCoordinador">
                         <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                       </div>
@@ -173,6 +175,13 @@
                         </select> --}}
                         <span class="fa fa-folder form-control-feedback right" aria-hidden="true"></span>
                         <span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
+                        <div class="form-group">
+                          <div class="col-sm-offset-3 col-sm-6">
+                              <button class="btn btn-default">
+                                  <i class="fa fa-plus"></i> Agregar Asignatura a la justificacion
+                              </button>
+                          </div>
+                      </div>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <select class="form-control" name="motivo">

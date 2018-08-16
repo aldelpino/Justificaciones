@@ -43,9 +43,9 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'justificaciones'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'c1tt'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -109,7 +109,7 @@ return [
         'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', '206.189.212.81'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 0,
@@ -118,16 +118,16 @@ return [
     ],
     'mysql' => [
         'read' => [
-            'host' => ['192.168.10.10'],
+            'host' => ['206.189.212.81'],
         ],
         'write' => [
-            'host' => ['196.168.10.10'],
+            'host' => ['206.189.212.81'],
         ],
         'sticky'    => true,
         'driver'    => 'mysql',
         'database'  => 'justificaciones',
-        'username'  => 'homestead',
-        'password'  => 'secret',
+        'username'  => 'root',
+        'password'  => 'c1tt',
         'charset'   => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
         'prefix'    => '',
