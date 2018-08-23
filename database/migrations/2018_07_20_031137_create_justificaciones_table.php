@@ -18,7 +18,8 @@ class CreateJustificacionesTable extends Migration
             $table->increments('id_justificaciones');
             $table->string('nombreAlumno')->nullable();
             $table->string('correoAlumno')->nullable();
-            $table->string('fechaJustificacion')->default(Carbon::now());
+            $table->string('fechaInicioJustificacion')->default(Carbon::now());
+            $table->string('fechaFinJustificacion')->default(Carbon::now());
             $table->string('asignatura')->nullable();
             $table->string('tipoInasistencia')->nullable();
             $table->string('motivo')->nullable();

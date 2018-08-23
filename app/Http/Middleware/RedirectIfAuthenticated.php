@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
 
             if (auth()->user()->rol == "alumno") {
-              return redirect('alumno\index');
+              return redirect('alumno.index');
             }elseif (auth()->user()->rol == "admin") {
               return redirect('administrador\index');
             }elseif (auth()->user()->rol == "coordinador") {

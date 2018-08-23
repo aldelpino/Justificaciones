@@ -1,12 +1,14 @@
 <?php
 
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 
   $factory->define(App\Justificacion::class, function (Faker $faker) {
     return [
-      'nombreAlumno' => $faker->sentence,
-      'correoAlumno' => $faker->sentence,
-      'fechaJustificacion' => $faker->sentence,
+      'nombreAlumno' => 'Alejandro Del Pino',
+      'correoAlumno' => 'al.delpino@alumnos.duoc.cl',
+      'fechaInicioJustificacion' =>  '05-07-2018',
+      'fechaFinJustificacion' =>  '05-08-2018',
       'asignatura' => $faker->sentence,
       'tipoInasistencia' => $faker->sentence,
       'motivo' => $faker->sentence,

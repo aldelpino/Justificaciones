@@ -29,19 +29,25 @@ Route::middleware(['auth'])->group(function(){
   Route::get('roles/{role}', 'RoleController@edit')->name('roles.edit')->middleware('permission:roles.edit');
 
   //Justificaciones
+
+  //Alumno
+
   Route::post('alumno/store', 'JustificacionController@store')->name('justificacion.store')->middleware('permission:justificacion.create');
   //Route::get('justificaciones', 'JustificacionController@index')->name('justificacion.index')->middleware('permission:roles.index');
+
   Route::get('alumno/create', 'JustificacionController@create')->name('justificacion.create')->middleware('permission:justificacion.create');
   Route::put('justificaciones/{role}', 'JustificacionController@update')->name('justificacion.update')->middleware('permission:justificacion.edit');
   Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
   Route::get('justificaciones/{role}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('permission:justificacion.edit');
-
+  Route::get('alumno/misJustificaciones', 'JustificacionController@listaJustificaciones')->name('justificacion.create')->middleware('permission:justificacion.create');
   //Usuarios
 
   Route::get('users', 'UserController@index')->name('users.index')->middleware('permission:users.index');
   Route::put('users/{role}', 'UserCon troller@update')->name('users.update')->middleware('permission:users.edit');
   Route::get('users/{role}', 'UserController@show')->name('users.show')->middleware('permission:users.show');
   Route::get('users/{role}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
+
+
 
 });
 
@@ -88,9 +94,7 @@ Route::post('/alumno/store', 'JustificacionController@store');
 
 
 
-Route::get('/alumno/misJustificaciones', function () {
-    return view('alumno.misJustificaciones');
-});
+
 
 
 Route::get('/alumno/perfil', function () {

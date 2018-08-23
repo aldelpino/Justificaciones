@@ -27,13 +27,9 @@ class LoginController extends Controller
     ]);
 
     if (Auth::attempt($credentials)) {
-      if (auth()->user()->rol == "alumno") {
-        return view('\alumno\index');
-      }elseif (auth()->user()->rol == "admin") {
-        return view('\administrador\index');
-      }elseif (auth()->user()->rol == "coordinador") {
-        return view('\coordinador\index');
-      }
+
+        return redirect()->action('JustificacionController@index');
+      
     }else {
       return back()
              ->withErrors(['email' => 'Estas credenciales no concuerdan con nuestros registros'])

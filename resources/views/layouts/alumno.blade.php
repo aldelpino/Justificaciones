@@ -23,6 +23,7 @@
 
   <body class="nav-md">
       <div class="container body">
+        @role('alumno')
         <div class="main_container">
           <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
@@ -100,6 +101,18 @@
             <div class="clearfix"></div>
           </footer>
           <!-- /footer content -->
+          @else
+            <div class="col-md-12">
+              <div class="col-middle">
+                <div class="text-center text-center">
+                  <br><br><br><br><br><br><br>
+                  <h1 class="error-number">403</h1>
+                  <h2>Acceso Denegado</h2>
+                  <p>Usted no tiene los permisos para acceder a esta pagina</p>
+                </div>
+              </div>
+            </div>
+          @endrole
         </div>
       </div>
 

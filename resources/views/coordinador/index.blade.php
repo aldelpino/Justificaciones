@@ -52,60 +52,7 @@
                          </tr>
                        </thead>
                        <tbody>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Tiger Nixon</td>
-                           <td>193076521</td>
-                           <td>2011/04/25</td>
-                           <td>2011/04/25</td>
-                           <td>Validando</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Garrett Winters</td>
-                           <td>193076521</td>
-                           <td>2011/07/25</td>
-                           <td>2011/07/25</td>
-                           <td>Validando</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Ashton Cox</td>
-                           <td>193076523</td>
-                           <td>2009/01/22</td>
-                           <td>2009/01/12</td>
-                           <td>Validando</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Brielle Williamson</td>
-                           <td>19312216521</td>
-                           <td>2012/12/22</td>
-                           <td>2012/12/02</td>
-                           <td>Validando</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Herrod Chandler</td>
-                           <td>193076521</td>
-                           <td>2012/08/26</td>
-                           <td>2012/08/06</td>
-                           <td>Validando</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Michael Silva</td>
-                           <td>119358016</td>
-                           <td>2012/11/27</td>
-                           <td>2012/11/27</td>
-                           <td>Validando</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
+
                        </tbody>
                      </table>
                    </div>
@@ -123,60 +70,7 @@
                          </tr>
                        </thead>
                        <tbody>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Rhona Davidson</td>
-                           <td>193076521</td>
-                           <td>2010/10/24</td>
-                           <td>2010/10/14</td>
-                           <td>Aprobado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Colleen Hurst</td>
-                           <td>193076521</td>
-                           <td>2009/09/25</td>
-                           <td>2009/09/15</td>
-                           <td>Aprobado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Sonya Frost</td>
-                           <td>193076521</td>
-                           <td>2008/12/23</td>
-                           <td>2008/12/13</td>
-                           <td>Aprobado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Jena Gaines</td>
-                           <td>189358016</td>
-                           <td>2008/12/29</td>
-                           <td>2008/12/19</td>
-                           <td>Aprobado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Quinn Flynn</td>
-                           <td>189358316</td>
-                           <td>2013/03/23</td>
-                           <td>2013/03/03</td>
-                           <td>Aprobado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Charde Marshall</td>
-                           <td>184358016</td>
-                           <td>2008/10/26</td>
-                           <td>2008/10/16</td>
-                           <td>Aprobado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
+
                        </tbody>
                      </table>
                    </div>
@@ -194,42 +88,7 @@
                          </tr>
                        </thead>
                        <tbody>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Cedric Kelly</td>
-                           <td>193012521</td>
-                           <td>2012/03/29</td>
-                           <td>2012/03/29</td>
-                           <td>Rechazado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Airi Satou</td>
-                           <td>1911276521</td>
-                           <td>2008/11/28</td>
-                           <td>2008/11/28</td>
-                           <td>Rechazado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Haley Kennedy</td>
-                           <td>139358016</td>
-                           <td>2012/12/28</td>
-                           <td>2012/12/18</td>
-                           <td>Rechazado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
-                         <tr>
-                           <td>201805789123</td>
-                           <td>Tatyana Fitzpatrick</td>
-                           <td>129358016</td>
-                           <td>2010/03/27</td>
-                           <td>2010/03/17</td>
-                           <td>Rechazado</td>
-                           <td><a href="">Ver</a></td>
-                         </tr>
+                         
                        </tbody>
                      </table>
                    </div>
