@@ -28,16 +28,11 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
       <div class="container body">
+        @role('admin')
         <div class="main_container">
           <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
@@ -123,6 +118,18 @@
             <div class="clearfix"></div>
           </footer>
           <!-- /footer content -->
+          @else
+            <div class="col-md-12">
+              <div class="col-middle">
+                <div class="text-center text-center">
+                  <br><br><br><br><br><br><br>
+                  <h1 class="error-number">403</h1>
+                  <h2>Acceso Denegado</h2>
+                  <p>Usted no tiene los permisos para acceder a esta pagina</p>
+                </div>
+              </div>
+            </div>
+          @endrole
         </div>
       </div>
 

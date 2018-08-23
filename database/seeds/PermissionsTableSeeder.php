@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Caffeinated\Shinobi\Models\Role;
 use Caffeinated\Shinobi\Models\Permission;
 
 class PermissionsTableSeeder extends Seeder
@@ -13,26 +14,61 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
 
+        //Roles Creacion
+        Role::create([
+          'name'    => 'Admin',
+          'slug'    => 'admin',
+          'special' => 'all-access',
+        ]);
+
+        Role::create([
+          'name'        => 'Alumno',
+          'slug'        => 'alumno',
+          'description' => 'Usuario creador de justificativos',
+        ]);
+
+        Role::create([
+          'name'        => 'Coordinador',
+          'slug'        => 'coordinador',
+          'description' => 'Usuario editor de justificativos',
+        ]);
+
+
         //Alumno
         Permission::create([
           'name'        => 'Navegar Alumno',
           'slug'        => 'alumno.index',
-          'description' => 'Lista y Navega los Justificativos del usuario',
+          'description' => 'Lista y Navega los Justificativos creados por el usuario',
         ]);
 
         Permission::create([
           'name'        => 'Crear justificativo',
-          'slug'        => 'alumno.create',
+          'slug'        => 'justificacion.create',
           'description' => 'Alumno crea justificativo',
         ]);
 
         Permission::create([
           'name'        => 'Ver detalle del justificativo',
-          'slug'        => 'alumno.show',
+          'slug'        => 'justificacion.show',
           'description' => 'Alumno ve detalle justificativo',
         ]);
 
-        //Roles
+        //Coordinador
+
+        Permission::create([
+          'name'        => 'Navegar Coordinador',
+          'slug'        => 'coordinador.index',
+          'description' => 'Lista y Navega los justificativos asignados al Coordinador',
+        ]);
+
+        Permission::create([
+          'name'        => 'Edicion de Justificativos',
+          'slug'        => 'coordinador.edit',
+          'description' => 'Edicion de justificativo enviado por el alumno',
+        ]);
+
+
+        //Roles Definicion Permisos
 
         Permission::create([
           'name'        => 'Navegar Roles',
@@ -64,36 +100,18 @@ class PermissionsTableSeeder extends Seeder
           'description' => 'Eliminacion de roles',
         ]);
 
-        //Coordinador
 
-        Permission::create([
-          'name'        => 'Navegar Justificativos',
-          'slug'        => 'coordinador.index',
-          'description' => 'Lista y Navega los roles',
-        ]);
+        //asociando permiso a rol
+        $role = Role::find(2);
+        $role->assignPermission(1);
+        $role->assignPermission(2);
+        $role->assignPermission(3);
+        $role->save();
 
-        Permission::create([
-          'name'        => 'Crear Roles',
-          'slug'        => 'coordinador.create',
-          'description' => 'Creacion de roles',
-        ]);
-
-        Permission::create([
-          'name'        => 'Ver detalle de Justificativos',
-          'slug'        => 'coordinador.show',
-          'description' => 'Ver en detalle un rol',
-        ]);
-
-        Permission::create([
-          'name'        => 'Edicion de Justificativos',
-          'slug'        => 'coordinador.edit',
-          'description' => 'Edicion de roles',
-        ]);
-
-        Permission::create([
-          'name'        => 'Elimincion de Justificativos',
-          'slug'        => 'coordinador.destroy',
-          'description' => 'Eliminacion de roles',
-        ]);
+        $role = Role::find(3);
+        $role->assignPermission(3);
+        $role->assignPermission(4);
+        $role->assignPermission(5);
+        $role->save();
     }
 }

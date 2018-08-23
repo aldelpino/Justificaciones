@@ -18,19 +18,19 @@
       <div class="row tile_count">
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-edit"></i> Justicaciones Emitidas</span>
-          <div class="count">5</div>
+          <div class="count">{{ $cantEmitidas }}</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-check-circle-o  "></i> Aprobadas</span>
-          <div class="count">1</div>
+          <div class="count">{{ $cantAprobadas }}</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-times-circle-o"></i> Rechazadas</span>
-          <div class="count">3</div>
+          <div class="count">{{ $cantRechazadas}}</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-clock-o"></i> Total Pendientes</span>
-          <div class="count">1</div>
+          <div class="count">{{ $cantValidando }}</div>
         </div>
 
       </div>
@@ -44,7 +44,7 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-              
+
                 <div class="x_content">
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>
@@ -58,14 +58,15 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <td>12/07/2018</td>
-                        <td>Adm. Base de Datos</td>
-                        <td>28/06/2018</td>
-                        <td>04/07/2018</td>
-                        <td>Validando</td>
-                      </tr>
-
-                      </tr>
+                      @foreach ($justificacion as $obj)
+                        <tr>
+                          <td>{{ $obj->created_at }}</td>
+                          <td>{{ $obj->asignatura }}</td>
+                          <td>{{ $obj->fechaInicioJustificacion }}</td>
+                          <td>{{ $obj->fechaFinJustificacion }}</td>
+                          <td>{{ $obj->estado }}</td>
+                        </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
