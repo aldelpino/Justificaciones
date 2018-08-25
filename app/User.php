@@ -8,8 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+<<<<<<< HEAD
     use Notifiable, ShinobiTrait;
 
+=======
+    use Notifiable;
+    public $table = 'users';
+>>>>>>> mi-branch
     /**
      * The attributes that are mass assignable.
      *
@@ -17,6 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
+        // 'nombre_alum','correo_alum','contrasena_alum'
     ];
 
     /**
@@ -27,4 +33,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getAuthPassword()
+{
+    return $this->password;
+}
 }

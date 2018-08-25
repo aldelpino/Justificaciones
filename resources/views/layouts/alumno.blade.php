@@ -43,7 +43,7 @@
                     <li><a><i class="fa fa-edit"></i> Mis Justificaciones <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="{{url('/alumno/nuevaJustificacion')}}">Crear Justificacion</a></li>
-                        <li><a href="{{url('/alumno/misJustificaciones')}}">Registro Justificaciones</a></li>
+                        <li><a href="{{url('/alumno/revisarJustificacion')}}">Revisar Justificaciones</a></li>
                       </ul>
                     </li>
                   </ul>

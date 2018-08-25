@@ -109,12 +109,28 @@ return [
         'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', '206.189.212.81'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 0,
         ],
 
+    ],
+    'mysql' => [
+        'read' => [
+            'host' => ['206.189.212.81'],
+        ],
+        'write' => [
+            'host' => ['206.189.212.81'],
+        ],
+        'sticky'    => true,
+        'driver'    => 'mysql',
+        'database'  => 'justificaciones',
+        'username'  => 'root',
+        'password'  => 'c1tt',
+        'charset'   => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix'    => '',
     ],
 
 ];
