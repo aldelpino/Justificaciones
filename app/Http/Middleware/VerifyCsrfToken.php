@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        'http://192.168.10.10:8080/alumno/store',
+        'http://192.168.10.10:8080/alumno/image/upload/store',
         //
     ];
 }

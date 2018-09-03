@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -15,6 +16,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use DB;
+use App\Justification;
 
 // use Auth;
 use Log;
@@ -50,7 +52,9 @@ class LoginController extends Controller
     $checkLogin = DB::table('users')->where($credentials)->get();
     // $checkLogin = DB::table('users')->where(['email'=>$email,'password'=>$password])->get();
     Log::debug($checkLogin);
-
+    $password = Hash::make('holamundo');
+    Log::debug($password);
+// $result = Model::wherePassword($password)->first();
     // if (Auth::attempt([$credentials->email=>$request['email'],$credentials->password=>$request['password']])) {
       // if (Auth::attempt(DB::table('users')->where($credentials)->get())){
         // if($user->email == $credentials['email'] && Hash::check($credentials['password'], $user->getAuthPassword()))//$user->getAuthPassword() == md5($credentials['password'].\Config::get('constants.SALT')))
@@ -60,6 +64,7 @@ class LoginController extends Controller
           // if(count($checkLogin)  >0) {
             if (Auth::check()) {
               Log::debug('yes');
+
               // The user is logged in...
           }
       Log::debug($credentials);

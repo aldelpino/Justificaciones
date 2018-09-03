@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-
+use Log;
 
 class RedirectIfAuthenticated
 {
@@ -18,11 +18,12 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-
+        Log::Debug('######################################################################');
+        Log::Debug($request);
 
         if (Auth::guard($guard)->check()) {
 
-            if (auth()->user()->rol == "alumno") {
+            if (auth()->user()->rol == 0) {
               return redirect('alumno\index');
             }elseif (auth()->user()->rol == "admin") {
               return redirect('administrador\index');

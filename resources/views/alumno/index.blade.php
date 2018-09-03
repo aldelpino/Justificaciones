@@ -37,14 +37,19 @@
     </div>
     <!-- /top tiles -->
 
-
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+    </div>
+    @endif
     <div class="">
         <div class="page-title">
           <div class="clearfix"></div>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-              
+
                 <div class="x_content">
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>

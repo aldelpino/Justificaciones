@@ -14,8 +14,10 @@ $(document).ready(function() {
                 success:function(data) {
                     window.console&&console.log(data);
                     // var objData = JSON.parse(data);
-                    $('input[name=nombreDocente]').val(data[0].NOMBRE_DOC);
-                    $('input[name=nombreCoordinador]').val(data[0].NOMBRE_COR);
+                    $('input[name=correoDocente]').val(data[0].CORREO_DOC);
+                    $('input[name=correoCoordinador]').val(data[0].CORREO_COR);
+                    $('input[name=nombreDocente]').val(data[0].NOMBRE_DOC + ' ' + data[0].APEP_DOC);
+                    $('input[name=nombreCoordinador]').val(data[0].NOMBRE_COR + ' ' + data[0].APEP_COR);
 
                     // $.each(data, function(key, value){
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Log;
 class AlumnoController extends Controller
 {
     /**
@@ -21,8 +21,10 @@ class AlumnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        Log::Debug($request->session()->all());
+        Log::Debug(auth()->user());
         return view('alumno/index');
     }
 }
