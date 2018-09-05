@@ -1,5 +1,7 @@
 @extends('layouts.alumno')
 
+
+
 @section('utilitiesHead')
   <!-- Datatables -->
   <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -10,41 +12,37 @@
 @endsection
 
 @section('content')
+  @section('content')
 
-  <!-- page content -->
-  <div class="right_col" role="main">
-    <!-- top tiles -->
-    <div class="container col-md-offset-2">
-      <div class="row tile_count">
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-          <span class="count_top"><i class="fa fa-edit"></i> Justicaciones Emitidas</span>
-          <div class="count">{{ $cantEmitidas }}</div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-          <span class="count_top"><i class="fa fa-check-circle-o  "></i> Aprobadas</span>
-          <div class="count">{{ $cantAprobadas }}</div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-          <span class="count_top"><i class="fa fa-times-circle-o"></i> Rechazadas</span>
-          <div class="count">{{ $cantRechazadas}}</div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-          <span class="count_top"><i class="fa fa-clock-o"></i> Total Pendientes</span>
-          <div class="count">{{ $cantValidando }}</div>
-        </div>
-
-      </div>
-    </div>
-    <!-- /top tiles -->
-
-
-    <div class="">
+    <!-- page content -->
+    <div class="right_col" role="main">
+      <div class="">
         <div class="page-title">
+          <div class="title_left">
+            <h3>Registro Justificaciones</small></h3>
+          </div>
           <div class="clearfix"></div>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-
+                <div class="x_title">
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
                 <div class="x_content">
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>
@@ -58,16 +56,41 @@
                       </tr>
                     </thead>
                     <tbody>
-                        {{-- {{ $justificacion }} --}}
-                      @foreach ($justificacion as $obj)
-                        <tr>
-                          <td>{{ $obj->FEC_SOL }}</td>
-                          <td>{{ $obj->ASIGNATURA }}</td>
-                          <td>{{ $obj->FEC_SOL }}</td>
-                          <td>{{ $obj->UPDATED_AT }}</td>
-                          <td>{{ $obj->ESTADO }}</td>
-                        </tr>
-                      @endforeach
+                      <tr>
+                        <td>06/07/2018</td>
+                        <td>Adm. Base de Datos</td>
+                        <td>28/06/2018</td>
+                        <td>04/07/2018</td>
+                        <td>Aceptada</td>
+                      </tr>
+                      <tr>
+                        <td>06/07/2018</td>
+                        <td>Adm. Base de Datos</td>
+                        <td>28/06/2018</td>
+                        <td>04/07/2018</td>
+                        <td>Rechazada</td>
+                      </tr>
+                      <tr>
+                        <td>12/07/2018</td>
+                        <td>Adm. Base de Datos</td>
+                        <td>28/06/2018</td>
+                        <td>04/07/2018</td>
+                        <td>Validando</td>
+                      </tr>
+                      <tr>
+                        <td>06/07/2018</td>
+                        <td>Adm. Base de Datos</td>
+                        <td>28/06/2018</td>
+                        <td>04/07/2018</td>
+                        <td>Rechazada</td>
+                      </tr>
+                      <tr>
+                        <td>06/07/2018</td>
+                        <td>Adm. Base de Datos</td>
+                        <td>28/06/2018</td>
+                        <td>04/07/2018</td>
+                        <td>Rechazada</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -76,12 +99,11 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- /page content -->
 
-  </div>
-  <!-- /page content -->
 @endsection
-
 
 @section('utilities')
   <!-- Datatables -->

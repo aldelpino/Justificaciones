@@ -138,7 +138,21 @@ class JustificacionController extends Controller
 
     public function revisar()
     {
-        return view('alumno.revisarJustificacion');
+
+            $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
+            $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
+            $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'aprobada' ]])->count();
+            $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'rechazada']])->count();
+            $cantValidando  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'validando' ]])->count();
+              Log::Debug($justificacion);
+            return view('alumno.revisarJustificacion', [
+                'justificacion'  => $justificacion,
+                'cantEmitidas'   => $cantEmitidas,
+                'cantAprobadas'  => $cantAprobadas,
+                'cantRechazadas' => $cantRechazadas,
+                'cantValidando'  => $cantValidando
+              ]);
+
     }
 
     public function getAsignaturas($asignaturaId) {

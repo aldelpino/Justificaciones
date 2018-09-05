@@ -18,26 +18,31 @@
       <div class="row tile_count">
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-edit"></i> Justicaciones Emitidas</span>
-          <div class="count">{{ $cantEmitidas }}</div>
+          <div class="count">5</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-check-circle-o  "></i> Aprobadas</span>
-          <div class="count">{{ $cantAprobadas }}</div>
+          <div class="count">1</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-times-circle-o"></i> Rechazadas</span>
-          <div class="count">{{ $cantRechazadas}}</div>
+          <div class="count">3</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           <span class="count_top"><i class="fa fa-clock-o"></i> Total Pendientes</span>
-          <div class="count">{{ $cantValidando }}</div>
+          <div class="count">1</div>
         </div>
 
       </div>
     </div>
     <!-- /top tiles -->
 
-
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+    </div>
+    @endif
     <div class="">
         <div class="page-title">
           <div class="clearfix"></div>
@@ -58,16 +63,14 @@
                       </tr>
                     </thead>
                     <tbody>
-                        {{-- {{ $justificacion }} --}}
-                      @foreach ($justificacion as $obj)
-                        <tr>
-                          <td>{{ $obj->FEC_SOL }}</td>
-                          <td>{{ $obj->ASIGNATURA }}</td>
-                          <td>{{ $obj->FEC_SOL }}</td>
-                          <td>{{ $obj->UPDATED_AT }}</td>
-                          <td>{{ $obj->ESTADO }}</td>
-                        </tr>
-                      @endforeach
+                        <td>12/07/2018</td>
+                        <td>Adm. Base de Datos</td>
+                        <td>28/06/2018</td>
+                        <td>04/07/2018</td>
+                        <td>Validando</td>
+                      </tr>
+
+                      </tr>
                     </tbody>
                   </table>
                 </div>
