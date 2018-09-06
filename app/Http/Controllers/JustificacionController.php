@@ -18,6 +18,12 @@ use App\Justification;
 use App\Files;
 use Carbon\Carbon;
 
+use App\Mail\EnviarCorreitoAlumnito;
+use App\Mail\EnviarCorreitoCoordinadorcito;
+use App\Mail\EnviarCorreitoAdministradorcito;
+use App\Mail\EnviarCorreitoProfesorcito;
+use Illuminate\Support\Facades\Mail;
+
 use DB;
 use Log;
 
@@ -120,8 +126,21 @@ class JustificacionController extends Controller
             $justification->comentario_rec = 'Pendiente';
             $justification->tipo_inasistencia = $request['tipoInasistencia'] == "evaluacion"?1:0;
             $justification->save();
-            $admin->notify(new InboxMessage($request));
+            // $admin->notify(new InboxMessage($request));
+            $adjuntos = DB::table('documento')
+             ->select('url')
+             ->where('nfolio','=', $request['folio'])
+             ->get();
+             Log::Debug($adjuntos->toJson());
+            Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+            Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+            Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+            // DESCOMENTAR EN PRODUCCION
+            // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+            // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+            // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
         }
+
 
 
         // $justification->notify(new InboxMessage($request));

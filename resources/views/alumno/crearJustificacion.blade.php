@@ -348,7 +348,7 @@
                 maxFiles: 3,
                 maxFilesize: 2,
                 dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos pdf",
+                dictInvalidFileType: "Solo archivos tipo Imagen",
                 dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
                 paramName: "file",
                 dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",

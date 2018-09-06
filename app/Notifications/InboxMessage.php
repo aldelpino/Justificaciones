@@ -56,8 +56,10 @@ class InboxMessage extends Notification
                     ->subject(config('admin.name') . ", nueva solicitud de Justificacion")
                     ->greeting(" ")  //sobreescribe los mensajes por defecto de laravel
                     ->salutation(" ")
-                    ->from($this->message->correo_alum, $this->message->name)
-					->line($this->message->message);
+                    ->from('hola@gmail.com', 'pepito') //correo no utilizado // Remitente
+                    ->line('hola mundo'); //mensaje
+                    // ->from($this->message->correo_alum, $this->message->name)
+					// ->line($this->message->message);
     }
 
     /**
