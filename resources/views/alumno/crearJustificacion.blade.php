@@ -346,7 +346,7 @@
             $("div#my-awesome-dropzone").dropzone({
                 url: "image/upload/store/",
                 maxFiles: 3,
-                maxFilesize: 2,
+                maxFilesize: 20,
                 dictResponseError: "Error al subir el archivo",
                 dictInvalidFileType: "Solo archivos tipo Imagen",
                 dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
