@@ -20,7 +20,7 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
   </head>
-
+  @if (auth()->user()->rol == 0)
   <body class="nav-md">
       <div class="container body">
         <div class="main_container">
@@ -117,4 +117,5 @@
       <script src="/build/js/custom.min.js"></script>
 
     </body>
+  @endif
 </html>
