@@ -146,7 +146,7 @@
                       <h2 class="StepTitle">Datos Solicitud</h2><br>
 
                       <div class="col-md-12">
-                        Que fechas faltaste?
+                        ¿Qué fechas faltaste?
                         <div class="input-prepend input-group">
                           <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
                           <input type="text" style="width: 200px" name="fechaJustificacion" id="reservation" class="form-control" value="01/01/2018 - 01/25/2018" />

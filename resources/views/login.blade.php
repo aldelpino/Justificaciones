@@ -24,15 +24,15 @@
 
   <body class="login">
     <div>
-      <a class="hiddenanchor" id="signup"></a>
+      
       <a class="hiddenanchor" id="signin"></a>
 
-      <div class="login_wrapper">
+      <div class="login_wrapper" style="margin-top: 150px">
         <div class="animate form login_form">
           <section class="login_content">
             <form method="post" action="{{ route('login') }}">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
-              <h1>Ingreso</h1>
+              <h1>Sistema de Justificaciones</h1>
               <div>
                 <input type="email" class="form-control" placeholder="Correo" required="" name="email" value="{{ old('email') }}" />
                 {{ $errors->first('email', ':message') }}
