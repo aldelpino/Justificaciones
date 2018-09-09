@@ -2,19 +2,14 @@
 
 namespace App;
 
-use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
-<<<<<<< HEAD
-    use Notifiable, ShinobiTrait;
-
-=======
     use Notifiable;
     public $table = 'users';
->>>>>>> mi-branch
     /**
      * The attributes that are mass assignable.
      *
@@ -33,8 +28,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    public $timestamps = false;
     public function getAuthPassword()
+
 {
     return $this->password;
 }

@@ -1,4 +1,4 @@
-@extends('layouts.alumno')
+@extends('layouts.coordinador')
 {{-- @include('alert::bootstrap') --}}
 
 @section('utilitiesHead')
@@ -21,7 +21,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Creando Justificativo</h3>
+          <h3>Administracion Justificaciones</h3>
         </div>
       </div>
       <div class="clearfix"></div>
@@ -45,9 +45,9 @@
 
               <!-- Smart Wizard -->
 
-              <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('alumno/store')}}" method="post">
+              <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('coordinador/update', $justifications->ID_DATO)}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <input type="hidden" id="folio" name="folio" value="{{$folio}}">
+
                 <input type="hidden" id="inputSuccess3" name="apem_alum" value="{{$datosAlumno->APEM_ALUM}}">
                 <input type="hidden" id="cursosArray" name="cursosArray">
                 <input type="hidden" id="correoDocente" name="correoDocente">
@@ -59,7 +59,7 @@
                         <span class="step_no">1</span>
                         <span class="step_descr">
                                           Paso 1<br />
-                                          <small>Mis Datos Academicos</small>
+                                          <small>Datos Academicos Alumno</small>
                                       </span>
                       </a>
                     </li>
@@ -68,7 +68,7 @@
                         <span class="step_no">2</span>
                         <span class="step_descr">
                                           Paso 2<br />
-                                          <small>Datos Solicitud</small>
+                                          <small>Datos Solicitud Alumno</small>
                                       </span>
                       </a>
                     </li>
@@ -77,7 +77,7 @@
                       <span class="step_no">3</span>
                       <span class="step_descr">
                                         Paso 3<br />
-                                        <small>Cargar Certificado</small>
+                                        <small>Certificados Alumno</small>
                                     </span>
                     </a>
                   </li>
@@ -86,7 +86,7 @@
                         <span class="step_no">4</span>
                         <span class="step_descr">
                                           Paso 4<br />
-                                          <small>Comentario</small>
+                                          <small>Evaluacion y Comentarios</small>
                                       </span>
                       </a>
                     </li>
@@ -104,7 +104,7 @@
                         {{-- {{ print_r($datosAlumno, true) }} --}}
                         {{-- {{ print_r($infoCursos, true) }} --}}
                         {{-- {{$datosAlumno->'correo_alum'}} --}}
-                        <h2 class="StepTitle">Mis datos Academicos</h2>
+                        <h2 class="StepTitle">Datos Academicos Alumno</h2>
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                           <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly" name='nombre_alum' placeholder="{{$datosAlumno->NOMBRE_ALUM}}" value="{{$datosAlumno->NOMBRE_ALUM}}">
                           <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
@@ -121,127 +121,92 @@
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="number" class="form-control" id="inputSuccess5"  placeholder="Telefono/Celular" name="celular_alum" value="{{$datosAlumno->CELULAR}}">
+                          <input type="text" class="form-control" id="inputSuccess7" readonly="readonly" placeholder="{{$datosAlumno->CELULAR}}">
                           <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         </div>
-
                         <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                           <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="Cordinador">
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div> -->
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="text" class="form-control" id="inputSuccess7" readonly="readonly" placeholder="{{$datosAlumno->CARRERA}}">
-                          <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess4" readonly="readonly" name='correo_alum' placeholder="{{$datosAlumno->CARRERA}}" value="{{$datosAlumno->CARRERA}}">
+                          <span class="fa fa-graduation-cap form-control-feedback left" aria-hidden="true"></span>
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="text" class="form-control" id="inputSuccess8" readonly="readonly" placeholder="{{$datosAlumno->JORNADA}}">
+                          <input type="text" class="form-control" id="inputSuccess8" readonly="readonly" name="jornada" placeholder="{{$datosAlumno->JORNADA}}">
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
                       </div>
                     </div>
                     <div id="step-2">
-                      <h2 class="StepTitle">Datos Solicitud</h2><br>
+                      <h2 class="StepTitle">Datos Solicitud Alumno</h2><br>
+
 
                       <div class="col-md-12">
-                        Que fechas faltaste?
-                        <div class="input-prepend input-group">
-                          <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                          <input type="text" style="width: 200px" name="fechaJustificacion" id="reservation" class="form-control" value="01/01/2018 - 01/25/2018" />
+                        <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback" >
+                          <label for="fechaFalta" class="control-label">Fechas Falta:</label>
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  name="fec_jus" placeholder="{{ $justifications->FEC_JUS }}" name="{{ $justifications->FEC_JUS }}">
+                          <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
                         </div>
                       </div>
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label for="nombreDocente" class="control-label">Docente:</label>
-                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  placeholder="Nombre Docente" name="nombreDocente">
-                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label for="nombreDocente" class="control-label">Coordinador:</label>
-                        <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="Nombre Cordinador" name="nombreCoordinador">
-                        <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            {{-- {!! Form::label('item', 'Item:') !!} --}}
-                            {{-- {!! Form::select('asignatura', ['L' => 'Large', 'S' => 'Small'], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
-                            {{-- {!! Form::select('asignatura', [$infoCursos['NOM_ASIG']], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
-
-                        {{-- FUNCIONA OK --}}
-                        <select class="form-control" id="carritoJC" name="asignatura" placeholder="Asignatura">
-                            <option value=''>Seleccionar asignatura</option>
-                            @foreach($infoCursos as $item)
-                                <option value="{{$item['NOM_ASIG']}}">{{$item['NOM_ASIG']}}</option>
-                            @endforeach
-                        </select>
-
-                        {{-- // echo Form::checkbox('name', 'value'); --}}
-                        {{-- // echo '<br/>'; --}}
-                        {{-- {!! Form::checkbox('is_ok[]',  false,  isset($model->checkbox) ? : 0) !!} --}}
-
-                        {{-- <select class="form-control" name="asignatura">
-                            <option>Seleciona una asignatura</option>
-                            <option>Programacion de base de datos</option>
-                            <option>DAI</option>
-                            <option>Soporte en hardware</option>
-                            <option>Desarrollo en Java</option>
-                        </select> --}}
-                        <span class="fa fa-folder form-control-feedback right" aria-hidden="true"></span>
-                        <span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
-                        <div id="panel-asignaturas">No has seleccionado Asignaturas</div>
-                        <div class="form-group">
-                          <div class="col-sm-offset-3 col-sm-6">
-                              <button class="btn btn-default" id="carrito">
-                                  <i class="fa fa-plus"></i> Agregar Asignatura a la justificacion
-                              </button>
-                          </div>
+                      <div class="col-md-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Docente:</label>
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  name="nombre_doc" placeholder="{{$datosAlumno->NOMBRE_DOC}}" name="{{$datosAlumno->NOMBRE_DOC}}">
+                          <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 f orm-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Asignatura:</label>
+                          <input type="text" class="form-control" id="inputSuccess6" readonly="readonly"  name="asignatura" placeholder="{{ $justifications->ASIGNATURA }}" value="{{ $justifications->ASIGNATURA }}">
+                          <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div>
                       </div>
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <select class="form-control" name="motivo">
-                               <option>Seleciona un motivo</option>
-                               <option>Médico</option>
-                               <option>Laboral</option>
-                               <option>Otros</option>
-                             </select>
-                        <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
+
+                      <div class="col-md-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Estado Solicitud::</label>
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  placeholder="{{$justifications->ESTADO}}" name="{{$justifications->ESTADO}}">
+                          <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 f orm-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Motivo Falta:</label>
+                          <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="{{ $justifications->MOTIVO }}" name="{{ $justifications->MOTIVO }}">
+                          <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
+                        </div>
                       </div>
 
 
-
-
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          ¿A que faltaste?
-                        <div class="checkbox">
-                                <label>
-                                  <input name="tipoInasistencia" type="checkbox" value="evaluacion"> Evaluaciones
-                                </label>
-                              </div>
-                              <div class="checkbox">
-                                <label>
-                                  <input name="tipoInasistencia" type="checkbox" value="clases"> Clases
-                                </label>
-                              </div>
+                      <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                        <label for="nombreDocente" class="control-label">Comentarios Solicitud:</label>
+                        <textarea cols="40" rows="5" id="message" required="required" class="form-control" readonly="readonly" placeholder="{{ $justifications->COMENTARIO }}" name="{{ $justifications->COMENTARIO }}"></textarea>
                       </div>
                     </div>
                     <div id="step-3">
                       <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
-                      <div class="x_content">
-                        <p>Arrastre las fotos que necesita subir o haga click en el panel</p>
-                        {{-- <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" class="dropzone dropzone-previews" id="my-awesome-dropzone">
-                            @csrf
-                        </form> --}}
-                        <div class="dropzone dropzone-previews" id="my-awesome-dropzone"></div>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                      </div>
+
                     </div>
                     <div id="step-4">
-                      <h2 class="StepTitle">Paso 4 Comentario</h2>
+                      <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
+
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
+                          <div id="gender" class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success btn-lg" data-toggle-class="btn-success" data-toggle-passive-class="btn-default">
+                              <input type="radio" name="estado" value="Aprobado" checked> &nbsp; Aceptar&nbsp;
+                            </label>
+                            <label class="btn btn-dark btn-lg" data-toggle-class="btn-danger" data-toggle-passive-class="btn-default">
+                              <input type="radio" name="estado" value="Rechazado"> Rechazar
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <br><br><br><br><br>
                       <label for="message">Ingrese máximo 500 caracteres:</label>
-                      <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentario"></textarea>
+                      <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentarioRechazo"></textarea>
                     </div>
                     {{-- <div class="form-group">
                         <button type="submit" class="btn btn-primary" value="Send">Send</button>
@@ -314,28 +279,7 @@
     maxFilesize: 3,
     };
   </script> --}}
-    <script type="text/javascript">
-        function display_locations(arr) {
-            // var array = ['london', 'ontario', 'san francisco', 'new york'];
-            var newHTML = "";
-            for (var i = 0; i < arr.length; i++) {
-                newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
-            }
-            $("#panel-asignaturas").html(newHTML);
-            $("#cursosArray").val(JSON.stringify(arr));
-        }
 
-        $(function() {
-            var arr = new Array();
-            $("#carrito").click( function()
-                {
-                arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
-                display_locations(arr);
-                console.log(arr);
-                }
-            );
-        });
-    </script>
     <script type="text/javascript">
         Dropzone.autoDiscover = false;
         jQuery(document).ready(function() {
@@ -369,7 +313,6 @@
         });
     </script>
 
-  <script src="{{ asset('js/selectProfeCord.js') }}"></script>
 
 
 @endsection

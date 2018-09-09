@@ -39,12 +39,11 @@
                  </ul>
                  <div id="myTabContent" class="tab-content">
                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                     <table id="datatable1" class="table table-striped table-bordered">
+                     <table id="" class="display table table-striped table-bordered">
                        <thead>
                          <tr>
                            <th>Nro. Folio</th>
                            <th>Nombre Alumno</th>
-                           <th>Rut</th>
                            <th>Fecha Solicitud</th>
                            <th>Fecha Justificacion</th>
                            <th>Estado</th>
@@ -52,17 +51,25 @@
                          </tr>
                        </thead>
                        <tbody>
-
+                         @foreach ($listaJustificacionesValidando as $obj)
+                           <tr>
+                             <td>{{ $obj->NFOLIO }}</td>
+                             <td>{{ $obj->NOMBRE_ALUM }}</td>
+                             <td>{{ $obj->FEC_SOL }}</td>
+                             <td>{{ $obj->FEC_JUS}}</td>
+                             <td>{{ $obj->ESTADO }}</td>
+                             <td><a href="{{ url('coordinador/edicion', $obj->ID_DATO) }}">Ver</a></td>
+                           </tr>
+                       @endforeach
                        </tbody>
                      </table>
                    </div>
                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                     <table id="datatable2" class="table table-striped table-bordered">
+                     <table id="" class="display table table-striped table-bordered">
                        <thead>
                          <tr>
                            <th>Nro. Folio</th>
                            <th>Nombre Alumno</th>
-                           <th>Rut</th>
                            <th>Fecha Solicitud</th>
                            <th>Fecha Justificacion</th>
                            <th>Estado</th>
@@ -70,17 +77,25 @@
                          </tr>
                        </thead>
                        <tbody>
-
+                         @foreach ($listaJustificacionesAprobadas as $obj)
+                           <tr>
+                             <td>{{ $obj->NFOLIO }}</td>
+                             <td>{{ $obj->NOMBRE_ALUM }}</td>
+                             <td>{{ $obj->FEC_SOL }}</td>
+                             <td>{{ $obj->FEC_JUS}}</td>
+                             <td>{{ $obj->ESTADO }}</td>
+                             <td><a href="">Ver</a></td>
+                           </tr>
+                       @endforeach
                        </tbody>
                      </table>
                    </div>
                    <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                     <table id="datatable3" class="table table-striped table-bordered">
+                     <table id="" class="display table table-striped table-bordered">
                        <thead>
                          <tr>
                            <th>Nro. Folio</th>
                            <th>Nombre Alumno</th>
-                           <th>Rut</th>
                            <th>Fecha Solicitud</th>
                            <th>Fecha Justificacion</th>
                            <th>Estado</th>
@@ -88,7 +103,16 @@
                          </tr>
                        </thead>
                        <tbody>
-                         
+                         @foreach ($listaJustificacionesRechazadas as $obj)
+                           <tr>
+                             <td>{{ $obj->NFOLIO }}</td>
+                             <td>{{ $obj->NOMBRE_ALUM }}</td>
+                             <td>{{ $obj->FEC_SOL }}</td>
+                             <td>{{ $obj->FEC_JUS}}</td>
+                             <td>{{ $obj->ESTADO }}</td>
+                             <td><a href="{{ url('coordinador/edicion', $obj->ID_DATO) }}">Ver</a></td>
+                           </tr>
+                       @endforeach
                        </tbody>
                      </table>
                    </div>
@@ -122,21 +146,41 @@
   <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
-  <script type="text/javascript">
-  $(document).ready( function () {
-$('#datatable1').DataTable();
-} );
-  </script>
+
+
 
   <script type="text/javascript">
-  $(document).ready( function () {
-$('#datatable2').DataTable();
-} );
+  $(document).ready(function() {
+  $('table.display').DataTable({
+        language: {
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+          "sZeroRecords":    "No se encontraron resultados",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+          "sInfoPostFix":    "",
+          "sSearch":         "Buscar:",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+              "sFirst":    "Primero",
+              "sLast":     "Último",
+              "sNext":     "Siguiente",
+              "sPrevious": "Anterior"
+          },
+          "oAria": {
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+      }
+    }
+  );
+
+  } );
   </script>
 
-  <script type="text/javascript">
-  $(document).ready( function () {
-$('#datatable3').DataTable();
-} );
-  </script>
+
 @endsection

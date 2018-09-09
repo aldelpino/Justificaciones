@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Justificacion extends Model
 {
-
-      public $table = 'justificaciones';
+    const CREATED_AT = 'fechaJustificacion';
+    const UPDATED_AT = 'fechaActualizacion';
+      public $table = 'justifications';
       protected $fillable = [
+        'id_dato',
         'fechaJustificacion',
         'asignatura',
         'motivo',
@@ -22,4 +24,5 @@ class Justificacion extends Model
         'motivoRechazo',
         'comentarioRechazo',
       ];
+      public $timestamps = false;
 }

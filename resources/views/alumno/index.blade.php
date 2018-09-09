@@ -58,13 +58,14 @@
                       </tr>
                     </thead>
                     <tbody>
+                        {{-- {{ $justificacion }} --}}
                       @foreach ($justificacion as $obj)
                         <tr>
-                          <td>{{ $obj->created_at }}</td>
-                          <td>{{ $obj->asignatura }}</td>
-                          <td>{{ $obj->fechaInicioJustificacion }}</td>
-                          <td>{{ $obj->fechaFinJustificacion }}</td>
-                          <td>{{ $obj->estado }}</td>
+                          <td>{{ $obj->FEC_SOL }}</td>
+                          <td>{{ $obj->ASIGNATURA }}</td>
+                          <td>{{ $obj->FEC_SOL }}</td>
+                          <td>{{ $obj->UPDATED_AT }}</td>
+                          <td>{{ $obj->ESTADO }}</td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -102,7 +103,34 @@
 
   <script type="text/javascript">
   $(document).ready( function () {
-$('#datatable').DataTable();
-} );
+    $('#datatable').DataTable(
+      {
+            language: {
+              "sProcessing":     "Procesando...",
+              "sLengthMenu":     "Mostrar _MENU_ registros",
+              "sZeroRecords":    "No se encontraron resultados",
+              "sEmptyTable":     "Ningún dato disponible en esta tabla",
+              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix":    "",
+              "sSearch":         "Buscar:",
+              "sUrl":            "",
+              "sInfoThousands":  ",",
+              "sLoadingRecords": "Cargando...",
+              "oPaginate": {
+                  "sFirst":    "Primero",
+                  "sLast":     "Último",
+                  "sNext":     "Siguiente",
+                  "sPrevious": "Anterior"
+              },
+              "oAria": {
+                  "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+              }
+          }
+        }
+    );
+  });
   </script>
 @endsection
