@@ -97,7 +97,7 @@
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Duoc Uc - Acreditado por 7 Años
+              Justificaciones Antonio Varas 
             </div>
             <div class="clearfix"></div>
           </footer>
