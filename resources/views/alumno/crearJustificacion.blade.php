@@ -346,7 +346,7 @@
             $("div#my-awesome-dropzone").dropzone({
                 url: "image/upload/store/",
                 maxFiles: 3,
-                maxFilesize: 20,
+                maxFilesize: 2,
                 dictResponseError: "Error al subir el archivo",
                 dictInvalidFileType: "Solo archivos tipo Imagen",
                 dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
@@ -356,12 +356,6 @@
                 params: {
                     folio: folio
                 },
-                // init: function() {
-                //     this.on("sending", function(file, xhr, formData) {
-                //     formData.append("data", "loremipsum");
-                //     console.log(formData)
-                //     });
-                // },
                 headers: {
                     'X-CSRFToken': $('meta[name="token"]').attr('content')
                 },

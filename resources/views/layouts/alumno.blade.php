@@ -45,6 +45,11 @@
                         <li><a href="{{url('/alumno/revisarJustificacion')}}">Revisar Justificaciones</a></li>
                       </ul>
                     </li>
+                    <li><a><i class="fa fa-cog" aria-hidden="true"></i> Configuraciones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{url('/alumno/cambiarContrasena')}}">Cambiar contraseña</a></li>
+                        </ul>
+                      </li>
                   </ul>
                 </div>
               </div>

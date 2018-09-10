@@ -54,14 +54,18 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+                {{-- forgot/password --}}
+            {{-- <form method="post" action="{{ route('recuperar') }}"> --}}
+            <form method="post" action="{{ route('recuperar') }}">
               <h1>Olvido de contraseña</h1>
 
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                <input type="email" class="form-control" placeholder="Email" name="email" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="#signin">Recuperar</a>
+                <button class="btn btn-primary btn-block">Recuperar</button>
+
+                {{-- <a class="btn btn-default submit">Recuperar</a> --}}
               </div>
 
               <div class="clearfix"></div>

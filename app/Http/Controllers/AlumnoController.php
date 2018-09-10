@@ -31,6 +31,11 @@ class AlumnoController extends Controller
     // }
     public function index()
     {
+        $verificar = DB::table('users')->select('activacion')->where('email', auth()->user()->email)->get();
+        Log::Debug(json_decode($verificar, true)[0]['activacion']);
+        if (! json_decode($verificar, true)[0]['activacion']) {
+            return view('contrasena.cambiar', []);
+        }
       $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
       $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
       $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'aprobada' ]])->count();

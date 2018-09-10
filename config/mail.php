@@ -102,6 +102,7 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+    'from' => ['address' => 'cittavarasapp@gmail.com', 'name' => 'CITT'],
 
     /*
     |--------------------------------------------------------------------------
