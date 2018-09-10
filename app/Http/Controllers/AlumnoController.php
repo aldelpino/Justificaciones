@@ -31,6 +31,7 @@ class AlumnoController extends Controller
     // }
     public function index()
     {
+<<<<<<< HEAD
         $verificar = DB::table('users')->select('activacion')->where('email', auth()->user()->email)->get();
         Log::Debug(json_decode($verificar, true)[0]['activacion']);
         if (! json_decode($verificar, true)[0]['activacion']) {
@@ -42,6 +43,14 @@ class AlumnoController extends Controller
       $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'rechazada']])->count();
       $cantValidando  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'validando' ]])->count();
         Log::Debug($justificacion);
+=======
+      $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
+      $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
+      $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Aprobado' ]])->count();
+      $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Rechazado']])->count();
+      $cantValidando  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente' ]])->count();
+      Log::Debug($justificacion);
+>>>>>>> desarrollo
       return view('alumno.index', [
           'justificacion'  => $justificacion,
           'cantEmitidas'   => $cantEmitidas,

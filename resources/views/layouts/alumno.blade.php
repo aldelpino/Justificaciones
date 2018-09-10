@@ -10,17 +10,17 @@
     <title>Duoc Uc - Justificaciones</title>
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
 
     @yield('utilitiesHead')
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="/build/css/custom.min.css" rel="stylesheet">
   </head>
-
+  @if (auth()->user()->rol == 0)
   <body class="nav-md">
       <div class="container body">
         <div class="main_container">
@@ -100,7 +100,7 @@
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Duoc Uc - Acreditado por 7 Años
+              Justificaciones Antonio Varas 
             </div>
             <div class="clearfix"></div>
           </footer>
@@ -122,4 +122,5 @@
       <script src="/build/js/custom.min.js"></script>
 
     </body>
+  @endif
 </html>

@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+<<<<<<< HEAD
 //
 // use App\Notifications\ResetPasswordNotification;
 // use App\Notifications\MyOwnResetPassword as ResetPasswordNotification;
 use App\Notifications\MyOwnResetPassword;
+=======
+>>>>>>> desarrollo
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
@@ -33,6 +36,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     public $timestamps = false;
+<<<<<<< HEAD
     /**
      * Send the password reset notification.
      *
@@ -49,4 +53,11 @@ class User extends Authenticatable
     {
         return $this->password;
     }
+=======
+    public function getAuthPassword()
+
+{
+    return $this->password;
+}
+>>>>>>> desarrollo
 }

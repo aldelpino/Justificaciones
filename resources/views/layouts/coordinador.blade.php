@@ -19,14 +19,18 @@
     @yield('utilitiesHead')
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="/build/css/custom.min.css" rel="stylesheet">
 
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
+<<<<<<< HEAD
+=======
+  @if (auth()->user()->rol == 1)
+>>>>>>> desarrollo
 
   <body class="nav-md">
       <div class="container body">
@@ -96,7 +100,7 @@
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Duoc Uc - Acreditado por 7 Años
+              Justificaciones Antonio Varas 
             </div>
             <div class="clearfix"></div>
           </footer>
@@ -105,13 +109,13 @@
       </div>
 
       <!-- jQuery -->
-      <script src="../vendors/jquery/dist/jquery.min.js"></script>
+      <script src="/vendors/jquery/dist/jquery.min.js"></script>
       <!-- Bootstrap -->
-      <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
       <!-- FastClick -->
-      <script src="../vendors/fastclick/lib/fastclick.js"></script>
+      <script src="/vendors/fastclick/lib/fastclick.js"></script>
       <!-- NProgress -->
-      <script src="../vendors/nprogress/nprogress.js"></script>
+      <script src="/vendors/nprogress/nprogress.js"></script>
 
       @yield('utilities')
 
@@ -119,4 +123,6 @@
       <script src="/build/js/custom.min.js"></script>
 
     </body>
+  @endif
+
 </html>

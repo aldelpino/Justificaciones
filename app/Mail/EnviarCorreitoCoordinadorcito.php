@@ -26,11 +26,18 @@ class EnviarCorreitoCoordinadorcito extends Mailable
      *
      * @return void
      */
+<<<<<<< HEAD
     public function __construct(contactFormRequest $message, $adjuntos, $resumenAsignaturas)
     {
         $this->message = $message;
         $this->adjuntos = $adjuntos;
         $this->resumenAsignaturas = $resumenAsignaturas;
+=======
+    public function __construct(contactFormRequest $message, $adjuntos)
+    {
+        $this->message = $message;
+        $this->adjuntos = $adjuntos;
+>>>>>>> desarrollo
     }
     /**
      * Build the message.
@@ -41,7 +48,11 @@ class EnviarCorreitoCoordinadorcito extends Mailable
     {
         Log::Debug($this->adjuntos);
         $correito = $this->from('justificaciones@duoc.cl')
+<<<<<<< HEAD
                         ->subject('Creación de Justificación')
+=======
+                        ->subject('Creación de Justificación - Coordinador')
+>>>>>>> desarrollo
                     // ->attach('storage/2018/09/201809AWxHDge7.png')
                     // ->attach('storage/2018/09/201809nuQL0sbw.png')
                     ->view('correos.coordinador')
@@ -49,9 +60,12 @@ class EnviarCorreitoCoordinadorcito extends Mailable
                         'nombreAlumno' => $this->message->nombre_alum.' '.$this->message->apep_alum.' '.$this->message->apem_alum,
                         'nombreProfe' => $this->message->nombreDocente,
                         'nombreCoordinador' => $this->message->nombreCoordinador,
+<<<<<<< HEAD
                         'folio' => $this->message->folio,
                         'comentario' => $this->message->comentario,
                         'resumenAsignaturas' => $this->resumenAsignaturas,
+=======
+>>>>>>> desarrollo
                     ]);
         foreach($this->adjuntos as $filePath){
             Log::Debug($filePath->url);

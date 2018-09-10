@@ -19,11 +19,17 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('recuperar', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('recuperar');
 
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
+  Route::post('/short', 'UrlMapperController@store');
+  Route::post('alumno/store', 'JustificacionController@store');
 
+<<<<<<< HEAD
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
 Route::post('/short', 'UrlMapperController@store');
 // Route::post('alumno/store', 'JustificacionController@store');
 
+=======
+>>>>>>> desarrollo
 });
 //Imagen
 
@@ -34,7 +40,6 @@ Route::middleware(['auth'])->group(function(){
   Route::get('/alumno/index','AlumnoController@index')->name('alumno');
   Route::get('/alumno/nuevaJustificacion','JustificacionController@create')->name('alumno');
   Route::get('/alumno/revisarJustificacion','JustificacionController@revisar')->name('alumno');
-
   Route::get('asignaturas/get/{asignaturaId}', 'JustificacionController@getAsignaturas');
 
 
@@ -61,6 +66,7 @@ Route::middleware(['auth'])->group(function(){
 //   Route::post('alumno/store', 'JustificacionController@store')->name('justificacion.store')->middleware('can:post');
   //Route::get('justificaciones', 'JustificacionController@index')->name('justificacion.index')->middleware('permission:roles.index');
   Route::get('alumno/create', 'JustificacionController@create')->name('justificacion.create')->middleware('permission:justificacion.create');
+<<<<<<< HEAD
   Route::get('alumno/cambiarContrasena', 'ContrasenaController@index')->name('contrasena.create')->middleware('auth:web');
   Route::post('alumno/contrasena/cambiar', 'ContrasenaController@cambiar')->name('contrasena.create')->middleware('auth:web');
 //   Route::get('/changePassword','HomeController@showChangePasswordForm');
@@ -74,6 +80,13 @@ Route::middleware(['auth'])->group(function(){
   Route::put('justificaciones/{role}', 'JustificacionController@update')->name('justificacion.update')->middleware('permission:justificacion.edit');
   Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
   Route::get('justificaciones/{role}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('permission:justificacion.edit');
+=======
+  Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
+  Route::get('coordinador/edicion/{id}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('auth:web');
+  Route::post('coordinador/update/{id}', 'JustificacionController@update')->name('justificacion.update')->middleware('auth:web');
+
+//  Route::post('coordinador/update', 'JustificacionController@udpdate')->name('justificacion.update');
+>>>>>>> desarrollo
 
   //Usuarios
 

@@ -28,6 +28,7 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+<<<<<<< HEAD
 
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -35,7 +36,16 @@
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
+=======
+>>>>>>> desarrollo
 
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  </head>
+  @if (auth()->user()->rol == 0)
   <body class="nav-md">
       <div class="container body">
         <div class="main_container">
@@ -118,7 +128,7 @@
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Duoc Uc - Acreditado por 7 Años
+              Justificaciones Antonio Varas
             </div>
             <div class="clearfix"></div>
           </footer>
@@ -191,4 +201,5 @@
 
 
     </body>
+  @endif
 </html>
