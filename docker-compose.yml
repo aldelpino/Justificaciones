@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    image: hitalos/laravel
+    volumes:
+      - .:/var/www
+    ports:
+      - 80:80
+
+  database:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - "MYSQL_ROOT_PASSWORD=someSecretPassword"
+      - "MYSQL_DATABASE=justificaciones"
