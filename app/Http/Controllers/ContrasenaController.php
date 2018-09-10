@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
-
 use Log;
 use DB;
+
 class ContrasenaController extends Controller
 {
     /**

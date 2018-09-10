@@ -25,13 +25,9 @@ class RedirectIfAuthenticated
 
             if (auth()->user()->rol == 0) {
               return redirect('alumno\index');
-<<<<<<< HEAD
             }elseif (auth()->user()->rol == "admin") {
               return redirect('administrador\index');
             }elseif (auth()->user()->rol == "coordinador") {
-=======
-            }elseif (auth()->user()->rol == 1) {
->>>>>>> desarrollo
               return redirect('coordinador\index');
             }elseif (auth()->user()->rol == 2) {
               return redirect('administrador\index');
