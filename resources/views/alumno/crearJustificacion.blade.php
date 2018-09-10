@@ -357,13 +357,9 @@
                 params: {
                     folio: folio
                 },
-//                init: function() {
-                //     this.on("sending", function(file, xhr, formData) {
-                //     formData.append("data", "loremipsum");
-//                    console.log('Enviando!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-                    });
+              });
                 },
-//                headers: {
+                headers: {
                     'X-CSRFToken': $('meta[name="token"]').attr('content')
                 },
             });

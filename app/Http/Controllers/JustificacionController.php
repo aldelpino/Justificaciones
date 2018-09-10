@@ -109,6 +109,7 @@ class JustificacionController extends Controller
         // $justificacion = Justificacion::create($request->all());
         Log::debug('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         Log::debug($request);
+        $resumenAsignaturas = [];
         foreach (json_decode($request->cursosArray, true) as $curso){
             $justification = new Justification();
             $justification->correo_cor = $curso['correoCoordinador'];
@@ -132,17 +133,23 @@ class JustificacionController extends Controller
              ->where('nfolio','=', $request['folio'])
              ->get();
              Log::Debug($adjuntos->toJson());
-            Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
-            Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
-            Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+            array_push($resumenAsignaturas, $justification->asignatura);
+
+
+        }
+        // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+        Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
+        Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
+        Log::Debug($resumenAsignaturas);
+        Log::Debug('#########################################################resumenAsignaturas');
             // DESCOMENTAR EN PRODUCCION
+            //
             // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
             // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
             // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
-        }
-
-
-
+            // EL profe recibe solo la resolucion del coordinador, sin datos de adjunto. Sacar desde justiController
+            // 1 solo correo con resumen de asignaturas para Coordinador
+            // 1 solo correo con resumen...Alumno recibe confirmacion de creacion con respaldo de los adjuntos
         // $justification->notify(new InboxMessage($request));
 
         // $result = $this->authorize('alumno/store', $post);
