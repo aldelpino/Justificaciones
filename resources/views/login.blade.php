@@ -75,14 +75,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <footer>
-        <div class="clearfix"></div>
-        <div class="pull-right">
-          Justificaciones Antonio Varas
-        </div>
-      </footer>
-    </div>
+    
+
 
 
 
