@@ -342,7 +342,6 @@
         // $(document).ready(function () {
             var folio = $('#folio').val();
             console.log(folio);
-            console.log("##############################################SUBIENDO ARCHIVOS");
             Dropzone.autoDiscover = false;
             $("div#my-awesome-dropzone").dropzone({
                 url: "image/upload/store/",
@@ -350,17 +349,15 @@
                 maxFilesize: 2,
                 dictResponseError: "Error al subir el archivo",
                 dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
+                dictMaxFilesExceeded: "Lo sentimos, solo puedes subir un maximo de 3 archivos!",
                 paramName: "file",
                 dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
                 acceptedFiles: "image/jpeg, image/png, image/jpg",
                 params: {
                     folio: folio
                 },
-              });
-                },
                 headers: {
-                    'X-CSRFToken': $('meta[name="token"]').attr('content')
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             });
         });
