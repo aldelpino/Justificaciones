@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\MyOwnResetPassword;
-use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -17,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','rol','recuperar','activacion'
     ];
 
     /**
@@ -38,10 +37,5 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new App\Notifications\MyOwnResetPassword($token));
-    }
-
-    public function getAuthPassword()
-    {
-        return $this->password;
     }
 }
