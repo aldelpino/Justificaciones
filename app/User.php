@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\MyOwnResetPassword;
 
 class User extends Authenticatable
 {
@@ -15,9 +14,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password','rol','recuperar','activacion'
-    ];
+    protected $fillable = ['name', 'email', 'password', 'rol', 'recuperar', 'activacion'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -27,15 +24,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new App\Notifications\MyOwnResetPassword($token));
-    }
 }
