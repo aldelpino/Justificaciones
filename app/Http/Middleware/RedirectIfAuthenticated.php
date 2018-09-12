@@ -24,11 +24,13 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
 
             if (auth()->user()->rol == 0) {
-              return redirect('alumno\index');
-            }elseif (auth()->user()->rol == 1) {
-              return redirect('coordinador\index');
-            }elseif (auth()->user()->rol == 2) {
-              return redirect('administrador\index');
+              return redirect('alumno/index');
+            } elseif (auth()->user()->rol == "admin") {
+              return redirect('administrador/index');
+            } elseif (auth()->user()->rol == "coordinador") {
+              return redirect('coordinador/index');
+            } elseif (auth()->user()->rol == 2) {
+              return redirect('administrador/index');
             }
         }
 

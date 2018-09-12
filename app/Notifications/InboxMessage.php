@@ -6,20 +6,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
 use App\Http\Requests\ContactFormRequest;
 
 class InboxMessage extends Notification
 {
     use Queueable;
 
+    protected $message;
+
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-
-    protected $message;
     public function __construct(contactFormRequest $message)
     {
         $this->message = $message;
@@ -42,24 +42,15 @@ class InboxMessage extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    // public function toMail($notifiable)
-    // {
-    //     return (new MailMessage)
-    //                 ->line('The introduction to the notification.')
-    //                 ->action('Notification Action', url('/'))
-    //                 ->line('Thank you for using our application!');
-    // }
 
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject(config('admin.name') . ", nueva solicitud de Justificacion")
-                    ->greeting(" ")  //sobreescribe los mensajes por defecto de laravel
-                    ->salutation(" ")
-                    ->from('hola@gmail.com', 'pepito') //correo no utilizado // Remitente
-                    ->line('hola mundo'); //mensaje
-                    // ->from($this->message->correo_alum, $this->message->name)
-					// ->line($this->message->message);
+            ->subject(config('admin.name') . ", nueva solicitud de Justificacion")
+            ->greeting(" ")  //sobreescribe los mensajes por defecto de laravel
+            ->salutation(" ")
+            ->from('hola@gmail.com', 'pepito') //correo no utilizado // Remitente
+            ->line('hola mundo'); //mensaje
     }
 
     /**

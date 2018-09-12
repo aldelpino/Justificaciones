@@ -1,95 +1,70 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Auth::routes();
 
-Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
-// Route::get('/', function () { if(DB::connection()->getDatabaseName()) { echo "Yes! successfully connected to the DB: " . DB::connection()->getDatabaseName(); } });
-
-
-Route::post('login', 'Auth\LoginController@login')->name('login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('recuperar', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('recuperar');
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
-  Route::post('/short', 'UrlMapperController@store');
-  Route::post('alumno/store', 'JustificacionController@store');
+    // Route::post('/short', 'UrlMapperController@store');
+    Route::post('alumno/store', 'JustificacionController@store');
+    // Route::post('/short', 'UrlMapperController@store');
+    // Route::post('alumno/store', 'JustificacionController@store');
 });
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
-Route::post('/short', 'UrlMapperController@store');
-// Route::post('alumno/store', 'JustificacionController@store');
 
-});
-//Imagen
+Route::group(['middleware' => 'auth'], function(){
 
+    // Alumno
+    Route::group(['prefix' => 'alumno'], function(){
+        Route::get('/index','AlumnoController@index')->name('alumno');
+        Route::get('/nuevaJustificacion','JustificacionController@create')->name('alumno');
+        Route::get('/revisarJustificacion','JustificacionController@revisar')->name('alumno');
+        Route::post('/image/upload/store','SubirImagenController@upload')->name('subirimagen.filestore')->middleware('auth:web');
+        Route::post('/store', 'JustificacionController@store')->name('justificacion.store')->middleware('auth:web');
+        Route::get('/create', 'JustificacionController@create')->name('justificacion.create')->middleware('permission:justificacion.create');
+        Route::get('/cambiarContrasena', 'ContrasenaController@index')->name('contrasena.create')->middleware('auth:web');
+        Route::post('/contrasena/cambiar', 'ContrasenaController@cambiar')->name('contrasena.create')->middleware('auth:web');
+    });
 
-Route::middleware(['auth'])->group(function(){
+    Route::get('asignaturas/get/{asignaturaId}', 'JustificacionController@getAsignaturas');
 
-  // Alumno
-  Route::get('/alumno/index','AlumnoController@index')->name('alumno');
-  Route::get('/alumno/nuevaJustificacion','JustificacionController@create')->name('alumno');
-  Route::get('/alumno/revisarJustificacion','JustificacionController@revisar')->name('alumno');
-  Route::get('asignaturas/get/{asignaturaId}', 'JustificacionController@getAsignaturas');
+    // Administrador
+    Route::get('/administrador/index','AdministradorController@index')->name('administrador');
 
+    // Coordinador
+    Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
 
-  // Administrador
-  Route::get('/administrador/index','AdministradorController@index')->name('administrador');
+    // Roles
+    // Route::post('roles/store', 'RoleController@store')->name('roles.store')->middleware('permission:roles.create');
+    // Route::get('roles', 'RoleController@index')->name('roles.index')->middleware('permission:roles.index');
+    // Route::get('roles/create', 'RoleController@create')->name('roles.create')->middleware('permission:roles.create');
+    // Route::put('roles/{role}', 'RoleController@update')->name('roles.update')->middleware('permission:roles.edit');
+    // Route::get('roles/{role}', 'RoleController@show')->name('roles.show')->middleware('permission:roles.show');
+    // Route::delete('roles/{role}', 'RoleController@destroy')->name('roles.destroy')->middleware('permission:roles.destroy');
+    // Route::get('roles/{role}', 'RoleController@edit')->name('roles.edit')->middleware('permission:roles.edit');
 
+    //Justificaciones
 
-  // Coordinador
-  Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
+    // Route::post('alumno/store', 'JustificacionController@store')->name('justificacion.store')->middleware('can:post');
+    // Route::get('justificaciones', 'JustificacionController@index')->name('justificacion.index')->middleware('permission:roles.index');
+    // Route::get('/changePassword','HomeController@showChangePasswordForm');
 
-  //Roles
-//   Route::post('roles/store', 'RoleController@store')->name('roles.store')->middleware('permission:roles.create');
-//   Route::get('roles', 'RoleController@index')->name('roles.index')->middleware('permission:roles.index');
-//   Route::get('roles/create', 'RoleController@create')->name('roles.create')->middleware('permission:roles.create');
-//   Route::put('roles/{role}', 'RoleController@update')->name('roles.update')->middleware('permission:roles.edit');
-//   Route::get('roles/{role}', 'RoleController@show')->name('roles.show')->middleware('permission:roles.show');
-//   Route::delete('roles/{role}', 'RoleController@destroy')->name('roles.destroy')->middleware('permission:roles.destroy');
-//   Route::get('roles/{role}', 'RoleController@edit')->name('roles.edit')->middleware('permission:roles.edit');
+    // Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+    // Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+    // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-  //Justificaciones
-  Route::post('alumno/image/upload/store','SubirImagenController@upload')->name('subirimagen.filestore')->middleware('auth:web');
+    // Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
+    // Route::get('coordinador/edicion/{id}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('auth:web');
+    // Route::post('coordinador/update/{id}', 'JustificacionController@update')->name('justificacion.update')->middleware('auth:web');
 
-  Route::post('alumno/store', 'JustificacionController@store')->name('justificacion.store')->middleware('auth:web');
-//   Route::post('alumno/store', 'JustificacionController@store')->name('justificacion.store')->middleware('can:post');
-  //Route::get('justificaciones', 'JustificacionController@index')->name('justificacion.index')->middleware('permission:roles.index');
-  Route::get('alumno/create', 'JustificacionController@create')->name('justificacion.create')->middleware('permission:justificacion.create');
-  Route::get('alumno/cambiarContrasena', 'ContrasenaController@index')->name('contrasena.create')->middleware('auth:web');
-  Route::post('alumno/contrasena/cambiar', 'ContrasenaController@cambiar')->name('contrasena.create')->middleware('auth:web');
-//   Route::get('/changePassword','HomeController@showChangePasswordForm');
+    Route::put('justificaciones/{role}', 'JustificacionController@update')->name('justificacion.update')->middleware('permission:justificacion.edit');
+    Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
+    Route::get('justificaciones/{role}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('permission:justificacion.edit');
 
-
-  Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-  Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-  Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-  Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-  Route::put('justificaciones/{role}', 'JustificacionController@update')->name('justificacion.update')->middleware('permission:justificacion.edit');
-  Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
-  Route::get('justificaciones/{role}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('permission:justificacion.edit');
-
-  Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
-  Route::get('coordinador/edicion/{id}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('auth:web');
-  Route::post('coordinador/update/{id}', 'JustificacionController@update')->name('justificacion.update')->middleware('auth:web');
-
-//  Route::post('coordinador/update', 'JustificacionController@udpdate')->name('justificacion.update');
-
-  //Usuarios
-
-//   Route::get('users', 'UserController@index')->name('users.index')->middleware('permission:users.index');
+    //   Route::get('users', 'UserController@index')->name('users.index')->middleware('permission:users.index');
 //   Route::put('users/{role}', 'UserCon troller@update')->name('users.update')->middleware('permission:users.edit');
 //   Route::get('users/{role}', 'UserController@show')->name('users.show')->middleware('permission:users.show');
 //   Route::get('users/{role}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
-
 });
 
 
@@ -163,9 +138,3 @@ Route::middleware(['auth'])->group(function(){
 // Route::get('/coordinador/perfil', function () {
 //     return view('coordinador.perfil');
 // });
-
-
-
-Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

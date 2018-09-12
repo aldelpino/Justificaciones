@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\SubirImagen;
@@ -9,7 +10,6 @@ use Carbon\Carbon;
 
 class SubirImagenController extends Controller
 {
-    //
     public function fileStore(Request $request)
     {
         Log::Debug($request->file('file')->getClientOriginalName() + '######################################################REQUEST');

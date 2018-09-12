@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJustificationsTable extends Migration
+class ChangePasswordAdminDataType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateJustificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('justifications', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        Schema::table('administrador', function(Blueprint $table){
+			$table->string('contrasena')->change();
+		});
     }
 
     /**
@@ -26,6 +25,6 @@ class CreateJustificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('justifications');
+        //
     }
 }

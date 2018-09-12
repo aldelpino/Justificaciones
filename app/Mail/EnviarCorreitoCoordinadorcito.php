@@ -25,21 +25,14 @@ class EnviarCorreitoCoordinadorcito extends Mailable
      * Create a new message instance.
      *
      * @return void
-     *
+     */
+    public function __construct(contactFormRequest $message, $adjuntos, $resumenAsignaturas)
+    {
+        $this->message = $message;
+        $this->adjuntos = $adjuntos;
+        $this->resumenAsignaturas = $resumenAsignaturas;
+    }
 
-    public function __construct(contactFormRequest $message, $adjuntos, $resumenAsignaturas)
-    {
-        $this->message = $message;
-        $this->adjuntos = $adjuntos;
-        $this->resumenAsignaturas = $resumenAsignaturas;
-    }
-    */
-    public function __construct(contactFormRequest $message, $adjuntos, $resumenAsignaturas)
-    {
-        $this->message = $message;
-        $this->adjuntos = $adjuntos;
-        $this->resumenAsignaturas = $resumenAsignaturas;
-    }
     /**
      * Build the message.
      *
