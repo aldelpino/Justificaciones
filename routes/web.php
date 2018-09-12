@@ -1,10 +1,7 @@
 <?php
 
-// Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
-
 Auth::routes();
-// Route::post('login', 'Auth\LoginController@login')->name('login');
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 Route::post('recuperar', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('recuperar');
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
@@ -56,9 +53,18 @@ Route::group(['middleware' => 'auth'], function(){
     // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
     // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+    // Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
+    // Route::get('coordinador/edicion/{id}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('auth:web');
+    // Route::post('coordinador/update/{id}', 'JustificacionController@update')->name('justificacion.update')->middleware('auth:web');
+
     Route::put('justificaciones/{role}', 'JustificacionController@update')->name('justificacion.update')->middleware('permission:justificacion.edit');
     Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
     Route::get('justificaciones/{role}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('permission:justificacion.edit');
+
+    //   Route::get('users', 'UserController@index')->name('users.index')->middleware('permission:users.index');
+//   Route::put('users/{role}', 'UserCon troller@update')->name('users.update')->middleware('permission:users.edit');
+//   Route::get('users/{role}', 'UserController@show')->name('users.show')->middleware('permission:users.show');
+//   Route::get('users/{role}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
 });
 
 

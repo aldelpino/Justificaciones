@@ -102,32 +102,35 @@ class JustificacionController extends Controller
         // $justificacion = Justificacion::create($request->all());
         Log::debug('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         Log::debug($request);
-        $justification = new Justification();
-        $justification->correo_cor = $request['correoCoordinador'];
-        $justification->correo_doc = $request['correoDocente'];
-        $justification->asignatura = $request['asignatura'];
-        $justification->comentario = $request['comentario'];
-        $justification->motivo = $request['motivo'];
-        $justification->nombre_alum = $request['nombre_alum'].' '.$request['apep_alum'].' '.$request['apem_alum'];
-        $justification->correo_alum = $request['correo_alum'];
-        $justification->celular_alum = $request['celular_alum'];
-        $justification->fec_jus = $request['fechaJustificacion'];
-        $justification->nfolio = $request['folio'];
-        $justification->estado = 'Pendiente';
-        $justification->motivo_rec = 'Pendiente';
-        $justification->comentario_rec = 'Pendiente';
-        $justification->tipo_inasistencia = $request['tipoInasistencia'] == "evaluacion" ? 1 : 0;
-        // dd($justification);
-        $justification->save();
-        // foreach (json_decode($request->cursosArray, true) as $curso){
-        //     // $admin->notify(new InboxMessage($request));
-        //     $adjuntos = DB::table('documento')
-        //      ->select('url')
-        //      ->where('nfolio','=', $request['folio'])
-        //      ->get();
-        //      Log::Debug($adjuntos->toJson());
-        //     array_push($resumenAsignaturas, $justification->asignatura);
-        // }
+
+        $resumenAsignaturas = [];
+
+        foreach (json_decode($request->cursosArray, true) as $curso){
+            $justification = new Justification();
+            $justification->correo_cor = $curso['correoCoordinador'];
+            $justification->correo_doc = $curso['correoDocente'];
+            $justification->asignatura = $curso['asignatura'];
+            $justification->comentario = $request['comentario'];
+            $justification->motivo = $request['motivo'];
+            $justification->nombre_alum = $request['nombre_alum'].' '.$request['apep_alum'].' '.$request['apem_alum'];
+            $justification->correo_alum = $request['correo_alum'];
+            $justification->celular_alum = $request['celular_alum'];
+            $justification->fec_jus = $request['fechaJustificacion'];
+            $justification->nfolio = $request['folio'];
+            $justification->estado = 'Pendiente';
+            $justification->motivo_rec = 'Pendiente';
+            $justification->comentario_rec = 'Pendiente';
+            $justification->tipo_inasistencia = $request['tipoInasistencia'] == "evaluacion"?1:0;
+            $justification->save();
+            // $admin->notify(new InboxMessage($request));
+            $adjuntos = DB::table('documento')
+             ->select('url')
+             ->where('nfolio','=', $request['folio'])
+             ->get();
+             Log::Debug($adjuntos->toJson());
+
+            array_push($resumenAsignaturas, $justification->asignatura);
+        }
         // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
         // Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
         // Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
@@ -141,6 +144,17 @@ class JustificacionController extends Controller
             // EL profe recibe solo la resolucion del coordinador, sin datos de adjunto. Sacar desde justiController
             // 1 solo correo con resumen de asignaturas para Coordinador
             // 1 solo correo con resumen...Alumno recibe confirmacion de creacion con respaldo de los adjuntos
+            // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+            // Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+            // Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+            // DESCOMENTAR EN PRODUCCION
+            // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+            // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+            // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+
+
+
+
         // $justification->notify(new InboxMessage($request));
 
         // $result = $this->authorize('alumno/store', $post);
@@ -148,7 +162,7 @@ class JustificacionController extends Controller
         // if(!$result){
         //     Log::debug('AAAA');
         // }
-        return redirect()->intended('alumno/index')->with('success', 'JUSTIFICACION CREADA CORRECTAMENTE !!!                      Presiona x para cerrar');;
+        return redirect()->intended('alumno/index')->with('success', 'JUSTIFICACION CREADA CORRECTAMENTE !!!                      Presiona x para cerrar');
 
         // return redirect()->route('alumno');
     }
@@ -156,6 +170,7 @@ class JustificacionController extends Controller
     public function revisar()
     {
         $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
+        // $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email]])->get();
         $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
         $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'aprobada' ]])->count();
         $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'rechazada']])->count();

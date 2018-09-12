@@ -59,7 +59,7 @@
                         <span class="step_no">1</span>
                         <span class="step_descr">
                                           Paso 1<br />
-                                          <small>Mis Datos Academicos</small>
+                                          <small>Mis Datos Académicos</small>
                                       </span>
                       </a>
                     </li>
@@ -142,13 +142,13 @@
 
                       </div>
                     </div>
-                    <div id="step-2">
+                    <div id="step-2" style="overflow:auto; height:480px">
                       <h2 class="StepTitle">Datos Solicitud</h2><br>
 
                       <div class="col-md-12">
                         ¿Qué fechas faltaste?
                         <div class="input-prepend input-group">
-                          <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                          <span id="reservation1" class="add-on input-group-addon"><i id="miCalendario" class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
                           <input type="text" style="width: 200px" name="fechaJustificacion" id="reservation" class="form-control" value="01/01/2018 - 01/25/2018" />
                         </div>
                       </div>
@@ -163,67 +163,59 @@
                         <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            {{-- {!! Form::label('item', 'Item:') !!} --}}
-                            {{-- {!! Form::select('asignatura', ['L' => 'Large', 'S' => 'Small'], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
-                            {{-- {!! Form::select('asignatura', [$infoCursos['NOM_ASIG']], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
-
-                        {{-- FUNCIONA OK --}}
                         <select class="form-control" id="carritoJC" name="asignatura" placeholder="Asignatura">
                           <option value=''>Seleccionar asignatura</option>
                           @foreach($infoCursos as $item)
                             <option value="{{$item['NOM_ASIG']}}">{{$item['NOM_ASIG']}}</option>
                           @endforeach
                         </select>
-
-                        {{-- // echo Form::checkbox('name', 'value'); --}}
-                        {{-- // echo '<br/>'; --}}
-                        {{-- {!! Form::checkbox('is_ok[]',  false,  isset($model->checkbox) ? : 0) !!} --}}
-
-                        {{-- <select class="form-control" name="asignatura">
-                            <option>Seleciona una asignatura</option>
-                            <option>Programacion de base de datos</option>
-                            <option>DAI</option>
-                            <option>Soporte en hardware</option>
-                            <option>Desarrollo en Java</option>
-                        </select> --}}
                         <span class="fa fa-folder form-control-feedback right" aria-hidden="true"></span>
-                        <span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
-                        <div id="panel-asignaturas">No has seleccionado Asignaturas</div>
-                        <div class="form-group">
-                          <div class="col-sm-offset-3 col-sm-6">
-                              <button class="btn btn-default" id="carrito">
-                                  <i class="fa fa-plus"></i> Agregar Asignatura a la justificacion
-                              </button>
-                          </div>
-                        </div>
+                        <span id="loader"><i class="form-control-feedback fa fa-spinner fa-3x fa-spin"></i></span>
                       </div>
+                            {{-- <div class="col-md-9">
+                              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                Asignaturas que serán justificadas
+                              </div>
+                            </div> --}}
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <select class="form-control" name="motivo">
-                               <option>Seleciona un motivo</option>
-                               <option>Médico</option>
-                               <option>Laboral</option>
-                               <option>Otros</option>
-                             </select>
+                          <option>Seleciona un motivo</option>
+                          <option>Médico</option>
+                          <option>Laboral</option>
+                          <option>Otros</option>
+                        </select>
                         <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          ¿A que faltaste?
-                        <div class="checkbox">
-                                <label>
-                                  <input name="tipoInasistencia" type="checkbox" value="evaluacion"> Evaluaciones
-                                </label>
-                              </div>
-                              <div class="checkbox">
-                                <label>
-                                  <input name="tipoInasistencia" type="checkbox" value="clases"> Clases
-                                </label>
-                              </div>
+                        <label for="panel-asignaturas" class="control-label has-feedback">Asignaturas que serán justificadas:</label>
+                        <div id="panel-asignaturas" class="form-group has-feedback">No has seleccionado Asignaturas</div>
+                        <div class="form-group">
+                          {{-- <div class="col-sm-offset-3 col-sm-6"> --}}
+                            <button class="btn btn-default form-group has-feedback" id="carrito">
+                                <i class="fa fa-plus"></i> Agregar Asignatura a la justificacion
+                            </button>
+                          {{-- </div> --}}
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          ¿Faltaste a alguna evaluación?
+                        <div class="checkbox form-group">
+                          <label>
+                            <input name="tipoInasistencia" type="checkbox" value="SI"> SI
+                          </label>
+                        </div>
+                        {{-- <div class="checkbox form-group">
+                          <label>
+                            <input name="tipoInasistencia" type="checkbox" value="NO"> NO
+                          </label>
+                        </div> --}}
                       </div>
                     </div>
                     <div id="step-3">
                       <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
                       <div class="x_content">
                         <p>Arrastre las fotos que necesita subir o haga click en el panel</p>
+                        <p><h5> Restricciones: img/jpg, img/png, tamaño máximo 3MB, cantidad máxima 3 documentos</h5></p>
                         {{-- <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" class="dropzone dropzone-previews" id="my-awesome-dropzone">
                             @csrf
                         </form> --}}
@@ -264,7 +256,15 @@
   <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- bootstrap-datetimepicker -->
   <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-
+  <script type="text/javascript">
+    $(function () {
+      $('input[name="fechaJustificacion"]').daterangepicker({
+      "locale": {
+        "applyLabel": "Aplicar",
+        "cancelLabel": "Cancelar",
+        }});
+      });
+    </script>
   {{-- <script type="text/javascript">
     Dropzone.options.dropzone = {
       maxFilesize: 12,

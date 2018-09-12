@@ -28,11 +28,15 @@ class AlumnoController extends Controller
         if (! json_decode($verificar, true)[0]['activacion']) {
             return view('contrasena.cambiar', []);
         }
+
         $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
         $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
         $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'aprobada' ]])->count();
+        // $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Aprobado' ]])->count();
         $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'rechazada']])->count();
+        // $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Rechazado']])->count();
         $cantValidando  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'validando' ]])->count();
+        // $cantValidando  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente' ]])->count();
         return view('alumno.index', [
             'justificacion'  => $justificacion,
             'cantEmitidas'   => $cantEmitidas,
