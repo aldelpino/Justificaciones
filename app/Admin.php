@@ -29,7 +29,7 @@ class Admin extends Authenticatable
      *
      * @var string
      */
-    protected $guard = 'admins';
+    protected $guard = 'admin';
 
     /**
      * Set value for timestamps present.
@@ -43,7 +43,7 @@ class Admin extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['usuario', 'contrasena'];
+    protected $fillable = ['id_admin', 'usuario', 'contrasena'];
 
     /**
      * The attributes that should be hidden for arrays.
