@@ -37,6 +37,4 @@ class CoordinadorController extends Controller
             'listaJustificacionesAprobadas'  => $listaJustificacionesAprobadas
         ]);
     }
-
-
 }
