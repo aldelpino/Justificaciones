@@ -33,57 +33,55 @@
       </div>
         <div class="login_wrapper">
           <div class="animate form login_form">
+            @if (session('status'))
+              <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+              </div>
+            @endif
             <section class="login_content">
               <form method="post" action="{{ route('login') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <h1>Sistema de Justificaciones</h1>
                 <div>
                   <input type="email" class="form-control" placeholder="Correo" required="" name="email" value="{{ old('email') }}" />
+                  @if($errors->has('email'))
                   {{ $errors->first('email', ':message') }}
+                  @endif
                 </div>
                 <div>
                   <input type="password" class="form-control" placeholder="Contraseña" required="" name="password" />
-                  {{ $errors->first('password', '<span class="help-block">:message</span>') }}
+                  @if($errors->has('password'))
+                  <span class="help-block">
+                    {{ $errors->first('password') }}
+                  </span>
+                  @endif
                 </div>
                 <div>
                   <button class="btn btn-primary btn-block">Acceder</button>
-                  <a class="reset_pass" href="#signup">Perdiste tu contraseña?</a>
+                  <a class="reset_pass" href="#signup">¿Perdiste tu contraseña?</a>
                 </div>
 
                 <div class="clearfix"></div>
-
               </form>
             </section>
           </div>
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-                {{-- forgot/password --}}
-            {{-- <form method="post" action="{{ route('recuperar') }}"> --}}
-            <form method="post" action="{{ route('recuperar') }}">
-              <h1>Olvido de contraseña</h1>
-
+            <form method="POST" action="{{ route('password.email') }}">
+              {{ csrf_field() }}
+              <h1>Reestablecer contraseña</h1>
               <div>
                 <input type="email" class="form-control" placeholder="Email" name="email" required="" />
               </div>
               <div>
                 <button class="btn btn-primary btn-block">Recuperar</button>
-
-                {{-- <a class="btn btn-default submit">Recuperar</a> --}}
               </div>
-
               <div class="clearfix"></div>
-
             </form>
           </section>
         </div>
       </div>
     </div>
-    
-
-
-
-
-
   </body>
 </html>
