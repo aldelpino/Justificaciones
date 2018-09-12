@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Notifications\InboxMessage;
-use App\Admin;
-
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactFormRequest;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
 use App\Justificacion;
 use App\Justification;
 use App\Files;
@@ -26,8 +20,7 @@ use Illuminate\Support\Facades\Mail;
 
 use DB;
 use Log;
-
-
+use Auth;
 
 class JustificacionController extends Controller
 {
@@ -38,7 +31,7 @@ class JustificacionController extends Controller
      */
     public function index()
     {
-      return view('alumno.index');
+        return view('alumno.index');
     }
 
     /**
@@ -48,7 +41,6 @@ class JustificacionController extends Controller
      */
     public function create()
     {
-        // dd(Auth::user());
         Log::debug(Auth::user()->email);
         $justificaciones = Justification::all();
     //     foreach ($justificaciones as $justificacion) {
@@ -99,7 +91,7 @@ class JustificacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function store(Request $request)
-    public function store(ContactFormRequest $request, Justification $justification, Admin $admin)
+    public function store(ContactFormRequest $request)
     {
         // public function mailToAdmin(ContactFormRequest $message, Admin $admin)
         // {        //send the admin an notification
@@ -110,38 +102,37 @@ class JustificacionController extends Controller
         // $justificacion = Justificacion::create($request->all());
         Log::debug('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         Log::debug($request);
-        foreach (json_decode($request->cursosArray, true) as $curso){
-            $justification = new Justification();
-            $justification->correo_cor = $curso['correoCoordinador'];
-            $justification->correo_doc = $curso['correoDocente'];
-            $justification->asignatura = $curso['asignatura'];
-            $justification->comentario = $request['comentario'];
-            $justification->motivo = $request['motivo'];
-            $justification->nombre_alum = $request['nombre_alum'].' '.$request['apep_alum'].' '.$request['apem_alum'];
-            $justification->correo_alum = $request['correo_alum'];
-            $justification->celular_alum = $request['celular_alum'];
-            $justification->fec_jus = $request['fechaJustificacion'];
-            $justification->nfolio = $request['folio'];
-            $justification->estado = 'Pendiente';
-            $justification->motivo_rec = 'Pendiente';
-            $justification->comentario_rec = 'Pendiente';
-            $justification->tipo_inasistencia = $request['tipoInasistencia'] == "evaluacion"?1:0;
-            $justification->save();
-            // $admin->notify(new InboxMessage($request));
-            $adjuntos = DB::table('documento')
-             ->select('url')
-             ->where('nfolio','=', $request['folio'])
-             ->get();
-             Log::Debug($adjuntos->toJson());
-            array_push($resumenAsignaturas, $justification->asignatura);
-
-
-        }
+        $justification = new Justification();
+        $justification->correo_cor = $request['correoCoordinador'];
+        $justification->correo_doc = $request['correoDocente'];
+        $justification->asignatura = $request['asignatura'];
+        $justification->comentario = $request['comentario'];
+        $justification->motivo = $request['motivo'];
+        $justification->nombre_alum = $request['nombre_alum'].' '.$request['apep_alum'].' '.$request['apem_alum'];
+        $justification->correo_alum = $request['correo_alum'];
+        $justification->celular_alum = $request['celular_alum'];
+        $justification->fec_jus = $request['fechaJustificacion'];
+        $justification->nfolio = $request['folio'];
+        $justification->estado = 'Pendiente';
+        $justification->motivo_rec = 'Pendiente';
+        $justification->comentario_rec = 'Pendiente';
+        $justification->tipo_inasistencia = $request['tipoInasistencia'] == "evaluacion" ? 1 : 0;
+        // dd($justification);
+        $justification->save();
+        // foreach (json_decode($request->cursosArray, true) as $curso){
+        //     // $admin->notify(new InboxMessage($request));
+        //     $adjuntos = DB::table('documento')
+        //      ->select('url')
+        //      ->where('nfolio','=', $request['folio'])
+        //      ->get();
+        //      Log::Debug($adjuntos->toJson());
+        //     array_push($resumenAsignaturas, $justification->asignatura);
+        // }
         // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
-        Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
-        Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
-        Log::Debug($resumenAsignaturas);
-        Log::Debug('#########################################################resumenAsignaturas');
+        // Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
+        // Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
+        // Log::Debug($resumenAsignaturas);
+        // Log::Debug('#########################################################resumenAsignaturas');
             // DESCOMENTAR EN PRODUCCION
             //
             // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
@@ -164,21 +155,19 @@ class JustificacionController extends Controller
 
     public function revisar()
     {
-
-            $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
-            $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
-            $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'aprobada' ]])->count();
-            $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'rechazada']])->count();
-            $cantValidando  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'validando' ]])->count();
-              Log::Debug($justificacion);
-            return view('alumno.revisarJustificacion', [
-                'justificacion'  => $justificacion,
-                'cantEmitidas'   => $cantEmitidas,
-                'cantAprobadas'  => $cantAprobadas,
-                'cantRechazadas' => $cantRechazadas,
-                'cantValidando'  => $cantValidando
-              ]);
-
+        $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
+        $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
+        $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'aprobada' ]])->count();
+        $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'rechazada']])->count();
+        $cantValidando  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'validando' ]])->count();
+        Log::Debug($justificacion);
+        return view('alumno.revisarJustificacion', [
+            'justificacion'  => $justificacion,
+            'cantEmitidas'   => $cantEmitidas,
+            'cantAprobadas'  => $cantAprobadas,
+            'cantRechazadas' => $cantRechazadas,
+            'cantValidando'  => $cantValidando
+        ]);
     }
 
     public function getAsignaturas($asignaturaId) {
@@ -193,7 +182,6 @@ class JustificacionController extends Controller
         // $asignatura = array(["nombreProfesor", "el Profe"], ["nombreCoordinador", "el Coordinador"]);
         // Log::debug($asignatura);
         return json_encode($asignatura);
-
     }
 
     /**
@@ -215,11 +203,17 @@ class JustificacionController extends Controller
      */
     public function edit($id)
     {
-       $justifications = DB::table('justifications')->where('id_dato', $id)->first();
-       $datosAlumno = DB::table('datos_semestre')->where([['correo_alum', 'like', $justifications->CORREO_ALUM],
-                                                             ['nom_asig', 'like', $justifications->ASIGNATURA]])->first();
+        $justifications = DB::table('justifications')->where('id_dato', $id)->first();
+        $datosAlumno = DB::table('datos_semestre')
+                        ->where([
+                            ['correo_alum', 'like', $justifications->CORREO_ALUM],
+                            ['nom_asig', 'like', $justifications->ASIGNATURA]
+                        ])->first();
 
-       return view('coordinador/edicionJustificaciones',['justifications' => $justifications], ['datosAlumno' => $datosAlumno]);
+       return view('coordinador/edicionJustificaciones', [
+           'justifications' => $justifications,
+           'datosAlumno' => $datosAlumno
+        ]);
     }
 
     /**
