@@ -27,10 +27,9 @@
     <link href="/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
-<<<<<<< HEAD
-=======
+
   @if (auth()->user()->rol == 1)
->>>>>>> desarrollo
+
 
   <body class="nav-md">
       <div class="container body">

@@ -346,37 +346,25 @@
             $("div#my-awesome-dropzone").dropzone({
                 url: "image/upload/store/",
                 maxFiles: 3,
-<<<<<<< HEAD
                 maxFilesize: 2,
                 dictResponseError: "Error al subir el archivo",
                 dictInvalidFileType: "Solo archivos tipo Imagen",
                 dictMaxFilesExceeded: "Lo sentimos, solo puedes subir un maximo de 3 archivos!",
-=======
-                maxFilesize: 20,
-                dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
->>>>>>> desarrollo
                 paramName: "file",
                 dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
                 acceptedFiles: "image/jpeg, image/png, image/jpg",
                 params: {
                     folio: folio
                 },
-<<<<<<< HEAD
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-=======
                 // init: function() {
                 //     this.on("sending", function(file, xhr, formData) {
                 //     formData.append("data", "loremipsum");
                 //     console.log(formData)
                 //     });
                 // },
-                headers: {
-                    'X-CSRFToken': $('meta[name="token"]').attr('content')
->>>>>>> desarrollo
-                },
+                }
             });
         });
     </script>

@@ -18,10 +18,7 @@ use App\Justification;
 use App\Files;
 use Carbon\Carbon;
 
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Input;
->>>>>>> desarrollo
 use App\Mail\EnviarCorreitoAlumnito;
 use App\Mail\EnviarCorreitoCoordinadorcito;
 use App\Mail\EnviarCorreitoAdministradorcito;
@@ -114,10 +111,9 @@ class JustificacionController extends Controller
         // $justificacion = Justificacion::create($request->all());
         Log::debug('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         Log::debug($request);
-<<<<<<< HEAD
+
         $resumenAsignaturas = [];
-=======
->>>>>>> desarrollo
+
         foreach (json_decode($request->cursosArray, true) as $curso){
             $justification = new Justification();
             $justification->correo_cor = $curso['correoCoordinador'];
@@ -141,7 +137,7 @@ class JustificacionController extends Controller
              ->where('nfolio','=', $request['folio'])
              ->get();
              Log::Debug($adjuntos->toJson());
-<<<<<<< HEAD
+
             array_push($resumenAsignaturas, $justification->asignatura);
 
 
@@ -159,19 +155,17 @@ class JustificacionController extends Controller
             // EL profe recibe solo la resolucion del coordinador, sin datos de adjunto. Sacar desde justiController
             // 1 solo correo con resumen de asignaturas para Coordinador
             // 1 solo correo con resumen...Alumno recibe confirmacion de creacion con respaldo de los adjuntos
-=======
-            Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
-            Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
-            Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+            // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+            // Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+            // Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos));
             // DESCOMENTAR EN PRODUCCION
             // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
             // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
             // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
-        }
+        
 
 
 
->>>>>>> desarrollo
         // $justification->notify(new InboxMessage($request));
 
         // $result = $this->authorize('alumno/store', $post);
@@ -179,7 +173,7 @@ class JustificacionController extends Controller
         // if(!$result){
         //     Log::debug('AAAA');
         // }
-        return redirect()->intended('alumno/index')->with('success', 'JUSTIFICACION CREADA CORRECTAMENTE !!!                      Presiona x para cerrar');;
+        return redirect()->intended('alumno/index')->with('success', 'JUSTIFICACION CREADA CORRECTAMENTE !!!                      Presiona x para cerrar');
 
         // return redirect()->route('alumno');
     }
@@ -187,11 +181,10 @@ class JustificacionController extends Controller
     public function revisar()
     {
 
-<<<<<<< HEAD
             $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
-=======
+
             $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email]])->get();
->>>>>>> desarrollo
+
             $cantEmitidas   = DB::table('justifications')->where('correo_alum','like', auth()->user()->email)->count();
             $cantAprobadas  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'aprobada' ]])->count();
             $cantRechazadas = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'rechazada']])->count();
