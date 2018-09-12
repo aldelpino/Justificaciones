@@ -63,11 +63,11 @@ class EnviarCorreitoCoordinadorcito extends Mailable
                         'comentario' => $this->message->comentario,
                         'resumenAsignaturas' => $this->resumenAsignaturas,
                     ]);
-        foreach($this->adjuntos as $filePath){
-            Log::Debug($filePath->url);
-            Log::Debug('###################################################################');
-            $correito->attach('storage/'.$filePath->url);
-        }
+        // foreach($this->adjuntos as $filePath){
+        //     Log::Debug($filePath->url);
+        //     Log::Debug('###################################################################');
+        //     $correito->attach('storage/'.$filePath->url);
+        // }
         return $correito;
     }
 }

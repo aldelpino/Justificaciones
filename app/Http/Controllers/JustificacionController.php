@@ -144,7 +144,9 @@ class JustificacionController extends Controller
         }
         // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
         Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
+        Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
         Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
+        Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
         Log::Debug($resumenAsignaturas);
         Log::Debug('#########################################################resumenAsignaturas');
             // DESCOMENTAR EN PRODUCCION
