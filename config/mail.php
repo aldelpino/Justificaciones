@@ -55,11 +55,10 @@ return [
     |
     */
 
-    // 'from' => [
-    //     'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-    //     'name' => env('MAIL_FROM_NAME', 'Example'),
-    // ],
-    // 'from' => ['address' => 'example@example.com', 'name' => 'App Name'],
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'Example'),
+    ],
 
 
     /*
@@ -102,7 +101,6 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
-    // 'from' => ['address' => 'cittavarasapp@gmail.com', 'name' => 'CITT'],
 
     /*
     |--------------------------------------------------------------------------
