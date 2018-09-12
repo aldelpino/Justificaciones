@@ -10,7 +10,6 @@
 @endsection
 
 @section('content')
-
   <!-- page content -->
   <div class="right_col" role="main">
     <!-- top tiles -->
@@ -39,54 +38,51 @@
 
     @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>{{ $message }}</strong>
     </div>
     @endif
     <div class="">
-        <div class="page-title">
-          <div class="clearfix"></div>
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
+      <div class="page-title">
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
 
-                <div class="x_content">
-                  <table id="datatable" class="table table-striped table-bordered">
-                    <thead>
+              <div class="x_content">
+                <table id="datatable" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Fecha Solicitud</th>
+                      <th>Asignatura</th>
+                      <th>Fecha Inicio Falta</th>
+                      <th>Fecha Fin Falta</th>
+                      <th>Estado</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {{-- {{ $justificacion }} --}}
+                    @foreach ($justificacion as $obj)
                       <tr>
-                        <th>Fecha Solicitud</th>
-                        <th>Asignatura</th>
-                        <th>Fecha Inicio Falta</th>
-                        <th>Fecha Fin Falta</th>
-                        <th>Estado</th>
-
+                        <td>{{ $obj->FEC_SOL }}</td>
+                        <td>{{ $obj->ASIGNATURA }}</td>
+                        <td>{{ $obj->FEC_SOL }}</td>
+                        <td>{{ $obj->UPDATED_AT }}</td>
+                        <td>{{ $obj->ESTADO }}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                        {{-- {{ $justificacion }} --}}
-                      @foreach ($justificacion as $obj)
-                        <tr>
-                          <td>{{ $obj->FEC_SOL }}</td>
-                          <td>{{ $obj->ASIGNATURA }}</td>
-                          <td>{{ $obj->FEC_SOL }}</td>
-                          <td>{{ $obj->UPDATED_AT }}</td>
-                          <td>{{ $obj->ESTADO }}</td>
-                        </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
+                    @endforeach
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
+    </div>
   </div>
   <!-- /page content -->
 @endsection
-
 
 @section('utilities')
   <!-- Datatables -->
@@ -108,34 +104,32 @@
 
   <script type="text/javascript">
   $(document).ready( function () {
-    $('#datatable').DataTable(
-      {
-            language: {
-              "sProcessing":     "Procesando...",
-              "sLengthMenu":     "Mostrar _MENU_ registros",
-              "sZeroRecords":    "No se encontraron resultados",
-              "sEmptyTable":     "Ningún dato disponible en esta tabla",
-              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-              "sInfoPostFix":    "",
-              "sSearch":         "Buscar:",
-              "sUrl":            "",
-              "sInfoThousands":  ",",
-              "sLoadingRecords": "Cargando...",
-              "oPaginate": {
-                  "sFirst":    "Primero",
-                  "sLast":     "Último",
-                  "sNext":     "Siguiente",
-                  "sPrevious": "Anterior"
-              },
-              "oAria": {
-                  "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-              }
-          }
+    $('#datatable').DataTable({
+      language: {
+        "sProcessing":     "Procesando...",
+        "sLengthMenu":     "Mostrar _MENU_ registros",
+        "sZeroRecords":    "No se encontraron resultados",
+        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix":    "",
+        "sSearch":         "Buscar:",
+        "sUrl":            "",
+        "sInfoThousands":  ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+          "sFirst":    "Primero",
+          "sLast":     "Último",
+          "sNext":     "Siguiente",
+          "sPrevious": "Anterior"
+        },
+        "oAria": {
+          "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
         }
-    );
+      }
+    });
   });
   </script>
 @endsection

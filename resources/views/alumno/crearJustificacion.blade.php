@@ -169,10 +169,10 @@
 
                         {{-- FUNCIONA OK --}}
                         <select class="form-control" id="carritoJC" name="asignatura" placeholder="Asignatura">
-                            <option value=''>Seleccionar asignatura</option>
-                            @foreach($infoCursos as $item)
-                                <option value="{{$item['NOM_ASIG']}}">{{$item['NOM_ASIG']}}</option>
-                            @endforeach
+                          <option value=''>Seleccionar asignatura</option>
+                          @foreach($infoCursos as $item)
+                            <option value="{{$item['NOM_ASIG']}}">{{$item['NOM_ASIG']}}</option>
+                          @endforeach
                         </select>
 
                         {{-- // echo Form::checkbox('name', 'value'); --}}
@@ -206,10 +206,6 @@
                              </select>
                         <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
                       </div>
-
-
-
-
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                           ¿A que faltaste?
                         <div class="checkbox">
@@ -256,7 +252,6 @@
     </div>
   </div>
   <!-- /page content -->
-
 @endsection
 
 @section('utilities')
@@ -271,117 +266,93 @@
   <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
   {{-- <script type="text/javascript">
-    Dropzone.options.dropzone =
-     {
-        maxFilesize: 12,
-        renameFile: function(file) {
-            var dt = new Date();
-            var time = dt.getTime();
-           return time+file.name;
-        },
-        acceptedFiles: ".pdf",
-        addRemoveLinks: true,
-        timeout: 5000,
-        success: function(file, response)
-        {
-            console.log(response);
-        },
-        error: function(file, response)
-        {
-           return false;
-        }
-}; --}}
-{{-- <script>
+    Dropzone.options.dropzone = {
+      maxFilesize: 12,
+      renameFile: function(file) {
+        var dt = new Date();
+        var time = dt.getTime();
+        return time+file.name;
+      },
+      acceptedFiles: ".pdf",
+      addRemoveLinks: true,
+      timeout: 5000,
+      success: function(file, response){
+        console.log(response);
+      },
+      error: function(file, response){
+        return false;
+      }
+    };
+  </script>
+  <script>
     // CSRF for all ajax call
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-</script>
+  </script>
   <script type="text/javascript">
     Dropzone.autoDiscover = false;
     jQuery(document).ready(function() {
-
       $("div#my-awesome-dropzone").dropzone({
         url: "image/upload/store"
       });
     });
 
-    Dropzone.options.myAwesomeDropzone =
-    {
-    acceptedFiles: ".pdf",
-    autoProcessQueue: true,
-    uploadMultiple: true,
-    parallelUploads: 2,
-    maxFiles: 2,
-    maxFilesize: 3,
+    Dropzone.options.myAwesomeDropzone = {
+      acceptedFiles: ".pdf",
+      autoProcessQueue: true,
+      uploadMultiple: true,
+      parallelUploads: 2,
+      maxFiles: 2,
+      maxFilesize: 3,
     };
   </script> --}}
-    <script type="text/javascript">
+     <script type="text/javascript">
         function display_locations(arr) {
-            // var array = ['london', 'ontario', 'san francisco', 'new york'];
-            var newHTML = "";
-            for (var i = 0; i < arr.length; i++) {
-                newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
-            }
-            $("#panel-asignaturas").html(newHTML);
-            $("#cursosArray").val(JSON.stringify(arr));
+          // var array = ['london', 'ontario', 'san francisco', 'new york'];
+          var newHTML = "";
+          for (var i = 0; i < arr.length; i++) {
+              newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
+          }
+          $("#panel-asignaturas").html(newHTML);
+          $("#cursosArray").val(JSON.stringify(arr));
         }
 
         $(function() {
-            var arr = new Array();
-            $("#carrito").click( function()
-                {
-                arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
-                display_locations(arr);
-                console.log(arr);
-                }
-            );
+          var arr = new Array();
+          $("#carrito").click(function(){
+            arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
+            display_locations(arr);
+            console.log(arr);
+          });
         });
     </script>
     <script type="text/javascript">
-        Dropzone.autoDiscover = false;
-        jQuery(document).ready(function() {
-        // $(document).ready(function () {
-            var folio = $('#folio').val();
-            console.log(folio);
-            Dropzone.autoDiscover = false;
-            $("div#my-awesome-dropzone").dropzone({
-                url: "image/upload/store/",
-                maxFiles: 3,
-<<<<<<< HEAD
-                maxFilesize: 2,
-                dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Lo sentimos, solo puedes subir un maximo de 3 archivos!",
-=======
-                maxFilesize: 20,
-                dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
->>>>>>> desarrollo
-                paramName: "file",
-                dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
-                acceptedFiles: "image/jpeg, image/png, image/jpg",
-                params: {
-                    folio: folio
-                },
-<<<<<<< HEAD
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-=======
-                // init: function() {
-                //     this.on("sending", function(file, xhr, formData) {
-                //     formData.append("data", "loremipsum");
-                //     console.log(formData)
-                //     });
-                // },
-                headers: {
-                    'X-CSRFToken': $('meta[name="token"]').attr('content')
->>>>>>> desarrollo
-                },
-            });
-        });
+      Dropzone.autoDiscover = false;
+      // jQuery(document).ready(function() {
+      $(document).ready(function () {
+          var folio = $('#folio').val();
+          console.log(folio);
+          Dropzone.autoDiscover = false;
+          $("div#my-awesome-dropzone").dropzone({
+              url: "image/upload/store/",
+              maxFiles: 3,
+              maxFilesize: 2,
+              dictResponseError: "Error al subir el archivo",
+              dictInvalidFileType: "Solo archivos tipo Imagen",
+              dictMaxFilesExceeded: "Lo sentimos, solo puedes subir un maximo de 3 archivos!",
+              paramName: "file",
+              dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
+              acceptedFiles: "image/jpeg, image/png, image/jpg",
+              params: {
+                folio: folio
+              },
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+          });
+      });
     </script>
 
-  <script src="{{ asset('js/selectProfeCord.js') }}"></script>
+<script src="{{ asset('js/selectProfeCord.js') }}"></script>
 
 
 @endsection
