@@ -12,7 +12,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function(){
-
     // Alumno
     Route::group(['prefix' => 'alumno'], function(){
         Route::get('/index','AlumnoController@index')->name('alumno');
