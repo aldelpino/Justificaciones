@@ -10,8 +10,9 @@ use Illuminate\Notifications\Messages\MailMessage;
 class MyOwnResetPassword extends Notification
 {
     use Queueable;
-    //Token handler
+
     public $token;
+
     /**
      * Create a new notification instance.
      *
@@ -39,18 +40,16 @@ class MyOwnResetPassword extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail( $notifiable ) {
-        $link = url( "/password/reset/?token=" . $this->token );
+    public function toMail($notifiable)
+    {
+        $link = url("/password/reset/?token=" . $this->token);
 
-        return ( new MailMessage )
-           ->view('reset.emailer')
-           ->from('info@example.com')
-           ->subject( 'Reset your password' )
-           ->line( "Hey, We've successfully changed the text " )
-           ->action( 'Reset Password', $link )
-           ->attach('reset.attachment')
-           ->line( 'Thank you!' );
-     }
+        return (new MailMessage)
+            ->subject('Reset your password')
+            ->line("Hey, We've successfully changed the text")
+            ->action('Reset Password', $link)
+            ->line('Thank you!');
+    }
 
     /**
      * Get the array representation of the notification.
