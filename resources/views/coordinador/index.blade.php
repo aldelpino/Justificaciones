@@ -12,15 +12,9 @@
 
 
 @section('content')
-
-
-
   <!-- page content -->
   <div class="right_col" role="main">
     <div class="">
-
-
-
     <div class="page-title">
         <div class="title_left">
           <h3>Lista de Solicitudes</small></h3>
@@ -103,7 +97,6 @@
                          </tr>
                        </thead>
                        <tbody>
-                         
                          @foreach ($listaJustificacionesRechazadas as $obj)
                            <tr>
                              <td>{{ $obj->NFOLIO }}</td>
@@ -113,7 +106,7 @@
                              <td>{{ $obj->ESTADO }}</td>
                              <td><a href="{{ url('coordinador/edicion', $obj->ID_DATO) }}">Ver</a></td>
                            </tr>
-                       @endforeach
+                        @endforeach
                        </tbody>
                      </table>
                    </div>
