@@ -1,30 +1,15 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Auth::routes();
 
-Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
-// Route::get('/', function () { if(DB::connection()->getDatabaseName()) { echo "Yes! successfully connected to the DB: " . DB::connection()->getDatabaseName(); } });
-
-
-Route::post('login', 'Auth\LoginController@login')->name('login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-Route::post('recuperar', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('recuperar');
+// Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
-  Route::post('/short', 'UrlMapperController@store');
+  // Route::post('/short', 'UrlMapperController@store');
   Route::post('alumno/store', 'JustificacionController@store');
 });
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
-Route::post('/short', 'UrlMapperController@store');
+// Route::post('/short', 'UrlMapperController@store');
 // Route::post('alumno/store', 'JustificacionController@store');
 
 });
@@ -66,12 +51,6 @@ Route::middleware(['auth'])->group(function(){
   Route::get('alumno/cambiarContrasena', 'ContrasenaController@index')->name('contrasena.create')->middleware('auth:web');
   Route::post('alumno/contrasena/cambiar', 'ContrasenaController@cambiar')->name('contrasena.create')->middleware('auth:web');
 //   Route::get('/changePassword','HomeController@showChangePasswordForm');
-
-
-  Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-  Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-  Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-  Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
   Route::put('justificaciones/{role}', 'JustificacionController@update')->name('justificacion.update')->middleware('permission:justificacion.edit');
   Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
@@ -165,7 +144,5 @@ Route::middleware(['auth'])->group(function(){
 // });
 
 
-
-Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
