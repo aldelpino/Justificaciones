@@ -1,5 +1,8 @@
 <?php
 
+Route::get('/', function(){
+    return redirect('/login');
+});
 Auth::routes();
 
 // Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
