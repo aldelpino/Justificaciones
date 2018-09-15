@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Mail\PasswordReset as PasswordResetMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,6 +12,8 @@ class MyOwnResetPassword extends Notification
 {
     use Queueable;
 
+    public $name;
+    public $email;
     public $token;
 
     /**
@@ -18,8 +21,10 @@ class MyOwnResetPassword extends Notification
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($name, $email, $token)
     {
+        $this->name = $name;
+        $this->email = $email;
         $this->token = $token;
     }
 
@@ -42,13 +47,8 @@ class MyOwnResetPassword extends Notification
      */
     public function toMail($notifiable)
     {
-        $link = url("/password/reset/?token=" . $this->token);
-
-        return (new MailMessage)
-            ->subject('Reset your password')
-            ->line("Hey, We've successfully changed the text")
-            ->action('Reset Password', $link)
-            ->line('Thank you!');
+        $link = url("/password/reset/" . $this->token);
+        return (new PasswordResetMail($this->name, $link))->to("some-email@some-domain.com");
     }
 
     /**
