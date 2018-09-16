@@ -25,10 +25,14 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/contrasena/cambiar', 'ContrasenaController@cambiar')->name('contrasena.create')->middleware('auth:web');
     });
 
-    Route::get('asignaturas/get/{asignaturaId}', 'JustificacionController@getAsignaturas');
-
     // Administrador
-    Route::get('/administrador/index','AdministradorController@index')->name('administrador');
+    Route::group(['prefix' => 'admin'], function(){
+        Route::get('/','AdministradorController@index')->name('admin.index');
+    });
+
+    Route::group(['prefix' => 'asignaturas'], function(){
+        Route::get('/{asignatura}', 'AsignaturaController@show');
+    });
 
     // Coordinador
     Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\SubirImagen;
-use Log;
 use Carbon\Carbon;
 
 class SubirImagenController extends Controller
@@ -26,10 +25,10 @@ class SubirImagenController extends Controller
     public function upload(Request $request)
     {
         $input = Input::all();
-        Log::Debug($input);
-        Log::Debug(request()->route()->parameter('userId'));
-        Log::Debug($request->folio);
-        Log::Debug("SUBIR ARCHIVOS##############################################################");
+        logger($input);
+        logger(request()->route()->parameter('userId'));
+        logger($request->folio);
+        logger("SUBIR ARCHIVOS##############################################################");
         $time = Carbon::now();
         $image = $request->file('file');
         $extension = $image->getClientOriginalExtension();
@@ -48,10 +47,7 @@ class SubirImagenController extends Controller
             $imageUpload->save();
             return response()->json($upload_success, 200);
         }
-        // Else, return error 400
-        else {
-            return response()->json('error', 400);
-        }
+        return response()->json('error', 400);
     }
 
 }
