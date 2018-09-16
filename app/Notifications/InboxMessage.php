@@ -14,7 +14,6 @@ class InboxMessage extends Notification
 
     protected $message;
 
-
     /**
      * Create a new notification instance.
      *

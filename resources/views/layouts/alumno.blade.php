@@ -92,15 +92,13 @@
           <!-- /top navigation -->
 
           <!-- page content -->
-
           @yield('content')
-
           <!-- /page content -->
 
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Antonio Varas 
+              Sistema de Justificaciones - Sede Antonio Varas
             </div>
             <div class="clearfix"></div>
           </footer>
@@ -120,7 +118,6 @@
 
       <!-- Custom Theme Scripts -->
       <script src="/build/js/custom.min.js"></script>
-
     </body>
   @endif
 </html>

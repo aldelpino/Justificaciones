@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => '¡Tu contraseña ha sido reestablecida!',
-    'sent' => '¡Te hemos enviado tu link para reestablecer la contraseña!',
+    'password' => 'Las contraseñas deben tener al menos 6 caracteres.',
+    'reset' => 'Su contraseña ha sido reestablecida.',
+    'sent' => 'Te hemos enviado un correo para reestablecer tu contraseña!',
+    'token' => 'El token para reestablecer la contraseña es inválido.',
 ];

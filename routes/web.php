@@ -1,8 +1,9 @@
 <?php
+Route::get('/', function(){
+    return redirect('/login');
+});
 
 Auth::routes();
-
-Route::post('recuperar', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('recuperar');
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
     // Route::post('/short', 'UrlMapperController@store');
@@ -32,25 +33,11 @@ Route::group(['middleware' => 'auth'], function(){
     // Coordinador
     Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
 
-    // Roles
-    // Route::post('roles/store', 'RoleController@store')->name('roles.store')->middleware('permission:roles.create');
-    // Route::get('roles', 'RoleController@index')->name('roles.index')->middleware('permission:roles.index');
-    // Route::get('roles/create', 'RoleController@create')->name('roles.create')->middleware('permission:roles.create');
-    // Route::put('roles/{role}', 'RoleController@update')->name('roles.update')->middleware('permission:roles.edit');
-    // Route::get('roles/{role}', 'RoleController@show')->name('roles.show')->middleware('permission:roles.show');
-    // Route::delete('roles/{role}', 'RoleController@destroy')->name('roles.destroy')->middleware('permission:roles.destroy');
-    // Route::get('roles/{role}', 'RoleController@edit')->name('roles.edit')->middleware('permission:roles.edit');
-
     //Justificaciones
 
     // Route::post('alumno/store', 'JustificacionController@store')->name('justificacion.store')->middleware('can:post');
     // Route::get('justificaciones', 'JustificacionController@index')->name('justificacion.index')->middleware('permission:roles.index');
     // Route::get('/changePassword','HomeController@showChangePasswordForm');
-
-    // Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-    // Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-    // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-    // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
     // Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
     // Route::get('coordinador/edicion/{id}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('auth:web');
@@ -59,11 +46,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('justificaciones/{role}', 'JustificacionController@update')->name('justificacion.update')->middleware('permission:justificacion.edit');
     Route::get('justificaciones/{role}', 'JustificacionController@show')->name('justificacion.show')->middleware('permission:justificacion.show');
     Route::get('justificaciones/{role}', 'JustificacionController@edit')->name('justificacion.edit')->middleware('permission:justificacion.edit');
-
-    //   Route::get('users', 'UserController@index')->name('users.index')->middleware('permission:users.index');
-//   Route::put('users/{role}', 'UserCon troller@update')->name('users.update')->middleware('permission:users.edit');
-//   Route::get('users/{role}', 'UserController@show')->name('users.show')->middleware('permission:users.show');
-//   Route::get('users/{role}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
+    Route::put('users/{role}', 'UserController@update')->name('users.update')->middleware('permission:users.edit');
+    Route::get('users/{role}', 'UserController@show')->name('users.show')->middleware('permission:users.show');
+    Route::get('users/{role}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
 });
 
 
