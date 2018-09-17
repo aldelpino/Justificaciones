@@ -44,7 +44,18 @@
 
 
               <!-- Smart Wizard -->
+              @if(count($errors))
 
+              <div class="alert alert-danger">
+                <strong>Upss!</strong> Algo no anda bien con tu solicitud de justificación
+                <br/>
+                <ul>
+                  @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
               <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('alumno/store')}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="folio" name="folio" value="{{$folio}}">
@@ -52,6 +63,7 @@
                 <input type="hidden" id="cursosArray" name="cursosArray">
                 <input type="hidden" id="correoDocente" name="correoDocente">
                 <input type="hidden" id="correoCoordinador" name="correoCoordinador">
+                <input type="hidden" id="subioArchivo" name="subioArchivo">
                 <div id="wizard" class="form_wizard wizard_horizontal">
                   <ul class="wizard_steps">
                     <li>
@@ -179,10 +191,10 @@
                             </div> --}}
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <select class="form-control" name="motivo">
-                          <option>Seleciona un motivo</option>
-                          <option>Médico</option>
-                          <option>Laboral</option>
-                          <option>Otros</option>
+                          <option value=''>Seleciona un motivo</option>
+                          <option value='Medico'>Médico</option>
+                          <option value='Laboral'>Laboral</option>
+                          <option value='Otros'>Otros</option>
                         </select>
                         <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
                       </div>
@@ -204,11 +216,11 @@
                             <input name="tipoInasistencia" type="checkbox" value="SI"> SI
                           </label>
                         </div>
-                        {{-- <div class="checkbox form-group">
+                        <div class="checkbox form-group">
                           <label>
                             <input name="tipoInasistencia" type="checkbox" value="NO"> NO
                           </label>
-                        </div> --}}
+                        </div>
                       </div>
                     </div>
                     <div id="step-3">
@@ -360,7 +372,13 @@
                 //     console.log(formData)
                 //     });
                 // },
-                }
+                },
+                init: function() {
+                  this.on("success", function(file, responseText) {
+                    // console.log(responseText);
+                    $("#subioArchivo").val('sip');
+                  });
+                },
             });
         });
     </script>

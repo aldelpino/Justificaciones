@@ -49,9 +49,17 @@ class JustificacionController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->activacion == '0')
+        {
+            Log::debug("############################################33CONSOLA");
+            return view('contrasena.cambiar', []);
+
+        }
         // dd(Auth::user());
         Log::debug(Auth::user()->email);
-        $justificaciones = Justification::all();
+        Log::debug("############################################33");
+        Log::debug(Auth::user()->activacion);
+        // $justificaciones = Justification::all();
     //     foreach ($justificaciones as $justificacion) {
     //         Log::debug($justificacion->NFOLIO);
     //   }
@@ -110,8 +118,9 @@ class JustificacionController extends Controller
         // }
         // $justificacion = Justificacion::create($request->all());
         Log::debug('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        Log::debug($request);
-
+        // $validated = $request->validated();
+        // Log::debug($validated->errors());
+        
         $resumenAsignaturas = [];
 
         foreach (json_decode($request->cursosArray, true) as $curso){
@@ -137,10 +146,7 @@ class JustificacionController extends Controller
              ->where('nfolio','=', $request['folio'])
              ->get();
              Log::Debug($adjuntos->toJson());
-
             array_push($resumenAsignaturas, $justification->asignatura);
-
-
         }
         // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
         Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
@@ -182,7 +188,12 @@ class JustificacionController extends Controller
 
     public function revisar()
     {
+        if(Auth::user()->activacion == '0')
+        {
+            Log::debug("############################################33CONSOLA");
+            return view('contrasena.cambiar', []);
 
+        }
             $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
 
             $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email]])->get();

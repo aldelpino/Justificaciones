@@ -25,6 +25,21 @@ class ContactFormRequest extends FormRequest
     {
         return [
             //
+            'asignatura' => 'required',
+            'tipoInasistencia' => 'required',
+            'motivo' => 'required',
+            'subioArchivo' => 'required',
+            'comentario' => 'required|min:30|max:200',
         ];
     }
+    public function messages()
+{
+    return [
+        'asignatura.required' => 'Debes mencionar asignatura',
+        'tipoInasistencia.required' => 'Debes marcar si faltaste a prueba o no',
+        'motivo.required' => 'Debes indicar un motivo',
+        'subioArchivo.required' => 'Debes adjuntar una imagen',
+        'comentario.required' => 'Debes comentar enter 30 y 500 caracteres',
+    ];
+}
 }

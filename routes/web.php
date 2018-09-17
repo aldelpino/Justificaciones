@@ -10,11 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
 // Route::get('/', function () { if(DB::connection()->getDatabaseName()) { echo "Yes! successfully connected to the DB: " . DB::connection()->getDatabaseName(); } });
-
-
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('recuperar', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('recuperar');
@@ -29,8 +26,6 @@ Route::post('/short', 'UrlMapperController@store');
 
 });
 //Imagen
-
-
 Route::middleware(['auth'])->group(function(){
 
   // Alumno
@@ -39,10 +34,8 @@ Route::middleware(['auth'])->group(function(){
   Route::get('/alumno/revisarJustificacion','JustificacionController@revisar')->name('alumno');
   Route::get('asignaturas/get/{asignaturaId}', 'JustificacionController@getAsignaturas');
 
-
   // Administrador
   Route::get('/administrador/index','AdministradorController@index')->name('administrador');
-
 
   // Coordinador
   Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
