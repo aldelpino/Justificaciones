@@ -99,7 +99,7 @@
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Antonio Varas 
+              Sistema de Justificaciones - Sede Antonio Varas
             </div>
             <div class="clearfix"></div>
           </footer>

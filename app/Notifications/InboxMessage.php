@@ -6,20 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
 use App\Http\Requests\ContactFormRequest;
 
 class InboxMessage extends Notification
 {
     use Queueable;
 
+    protected $message;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-
-    protected $message;
     public function __construct(contactFormRequest $message)
     {
         $this->message = $message;
