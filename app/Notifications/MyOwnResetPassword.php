@@ -48,7 +48,9 @@ class MyOwnResetPassword extends Notification
     public function toMail($notifiable)
     {
         $link = url("/password/reset/" . $this->token);
-        return (new PasswordResetMail($this->name, $link))->to("some-email@some-domain.com");
+        return (new PasswordResetMail($this->name, $link))
+            ->subject('Reestablecer contraseña')
+            ->to($this->email);
     }
 
     /**
