@@ -5,8 +5,6 @@ Route::get('/', function(){
 });
 Auth::routes();
 
-// Route::get('/','Auth\LoginController@showLoginForm')->middleware('guest');
-
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
   // Route::post('/short', 'UrlMapperController@store');
   Route::post('alumno/store', 'JustificacionController@store');
@@ -17,8 +15,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
 
 });
 //Imagen
-
-
 Route::middleware(['auth'])->group(function(){
 
   // Alumno
@@ -27,10 +23,8 @@ Route::middleware(['auth'])->group(function(){
   Route::get('/alumno/revisarJustificacion','JustificacionController@revisar')->name('alumno');
   Route::get('asignaturas/get/{asignaturaId}', 'JustificacionController@getAsignaturas');
 
-
   // Administrador
   Route::get('/administrador/index','AdministradorController@index')->name('administrador');
-
 
   // Coordinador
   Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
