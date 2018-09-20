@@ -116,7 +116,7 @@
                         {{-- {{ print_r($datosAlumno, true) }} --}}
                         {{-- {{ print_r($infoCursos, true) }} --}}
                         {{-- {{$datosAlumno->'correo_alum'}} --}}
-                        <h2 class="StepTitle">Mis datos Academicos</h2>
+                        <h2 class="StepTitle">Mis datos Académicos</h2>
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                           <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly" name='nombre_alum' placeholder="{{$datosAlumno->NOMBRE_ALUM}}" value="{{$datosAlumno->NOMBRE_ALUM}}">
                           <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
