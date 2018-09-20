@@ -133,7 +133,7 @@
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="number" class="form-control" id="inputSuccess5"  placeholder="Telefono/Celular" name="celular_alum" value="{{$datosAlumno->CELULAR}}">
+                          <input type="text" class="form-control" id="inputSuccess5"  placeholder="Telefono/Celular" name="celular_alum" value="{{$datosAlumno->CELULAR}}" maxlength="9">
                           <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
