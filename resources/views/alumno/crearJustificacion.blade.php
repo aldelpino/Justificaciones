@@ -176,7 +176,7 @@
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <select class="form-control" id="carritoJC" name="asignatura" placeholder="Asignatura">
-                            <option value=''>Seleccionar asignatura</option>
+                            <option value='null'>Seleccionar asignatura</option>
                             @foreach($infoCursos as $item)
                                 <option value="{{$item['NOM_ASIG']}}">{{$item['NOM_ASIG']}}</option>
                             @endforeach
@@ -323,8 +323,7 @@
     };
   </script> --}}
     <script type="text/javascript">
-        function display_locations(arr) {
-            // var array = ['london', 'ontario', 'san francisco', 'new york'];
+        function display_asignaturas(arr) {
             var newHTML = "";
             for (var i = 0; i < arr.length; i++) {
                 newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
@@ -337,9 +336,16 @@
             var arr = new Array();
             $("#carrito").click( function()
                 {
-                arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
-                display_locations(arr);
-                console.log(arr);
+                var selectobject=document.getElementById("carritoJC");
+                if ($('#carritoJC').find(":selected").text() != 'Seleccionar asignatura') {
+                    arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
+                    display_asignaturas(arr);
+                    // console.log(arr);
+                    for (var i=0; i<selectobject.length; i++){
+                        if (selectobject.options[i].value == $('#carritoJC').find(":selected").text() )
+                        selectobject.remove(i);
+                        }
+                    }
                 }
             );
         });
