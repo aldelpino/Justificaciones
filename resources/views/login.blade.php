@@ -42,7 +42,7 @@
                   {{ $errors->first('email', ':message') }}
                 </div>
                 <div>
-                  <input type="password" class="form-control" placeholder="Contraseña (primeros 6 digitos del RUT)" required="" name="password" />
+                  <input type="password" class="form-control" placeholder="Contraseña (primeros 6 digitos de tu RUT)" required="" name="password" />
                   {{ $errors->first('password', '<span class="help-block">:message</span>') }}
                 </div>
                 <div>
