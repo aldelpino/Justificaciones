@@ -44,6 +44,7 @@
                          <tr>
                            <th>Nro. Folio</th>
                            <th>Nombre Alumno</th>
+                           <th>Rut Alumno</th>
                            <th>Fecha Solicitud</th>
                            <th>Fecha Justificacion</th>
                            <th>Estado</th>
@@ -55,6 +56,7 @@
                            <tr>
                              <td>{{ $obj->NFOLIO }}</td>
                              <td>{{ $obj->NOMBRE_ALUM }}</td>
+                             <td>{{ $obj->RUT_ALU }}</td>
                              <td>{{ $obj->FEC_SOL }}</td>
                              <td>{{ $obj->FEC_JUS}}</td>
                              <td>{{ $obj->ESTADO }}</td>
