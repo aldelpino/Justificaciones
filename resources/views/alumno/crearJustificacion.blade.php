@@ -3,7 +3,7 @@
 
 @section('utilitiesHead')
   <!-- bootstrap-daterangepicker -->
-  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  {{-- <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"> --}}
   <!-- Dropzone.js -->
   <link href="/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <style>
@@ -161,7 +161,7 @@
                         ¿Qué fechas faltaste?
                         <div class="input-prepend input-group">
                           <span id="reservation1" class="add-on input-group-addon"><i id="miCalendario" class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                          <input type="text" style="width: 200px" name="fechaJustificacion" id="reservation" class="form-control" value="01/01/2018 - 01/25/2018" />
+                          <input type="text" style="width: 200px" name="fechaJustificacion" id="reservation-time" class="form-control"/>
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -269,7 +269,9 @@
   <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- bootstrap-datetimepicker -->
   <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-  <script type="text/javascript">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+  {{-- <script type="text/javascript">
     $(function () {
       $('input[name="fechaJustificacion"]').daterangepicker({
       "locale": {
@@ -277,7 +279,7 @@
         "cancelLabel": "Cancelar",
         }});
       });
-    </script>
+    </script> --}}
   {{-- <script type="text/javascript">
     Dropzone.options.dropzone =
      {
@@ -388,7 +390,55 @@
             });
         });
     </script>
+    <script type="text/javascript">
+    //   $(function() {
+    //      $('input[name="fechaJustificacion"]').daterangepicker({
+    //       timePicker: true,
+    // startDate: moment().startOf('hour'),
+    // endDate: moment().startOf('hour').add(168, 'hour'),
+    // locale: { cancelLabel: 'Clear' } 
+  </script>
 
+    {{-- // locale: {
+    //   format: 'DD/M/YY'
+    // }
+    // applyLabel: "Aplicar",
+    //     cancelLabel: "Cancelar",
+    // locale: {
+    //   format: 'M/DD hh:mm A'
+    // },
+              // minDate: "08/06/2018",
+              // maxDate: "08/14/2018",
+              // locale: {
+              //     cancelLabel: 'Cancelar',
+              //     applyLabel: 'Aplicar',
+              //     // format: 'DD/MM/YYYY',
+              //     "daysOfWeek": [
+              //     "Dom",
+              //     "Lun",
+              //     "Mar",
+              //     "Mie",
+              //     "Jue",
+              //     "Vie",
+              //     "Sab"
+              //   ],
+              //   "monthNames": [
+              //       "Enero",
+              //       "Febrero",
+              //       "Marzo",
+              //       "Abril",
+              //       "Mayo",
+              //       "Junio",
+              //       "Julio",
+              //       "Agosto",
+              //       "Septiembre",
+              //       "Octubre",
+              //       "Noviembre",
+              //       "Diciembre"
+              //   ]
+              // }
+          });
+      }); --}}
   <script src="{{ asset('js/selectProfeCord.js') }}"></script>
 
 
