@@ -126,6 +126,10 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                   <br>
                   <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
+                  @foreach ($imagenes as $filePath )
+                    <img src="{{ 'storage/'.$filePath->url }}" alt="asdas">
+                  @endforeach
+
 
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
