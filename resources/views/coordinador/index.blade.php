@@ -45,6 +45,7 @@
                            <th>Nro. Folio</th>
                            <th>Nombre Alumno</th>
                            <th>Rut Alumno</th>
+                           <th>Asignatura</th>
                            <th>Fecha Solicitud</th>
                            <th>Fecha Justificacion</th>
                            <th>Estado</th>
@@ -57,6 +58,7 @@
                              <td>{{ $obj->NFOLIO }}</td>
                              <td>{{ $obj->NOMBRE_ALUM }}</td>
                              <td>{{ $obj->RUT_ALU }}</td>
+                             <td>{{ $obj->ASIGNATURA }}</td>
                              <td>{{ $obj->FEC_SOL }}</td>
                              <td>{{ $obj->FEC_JUS}}</td>
                              <td>{{ $obj->ESTADO }}</td>
@@ -72,6 +74,8 @@
                          <tr>
                            <th>Nro. Folio</th>
                            <th>Nombre Alumno</th>
+                           <th>Rut Alumno</th>
+                           <th>Asignatura</th>
                            <th>Fecha Solicitud</th>
                            <th>Fecha Justificacion</th>
                            <th>Estado</th>
@@ -83,10 +87,12 @@
                            <tr>
                              <td>{{ $obj->NFOLIO }}</td>
                              <td>{{ $obj->NOMBRE_ALUM }}</td>
+                             <td>{{ $obj->RUT_ALU }}</td>
+                             <td>{{ $obj->ASIGNATURA }}</td>
                              <td>{{ $obj->FEC_SOL }}</td>
                              <td>{{ $obj->FEC_JUS}}</td>
                              <td>{{ $obj->ESTADO }}</td>
-                             <td><a href="">Ver</a></td>
+                             <td><a href="{{ url('coordinador/edicion', $obj->ID_DATO) }}">Ver</a></td>
                            </tr>
                        @endforeach
                        </tbody>
@@ -98,6 +104,8 @@
                          <tr>
                            <th>Nro. Folio</th>
                            <th>Nombre Alumno</th>
+                           <th>Rut Alumno</th>
+                           <th>Asignatura</th>
                            <th>Fecha Solicitud</th>
                            <th>Fecha Justificacion</th>
                            <th>Estado</th>
@@ -109,6 +117,8 @@
                            <tr>
                              <td>{{ $obj->NFOLIO }}</td>
                              <td>{{ $obj->NOMBRE_ALUM }}</td>
+                             <td>{{ $obj->RUT_ALU }}</td>
+                             <td>{{ $obj->ASIGNATURA }}</td>
                              <td>{{ $obj->FEC_SOL }}</td>
                              <td>{{ $obj->FEC_JUS}}</td>
                              <td>{{ $obj->ESTADO }}</td>
