@@ -215,7 +215,7 @@ class JustificacionController extends Controller
                                                              ['nom_asig', 'like', $justifications->ASIGNATURA]])->first();
        $imagenes = DB::table('documento')
         ->select('url')
-        ->where('nfolio','like', $justifications->NFOLIO)
+        ->where('nfolio','like', '20180421371067')
         ->get();
         Log::Debug($imagenes->toJson());
         return view('coordinador/edicionJustificaciones',['justifications' => $justifications,

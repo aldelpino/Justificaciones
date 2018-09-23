@@ -127,7 +127,7 @@
                   <br>
                   <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
                   @foreach ($imagenes as $filePath )
-                    <img src="{{ 'storage/'.$filePath->url }}" alt="asdas">
+                    <img src="/storage/documentos/201804213710670.jpg" alt="asdas">
                   @endforeach
 
 
