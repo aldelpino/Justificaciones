@@ -139,6 +139,8 @@
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
+                        <img src="/storage/2018/09/2018/09/201809n7aCd7Mb.png" alt="justificacion">
+
                       </div>
                     </div>
                     <div id="step-2">
