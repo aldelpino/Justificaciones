@@ -251,13 +251,13 @@ class JustificacionController extends Controller
        $datosAlumno = DB::table('datos_semestre')->where([['correo_alum', 'like', $justifications->CORREO_ALUM],
                                                              ['nom_asig', 'like', $justifications->ASIGNATURA]])->first();
        $imagenes = DB::table('documento')
-        ->select('url')
+        ->select('substr(URL,12)')
         ->where('nfolio','like', '20180421371067')
         ->get();
         Log::Debug($imagenes->toJson());
         return view('coordinador/edicionJustificaciones',['justifications' => $justifications,
                                                          'datosAlumno'    => $datosAlumno,
-                                                         'imagenes'       => $imagenes]);       
+                                                         'imagenes'       => $imagenes]);
     }
 
     /**
