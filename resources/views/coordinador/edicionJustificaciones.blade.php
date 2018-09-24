@@ -45,116 +45,173 @@
 
               <!-- Smart Wizard -->
 
-              <form enctype="multipart/form-data"  action="{{url('coordinador/update', $justifications->ID_DATO)}}" method="post">
+              <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('coordinador/update', $justifications->ID_DATO)}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                 <input type="hidden" id="inputSuccess3" name="apem_alum" value="{{$datosAlumno->APEM_ALUM}}">
                 <input type="hidden" id="cursosArray" name="cursosArray">
                 <input type="hidden" id="correoDocente" name="correoDocente">
                 <input type="hidden" id="correoCoordinador" name="correoCoordinador">
+                <div id="wizard" class="form_wizard wizard_horizontal">
+                  <ul class="wizard_steps">
+                    <li>
+                      <a href="#step-1">
+                        <span class="step_no">1</span>
+                        <span class="step_descr">
+                                          Paso 1<br />
+                                          <small>Datos Academicos Alumno</small>
+                                      </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#step-2">
+                        <span class="step_no">2</span>
+                        <span class="step_descr">
+                                          Paso 2<br />
+                                          <small>Datos Solicitud Alumno</small>
+                                      </span>
+                      </a>
+                    </li>
+                    <li>
+                    <a href="#step-3">
+                      <span class="step_no">3</span>
+                      <span class="step_descr">
+                                        Paso 3<br />
+                                        <small>Certificados Alumno</small>
+                                    </span>
+                    </a>
+                  </li>
+                    <li>
+                      <a href="#step-4">
+                        <span class="step_no">4</span>
+                        <span class="step_descr">
+                                          Paso 4<br />
+                                          <small>Evaluacion y Comentarios</small>
+                                      </span>
+                      </a>
+                    </li>
+                  </ul>
+                    <div id="step-1">
+                      <div class="form-horizontal form-label-left">
+                        {{-- @foreach($datosAlumno as $key => $data) --}}
+                        {{-- @foreach($datosAlumno as $data)
+                            <tr>
+                                <th>{{$data->nombre_alum}}</th>
+                                <th>{{$data['correo_alum']}}</th>
+                            </tr>
+                        @endforeach --}}
+                        {{-- {{$datosAlumno->CORREO_ALUM}} --}}
+                        {{-- {{ print_r($datosAlumno, true) }} --}}
+                        {{-- {{ print_r($infoCursos, true) }} --}}
+                        {{-- {{$datosAlumno->'correo_alum'}} --}}
+                        <h2 class="StepTitle">Datos Academicos Alumno</h2>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly" name='nombre_alum' placeholder="{{$datosAlumno->NOMBRE_ALUM}}" value="{{$datosAlumno->NOMBRE_ALUM}}">
+                          <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
 
-                <div class="form-horizontal form-label-left">
-                  <h2 class="StepTitle">Datos Academicos Alumno</h2><br>
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly" name='nombre_alum' placeholder="{{$datosAlumno->NOMBRE_ALUM}}" value="{{$datosAlumno->NOMBRE_ALUM}}">
-                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                  </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" class="form-control" id="inputSuccess3" readonly="readonly" name='apep_alum' placeholder="{{$datosAlumno->APEP_ALUM}}" value="{{$datosAlumno->APEP_ALUM}}">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
 
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control" id="inputSuccess3" readonly="readonly" name='apep_alum' placeholder="{{$datosAlumno->APEP_ALUM}}" value="{{$datosAlumno->APEP_ALUM}}">
-                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                  </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess4" readonly="readonly" name='correo_alum' placeholder="{{$datosAlumno->CORREO_ALUM}}" value="{{$datosAlumno->CORREO_ALUM}}">
+                          <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                        </div>
 
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control has-feedback-left" id="inputSuccess4" readonly="readonly" name='correo_alum' placeholder="{{$datosAlumno->CORREO_ALUM}}" value="{{$datosAlumno->CORREO_ALUM}}">
-                    <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
-                  </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" class="form-control" id="inputSuccess7" readonly="readonly" placeholder="{{$datosAlumno->CELULAR}}">
+                          <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="Cordinador">
+                          <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
+                        </div> -->
 
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control" id="inputSuccess7" readonly="readonly" placeholder="{{$datosAlumno->CELULAR}}">
-                    <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
-                  </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess4" readonly="readonly" name='correo_alum' placeholder="{{$datosAlumno->CARRERA}}" value="{{$datosAlumno->CARRERA}}">
+                          <span class="fa fa-graduation-cap form-control-feedback left" aria-hidden="true"></span>
+                        </div>
 
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control has-feedback-left" id="inputSuccess4" readonly="readonly" name='correo_alum' placeholder="{{$datosAlumno->CARRERA}}" value="{{$datosAlumno->CARRERA}}">
-                    <span class="fa fa-graduation-cap form-control-feedback left" aria-hidden="true"></span>
-                  </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                          <input type="text" class="form-control" id="inputSuccess8" readonly="readonly" name="jornada" placeholder="{{$datosAlumno->JORNADA}}">
+                          <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
+                        </div>
 
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <input type="text" class="form-control" id="inputSuccess8" readonly="readonly" name="jornada" placeholder="{{$datosAlumno->JORNADA}}">
-                    <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
-                    <br><br>
-                  </div>
-
-
-                  <h2 class="StepTitle">Datos Solicitud Alumno</h2>
-
-                    <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback" >
-                      <label for="fechaFalta" class="control-label">Fechas Falta:</label>
-                      <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  name="fec_jus" placeholder="{{ $justifications->FEC_JUS }}" name="{{ $justifications->FEC_JUS }}">
-                      <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">
-                      <label for="nombreDocente" class="control-label">Docente:</label>
-                      <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  name="nombre_doc" placeholder="{{$datosAlumno->NOMBRE_DOC}}" name="{{$datosAlumno->NOMBRE_DOC}}">
-                      <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 f orm-group has-feedback">
-                      <label for="nombreDocente" class="control-label">Asignatura:</label>
-                      <input type="text" class="form-control" id="inputSuccess6" readonly="readonly"  name="asignatura" placeholder="{{ $justifications->ASIGNATURA }}" value="{{ $justifications->ASIGNATURA }}">
-                      <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">
-                      <label for="nombreDocente" class="control-label">Estado Solicitud::</label>
-                      <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  placeholder="{{$justifications->ESTADO}}" name="{{$justifications->ESTADO}}">
-                      <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 f orm-group has-feedback">
-                      <label for="nombreDocente" class="control-label">Motivo Falta:</label>
-                      <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="{{ $justifications->MOTIVO }}" name="{{ $justifications->MOTIVO }}">
-                      <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
-                    </div>
-
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                  <label for="nombreDocente" class="control-label">Comentarios Solicitud:</label>
-                  <textarea cols="40" rows="5" id="message" required="required" class="form-control" readonly="readonly" placeholder="{{ $justifications->COMENTARIO }}" name="{{ $justifications->COMENTARIO }}"></textarea>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                  <br>
-                  <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
-                  @foreach ($imagenes as $filePath )
-                    <img src="/public/storage/2018/09/201809yGPocycU.jpg" alt="asdas">
-                  @endforeach
-
-
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                  <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
-
-                  <label for="message">Ingrese máximo 500 caracteres:</label>
-                  <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentarioRechazo"></textarea>
-                    <br><br><br><br><br>
-                  <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
-                      <div id="gender" class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-success btn-lg" data-toggle-class="btn-success" data-toggle-passive-class="btn-default">
-                          <input type="radio" name="estado" value="Aprobado" checked> &nbsp; Aceptar&nbsp;
-                        </label>
-                        <label class="btn btn-dark btn-lg" data-toggle-class="btn-danger" data-toggle-passive-class="btn-default">
-                          <input type="radio" name="estado" value="Rechazado"> Rechazar
-                        </label>
                       </div>
                     </div>
-                  </div>
-                </div>
-                {{-- <div class="form-group">
+                    <div id="step-2">
+                      <h2 class="StepTitle">Datos Solicitud Alumno</h2><br>
+
+
+                      <div class="col-md-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback" >
+                          <label for="fechaFalta" class="control-label">Fechas Falta:</label>
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  name="fec_jus" placeholder="{{ $justifications->FEC_JUS }}" name="{{ $justifications->FEC_JUS }}">
+                          <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Docente:</label>
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  name="nombre_doc" placeholder="{{$datosAlumno->NOMBRE_DOC}}" name="{{$datosAlumno->NOMBRE_DOC}}">
+                          <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 f orm-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Asignatura:</label>
+                          <input type="text" class="form-control" id="inputSuccess6" readonly="readonly"  name="asignatura" placeholder="{{ $justifications->ASIGNATURA }}" value="{{ $justifications->ASIGNATURA }}">
+                          <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Estado Solicitud::</label>
+                          <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly"  placeholder="{{$justifications->ESTADO}}" name="{{$justifications->ESTADO}}">
+                          <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 f orm-group has-feedback">
+                          <label for="nombreDocente" class="control-label">Motivo Falta:</label>
+                          <input type="text" class="form-control" id="inputSuccess6" readonly="readonly" placeholder="{{ $justifications->MOTIVO }}" name="{{ $justifications->MOTIVO }}">
+                          <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                        <label for="nombreDocente" class="control-label">Comentarios Solicitud:</label>
+                        <textarea cols="40" rows="5" id="message" required="required" class="form-control" readonly="readonly" placeholder="{{ $justifications->COMENTARIO }}" name="{{ $justifications->COMENTARIO }}"></textarea>
+                      </div>
+                    </div>
+                    <div id="step-3">
+                      <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
+
+                      <img src="/public/storage/2018/09/201804213710670.jpg" alt="asdas">
+
+                    </div>
+                    <div id="step-4">
+                      <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
+
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <label>Evaluación:</label>
+                          <p>
+                            Aprobar:
+                            <input type="radio" class="flat" name="estado" id="estado" value="Aprobado" checked="" required /> Rechazar:
+                            <input type="radio" class="flat" name="estado" id="estado" value="Rechazado" />
+                          </p>
+                        </div>
+                      </div>
+
+                      <br><br><br><br><br>
+                      <label for="message">Ingrese máximo 500 caracteres:</label>
+                      <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentarioRechazo"></textarea>
+                    </div>
+                    {{-- <div class="form-group">
                         <button type="submit" class="btn btn-primary" value="Send">Send</button>
                     </div> --}}
-
+                </div>
               </form>
               <!-- End SmartWizard Content -->
             </div>
