@@ -186,6 +186,7 @@
                     </div>
                     <div id="step-3">
                       <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
+                      <img src="/public/storage/2018/09/201809yGPocycU.jpg" alt="asdas">
 
                     </div>
                     <div id="step-4">
