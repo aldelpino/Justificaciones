@@ -140,7 +140,7 @@
                         </div>
 
                         @foreach ($imagenes as $imagen )
-                          <img src="{{'/storage/2018/09/'.$imagen->url}}" alt="justificacion">
+                          <img src="{{'/storage/'.$imagen->url}}" alt="justificacion">
                         @endforeach
 
                       </div>
