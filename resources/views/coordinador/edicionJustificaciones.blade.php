@@ -206,7 +206,7 @@
                               {{ $i = 1 }}
                               @else
                                 <div class="item ">
-                                  <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:500px;" alt="justificacion">
+                                  <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
                                 </div>
                               @endif
                             @endforeach
