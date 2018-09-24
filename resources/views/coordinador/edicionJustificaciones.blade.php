@@ -187,9 +187,32 @@
                     <div id="step-3">
                       <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
 
-                      @foreach ($imagenes as $imagen )
-                        <img src="{{'/storage/'.$imagen->url}}" alt="justificacion">
-                      @endforeach
+                      <div class="container">
+
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                          <!-- Indicators -->
+                          <ol class="carousel-indicators"
+                            @foreach ($imagenes as $imagen )
+                              <li data-target="#myCarousel" data-slide-to="0" ></li>
+                            @endforeach
+                          </ol>
+                          <div class="carousel-inner">
+                            @foreach ($imagenes as $imagen )
+                              <div class="item active">
+                                <img src="{{'/storage/'.$imagen->url}}" alt="justificacion">
+                              </div>
+                            @endforeach
+                          </div>
+                          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Anterior</span>
+                          </a>
+                          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Siguiente</span>
+                          </a>
+                        </div>
+                      </div>
 
 
                     </div>
