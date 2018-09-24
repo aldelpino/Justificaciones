@@ -33,7 +33,7 @@
           <div class="count">{{ $cantValidando }}</div>
         </div>
         <div class="col-md-1 " style="padding-top:20px">
-          <button type="button" class="btn btn-round btn-success">Crear Justificación</button>
+          <a href="{{ url('/alumno/nuevaJustificacion') }}"  class="btn btn-round btn-success">Crear Justificación</a>
         </div>
       </div>
     </div>
