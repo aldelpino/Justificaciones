@@ -32,7 +32,9 @@
           <span class="count_top"><i class="fa fa-clock-o"></i> Total Pendientes</span>
           <div class="count">{{ $cantValidando }}</div>
         </div>
-
+        <div class="col-md-1 " style="padding-top:20px">
+          <button type="button" class="btn btn-round btn-success">Crear Justificación</button>
+        </div>
       </div>
     </div>
     <!-- /top tiles -->
