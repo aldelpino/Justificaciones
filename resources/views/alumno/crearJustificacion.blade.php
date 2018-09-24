@@ -240,7 +240,7 @@
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Paso 4 Comentario</h2>
-                      <label for="message">Ingrese máximo 500 caracteres:</label>
+                      <label for="message">Ingrese mínimo 30 caracteres y máximo 500:</label>
                       <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentario"></textarea>
                     </div>
                     {{-- <div class="form-group">
@@ -396,7 +396,7 @@
     //       timePicker: true,
     // startDate: moment().startOf('hour'),
     // endDate: moment().startOf('hour').add(168, 'hour'),
-    // locale: { cancelLabel: 'Clear' } 
+    // locale: { cancelLabel: 'Clear' }
   </script>
 
     {{-- // locale: {
