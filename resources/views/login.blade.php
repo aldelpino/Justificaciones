@@ -46,7 +46,7 @@
                 @endif
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Contraseña (primeros 5 dígitos de RUT )" required="" name="password" />
+                <input type="password" class="form-control" placeholder="Contraseña (primeros 5 dígitos del RUT )" required="" name="password" />
                 @if($errors->has('password'))
                 <span class="help-block">
                   {{ $errors->first('password') }}
