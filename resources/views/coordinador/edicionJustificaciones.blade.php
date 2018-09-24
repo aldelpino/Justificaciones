@@ -139,7 +139,7 @@
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
-                      {{'/storage/2018/09/'.substr($imagenes->URL,12)}}
+                      {{'/storage/2018/09/'.substr($imagenes->url,12)}}
 
                       </div>
                     </div>
