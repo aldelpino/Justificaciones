@@ -120,7 +120,7 @@ class JustificacionController extends Controller
         Log::debug('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         // $validated = $request->validated();
         // Log::debug($validated->errors());
-        
+
         $resumenAsignaturas = [];
 
         foreach (json_decode($request->cursosArray, true) as $curso){
@@ -170,7 +170,7 @@ class JustificacionController extends Controller
             // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
             // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
             // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
-        
+
 
 
 
@@ -250,8 +250,14 @@ class JustificacionController extends Controller
        $justifications = DB::table('justifications')->where('id_dato', $id)->first();
        $datosAlumno = DB::table('datos_semestre')->where([['correo_alum', 'like', $justifications->CORREO_ALUM],
                                                              ['nom_asig', 'like', $justifications->ASIGNATURA]])->first();
-
-       return view('coordinador/edicionJustificaciones',['justifications' => $justifications], ['datosAlumno' => $datosAlumno]);
+       $imagenes = DB::table('documento')
+        ->select('url')
+        ->where('nfolio','like', '20180421371067')
+        ->get();
+        Log::Debug($imagenes->toJson());
+        return view('coordinador/edicionJustificaciones',['justifications' => $justifications,
+                                                         'datosAlumno'    => $datosAlumno,
+                                                         'imagenes'       => $imagenes]);       
     }
 
     /**
