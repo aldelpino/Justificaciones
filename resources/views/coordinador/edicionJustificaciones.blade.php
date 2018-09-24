@@ -139,9 +139,8 @@
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
-                        <img src="{{'/storage/2018/09/'.'201809n7aCd7Mb.png'}}" alt="justificacion">
                         @foreach ($imagenes as $imagen )
-                          {{ $imagen->url }}
+                          <img src="{{'/storage/2018/09/'.$imagen->url}}" alt="justificacion">
                         @endforeach
 
                       </div>
