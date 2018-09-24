@@ -127,7 +127,7 @@
                   <br>
                   <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
                   @foreach ($imagenes as $filePath )
-                    <img src="/storage/documentos/201804213710670.jpg" alt="asdas">
+                    <img src="/public/storage/2018/09/201804213710670.jpg" alt="asdas">
                   @endforeach
 
 
