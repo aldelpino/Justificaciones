@@ -199,7 +199,7 @@
                           <div class="carousel-inner">
                             @foreach ($imagenes as $imagen )
                               <div class="item active">
-                                <img src="{{'/storage/'.$imagen->url}}" alt="justificacion">
+                                <img src="{{'/storage/'.$imagen->url}}" style="width:1200px;" alt="justificacion">
                               </div>
                             @endforeach
                           </div>
