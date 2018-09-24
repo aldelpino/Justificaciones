@@ -139,10 +139,6 @@
                           <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
-                        @foreach ($imagenes as $imagen )
-                          <img src="{{'/storage/'.$imagen->url}}" alt="justificacion">
-                        @endforeach
-
                       </div>
                     </div>
                     <div id="step-2">
@@ -190,22 +186,24 @@
                     </div>
                     <div id="step-3">
                       <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
-                      <img src="/public/storage/2018/09/201804213710670.jpg" alt="asdas">
+
+                      @foreach ($imagenes as $imagen )
+                        <img src="{{'/storage/'.$imagen->url}}" alt="justificacion">
+                      @endforeach
+
 
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
 
                       <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-success btn-lg" data-toggle-class="btn-success" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="estado" value="Aprobado" checked> &nbsp; Aceptar&nbsp;
-                            </label>
-                            <label class="btn btn-dark btn-lg" data-toggle-class="btn-danger" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="estado" value="Rechazado"> Rechazar
-                            </label>
-                          </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <label>Evaluación:</label>
+                          <p>
+                            Aprobar:
+                            <input type="radio" class="flat" name="estado" id="estado" value="Aprobado" checked="" required /> Rechazar:
+                            <input type="radio" class="flat" name="estado" id="estado" value="Rechazado" />
+                          </p>
                         </div>
                       </div>
 
