@@ -36,7 +36,7 @@
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
 
-  @if (auth()->user()->rol == 0)
+  @if (auth()->user()->rol == 2)
     <body class="nav-md">
       <div class="container body">
         <div class="main_container">
