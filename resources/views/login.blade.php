@@ -40,13 +40,13 @@
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <h1>Sistema de Justificaciones</h1>
               <div>
-                <input type="email" class="form-control" placeholder="Correo" required="" name="email" value="{{ old('email') }}" />
+                <input type="email" class="form-control" placeholder="Correo Institucional" required="" name="email" value="{{ old('email') }}" />
                 @if($errors->has('email'))
                   {{ $errors->first('email', ':message') }}
                 @endif
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Contraseña" required="" name="password" />
+                <input type="password" class="form-control" placeholder="Contraseña (primeros 5 dígitos de RUT )" required="" name="password" />
                 @if($errors->has('password'))
                 <span class="help-block">
                   {{ $errors->first('password') }}
