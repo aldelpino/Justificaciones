@@ -197,13 +197,13 @@
                             @endforeach
                           </ol>
                           <div class="carousel-inner">
-                            {{ $i = 0 }}
+                            @php $i = 0; @endphp
                             @foreach ($imagenes as $imagen )
                               @if ($i == 0)
                               <div class="item active">
                                 <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
                               </div>
-                              {{ $i = 1 }}
+                              @php $i = 1; @endphp
                               @else
                                 <div class="item ">
                                   <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
