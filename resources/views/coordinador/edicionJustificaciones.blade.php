@@ -201,12 +201,12 @@
                             @foreach ($imagenes as $imagen )
                               @if ($i == 0)
                               <div class="item active">
-                                <img src="{{'/storage/'.$imagen->url}}" width="1000" height="500" alt="justificacion">
+                                <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:500px;" alt="justificacion">
                               </div>
                               {{ $i = 1 }}
                               @else
                                 <div class="item ">
-                                  <img src="{{'/storage/'.$imagen->url}}" width="1000" height="500" alt="justificacion">
+                                  <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:500px;" alt="justificacion">
                                 </div>
                               @endif
                             @endforeach
