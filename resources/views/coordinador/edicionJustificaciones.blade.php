@@ -197,10 +197,18 @@
                             @endforeach
                           </ol>
                           <div class="carousel-inner">
+                            {{ $i = 0 }}
                             @foreach ($imagenes as $imagen )
-                              <div class="item">
+                              @if ($i == 0)
+                              <div class="item active">
                                 <img src="{{'/storage/'.$imagen->url}}" style="width:1200px;" alt="justificacion">
                               </div>
+                              {{ $i = 1 }}
+                              @else
+                                <div class="item ">
+                                  <img src="{{'/storage/'.$imagen->url}}" style="width:1200px;" alt="justificacion">
+                                </div>
+                              @endif
                             @endforeach
                           </div>
                           <a class="left carousel-control" href="#myCarousel" data-slide="prev">
