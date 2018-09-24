@@ -185,7 +185,7 @@
                       </div>
                     </div>
                     <div id="step-3">
-                      <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
+                      <h2 class="StepTitle">Paso 3 Certificado Alumno</h2>
 
                       <div class="container">
 
@@ -198,7 +198,7 @@
                           </ol>
                           <div class="carousel-inner">
                             @foreach ($imagenes as $imagen )
-                              <div class="item active">
+                              <div class="item">
                                 <img src="{{'/storage/'.$imagen->url}}" style="width:1200px;" alt="justificacion">
                               </div>
                             @endforeach
