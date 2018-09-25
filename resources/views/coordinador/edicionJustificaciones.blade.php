@@ -30,16 +30,7 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-            <div class="x_title">
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
+          
             <div class="x_content">
 
 
@@ -185,22 +176,56 @@
                       </div>
                     </div>
                     <div id="step-3">
-                      <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
+                      <h2 class="StepTitle">Paso 3 Certificado Alumno</h2>
+
+                      <div class="container">
+
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                          <!-- Indicators -->
+                          <ol class="carousel-indicators"
+                            @foreach ($imagenes as $imagen )
+                              <li data-target="#myCarousel" data-slide-to="0" ></li>
+                            @endforeach
+                          </ol>
+                          <div class="carousel-inner">
+                            @php $i = 0; @endphp
+                            @foreach ($imagenes as $imagen )
+                              @if ($i == 0)
+                              <div class="item active">
+                                <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
+                              </div>
+                              @php $i = 1; @endphp
+                              @else
+                                <div class="item ">
+                                  <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
+                                </div>
+                              @endif
+                            @endforeach
+                          </div>
+                          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Anterior</span>
+                          </a>
+                          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Siguiente</span>
+                          </a>
+                        </div>
+                      </div>
+
 
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
 
                       <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-success btn-lg" data-toggle-class="btn-success" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="estado" value="Aprobado" checked> &nbsp; Aceptar&nbsp;
-                            </label>
-                            <label class="btn btn-dark btn-lg" data-toggle-class="btn-danger" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="estado" value="Rechazado"> Rechazar
-                            </label>
-                          </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <label>Evaluación:</label>
+                          <p>
+                            Aprobar:
+                            <input type="radio" class="flat" name="estado" id="estado" value="Aprobado" checked="" required /> Rechazar:
+                            <input type="radio" class="flat" name="estado" id="estado" value="Rechazado" />
+                          </p>
                         </div>
                       </div>
 

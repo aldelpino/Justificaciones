@@ -2,10 +2,30 @@
   margin-top: 40px;
 }
 
-.container{
-  margin-top: 40px;
-}
+
 
 body {
     overflow-x: hidden;
+}
+
+.imagenLogo {
+  padding-bottom: 20px;
+}
+
+.imagenLogoRegistro {
+  padding-top: 30px;
+}
+
+.login {
+
+  background: url("../images/fondoLogin1.jpg")   ;
+  background-size: 100% ;
+}
+
+
+.panel {
+  margin-top: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
 }

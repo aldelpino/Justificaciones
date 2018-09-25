@@ -76,7 +76,6 @@ class JustificacionController extends Controller
     // public function store(Request $request)
     public function store(ContactFormRequest $request)
     {
-        // dd($request);
         logger('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         $resumenAsignaturas = [];
 
@@ -185,9 +184,15 @@ class JustificacionController extends Controller
             ['nom_asig', 'like', $justifications->ASIGNATURA]
         ])->first();
 
+        $imagenes = DB::table('documento')
+            ->select('url')
+            ->where('nfolio','like', $justifications->NFOLIO)
+            ->get();
+
         return view('coordinador/edicionJustificaciones', [
             'justifications' => $justifications,
-            'datosAlumno' => $datosAlumno
+            'datosAlumno' => $datosAlumno,
+            'imagenes' => $imagenes,
         ]);
     }
 

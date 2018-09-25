@@ -30,16 +30,7 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-            <div class="x_title">
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
+            
             <div class="x_content">
 
 
@@ -239,7 +230,7 @@
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Paso 4 Comentario</h2>
-                      <label for="message">Ingrese máximo 500 caracteres:</label>
+                      <label for="message">Ingrese mínimo 30 caracteres y máximo 500:</label>
                       <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentario"></textarea>
                     </div>
                     {{-- <div class="form-group">
@@ -393,7 +384,7 @@
     //       timePicker: true,
     // startDate: moment().startOf('hour'),
     // endDate: moment().startOf('hour').add(168, 'hour'),
-    // locale: { cancelLabel: 'Clear' } 
+    // locale: { cancelLabel: 'Clear' }
   </script>
 
     {{-- // locale: {
