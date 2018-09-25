@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
+use App\Events\Justification\Submitted as JustificationSubmitted;
+use App\Events\Justification\Approved as JustificationApproved;
+use App\Events\Justification\Rejected as JustificationRejected;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -13,8 +15,17 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        JustificationSubmitted::class => [
+            'App\Listeners\Justification\Submitted\SendEmailToStudent',
+            'App\Listeners\Justification\Submitted\SendEmailToCoordinator',
+        ],
+        JustificationApproved::class => [
+            'App\Listeners\Justification\Approved\SendEmailToStudent',
+            'App\Listeners\Justification\Approved\SendEmailToTeacher',
+        ],
+        JustificationRejected::class => [
+            'App\Listeners\Justification\Rejected\SendEmailToStudent',
+            'App\Listeners\Justification\Rejected\SendEmailToTeacher',
         ],
     ];
 
