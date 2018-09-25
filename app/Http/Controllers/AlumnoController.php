@@ -39,11 +39,11 @@ class AlumnoController extends Controller
         logger($justificacion);
 
         return view('alumno.index', [
-          'justificacion'  => $justificacion,
-          'cantEmitidas'   => $cantEmitidas,
-          'cantAprobadas'  => $cantAprobadas,
-          'cantRechazadas' => $cantRechazadas,
-          'cantValidando'  => $cantValidando
+            'justificacion'  => $justificacion,
+            'cantEmitidas'   => $cantEmitidas,
+            'cantAprobadas'  => $cantAprobadas,
+            'cantRechazadas' => $cantRechazadas,
+            'cantValidando'  => $cantValidando
         ]);
     }
 }
