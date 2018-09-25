@@ -14,14 +14,20 @@ class Approved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $studentEmail;
+    public $teacherEmail;
+    public $justification;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($studentEmail, $teacherEmail, $justification)
     {
-        //
+        $this->studentEmail = $studentEmail;
+        $this->teacherEmail = $teacherEmail;
+        $this->justification = $justification;
     }
 
     /**

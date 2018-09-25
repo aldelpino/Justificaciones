@@ -14,14 +14,24 @@ class Rejected
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $studentEmail;
+    public $teacherEmail;
+    public $message;
+    public $adjuntos;
+    public $resumenAsignaturas;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($studentEmail, $teacherEmail, $message, $adjuntos, $resumenAsignaturas)
     {
-        //
+        $this->studentEmail = $studentEmail;
+        $this->teacherEmail = $teacherEmail;
+        $this->message = $message;
+        $this->adjuntos = $adjuntos;
+        $this->resumenAsignaturas = $resumenAsignaturas;
     }
 
     /**
