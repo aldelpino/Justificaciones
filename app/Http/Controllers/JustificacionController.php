@@ -49,9 +49,17 @@ class JustificacionController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->activacion == '0')
+        {
+            Log::debug("############################################33CONSOLA");
+            return view('contrasena.cambiar', []);
+
+        }
         // dd(Auth::user());
         Log::debug(Auth::user()->email);
-        $justificaciones = Justification::all();
+        Log::debug("############################################33");
+        Log::debug(Auth::user()->activacion);
+        // $justificaciones = Justification::all();
     //     foreach ($justificaciones as $justificacion) {
     //         Log::debug($justificacion->NFOLIO);
     //   }
@@ -73,7 +81,7 @@ class JustificacionController extends Controller
         // }, $result);
 
         // Log::debug($result[0]);
-        Log::debug($result[0]['NOM_ASIG']);
+        Log::debug($result[1]['NOM_ASIG']);
         // Log::debug($result[2]['NOM_ASIG']);
         // Log::debug($result[3]['NOM_ASIG']);
         // Log::debug($result[4]['NOM_ASIG']);
@@ -110,7 +118,8 @@ class JustificacionController extends Controller
         // }
         // $justificacion = Justificacion::create($request->all());
         Log::debug('CREANDO REGISTRO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        Log::debug($request);
+        // $validated = $request->validated();
+        // Log::debug($validated->errors());
 
         $resumenAsignaturas = [];
 
@@ -137,14 +146,13 @@ class JustificacionController extends Controller
              ->where('nfolio','=', $request['folio'])
              ->get();
              Log::Debug($adjuntos->toJson());
-
             array_push($resumenAsignaturas, $justification->asignatura);
-
-
         }
         // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
         Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
+        Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos, $resumenAsignaturas));
         Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
+        Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoAlumnito($request, $adjuntos, $resumenAsignaturas));
         Log::Debug($resumenAsignaturas);
         Log::Debug('#########################################################resumenAsignaturas');
             // DESCOMENTAR EN PRODUCCION
@@ -180,7 +188,12 @@ class JustificacionController extends Controller
 
     public function revisar()
     {
+        if(Auth::user()->activacion == '0')
+        {
+            Log::debug("############################################33CONSOLA");
+            return view('contrasena.cambiar', []);
 
+        }
             $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email],['estado', 'like', 'Pendiente']])->get();
 
             $justificacion  = DB::table('justifications')->where([['correo_alum','like', auth()->user()->email]])->get();
@@ -237,8 +250,14 @@ class JustificacionController extends Controller
        $justifications = DB::table('justifications')->where('id_dato', $id)->first();
        $datosAlumno = DB::table('datos_semestre')->where([['correo_alum', 'like', $justifications->CORREO_ALUM],
                                                              ['nom_asig', 'like', $justifications->ASIGNATURA]])->first();
-
-       return view('coordinador/edicionJustificaciones',['justifications' => $justifications], ['datosAlumno' => $datosAlumno]);
+       $imagenes = DB::table('documento')
+        ->select('url')
+        ->where('nfolio','like', $justifications->NFOLIO)
+        ->get();
+        Log::Debug($imagenes->toJson());
+        return view('coordinador/edicionJustificaciones',['justifications' => $justifications,
+                                                         'datosAlumno'    => $datosAlumno,
+                                                         'imagenes'       => $imagenes]);
     }
 
     /**
