@@ -2,8 +2,8 @@
 
 namespace App\Listeners\Justification\Submitted;
 
-use App\Events\Justification\Submitted;
-use App\Mail\Justification\Submitted\ToStudent as JustificationSubmittedToStudent;
+use App\Events\Justification\Submitted as JustificationSubmitted;
+use App\Mail\Justification\Submitted\ToStudent;
 use Mail;
 
 class SendEmailToStudent
@@ -24,9 +24,9 @@ class SendEmailToStudent
      * @param  object  $event
      * @return void
      */
-    public function handle(Submitted $event)
+    public function handle(JustificationSubmitted $event)
     {
         Mail::to($event->studentEmail)
-            ->send(new JustificationSubmittedToStudent($event->message, $event->adjuntos, $event->resumenAsignaturas));
+            ->send(new ToStudent($event->message, $event->adjuntos, $event->resumenAsignaturas));
     }
 }

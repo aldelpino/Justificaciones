@@ -2,8 +2,8 @@
 
 namespace App\Listeners\Justification\Submitted;
 
-use App\Events\Justification\Submitted;
-use App\Mail\Justification\Submitted\ToCoordinator as JustificationSubmittedToCoordinator;
+use App\Events\Justification\Submitted as JustificationSubmitted;
+use App\Mail\Justification\Submitted\ToCoordinator;
 use Mail;
 
 class SendEmailToCoordinator
@@ -24,9 +24,9 @@ class SendEmailToCoordinator
      * @param  object  $event
      * @return void
      */
-    public function handle(Submitted $event)
+    public function handle(JustificationSubmitted $event)
     {
         Mail::to($event->coordinatorEmail)
-            ->send(new JustificationSubmittedToCoordinator($event->message, $event->adjuntos, $event->resumenAsignaturas));
+            ->send(new ToCoordinator($event->message, $event->adjuntos, $event->resumenAsignaturas));
     }
 }

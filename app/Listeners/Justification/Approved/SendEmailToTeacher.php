@@ -2,8 +2,9 @@
 
 namespace App\Listeners\Justification\Approved;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Events\Justification\Approved as JustificationApproved;
+use App\Mail\Justification\Approved\ToTeacher as JustificationApprovedEmail;
+use Mail;
 
 class SendEmailToTeacher
 {
@@ -23,8 +24,8 @@ class SendEmailToTeacher
      * @param  object  $event
      * @return void
      */
-    public function handle($event)
+    public function handle(JustificationApproved $event)
     {
-        //
+        Mail::to($event->teacherEmail)->send(new JustificationApprovedEmail());
     }
 }
