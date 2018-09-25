@@ -73,7 +73,7 @@ class JustificacionController extends Controller
         // }, $result);
 
         // Log::debug($result[0]);
-        Log::debug($result[1]['NOM_ASIG']);
+        Log::debug($result[0]['NOM_ASIG']);
         // Log::debug($result[2]['NOM_ASIG']);
         // Log::debug($result[3]['NOM_ASIG']);
         // Log::debug($result[4]['NOM_ASIG']);
@@ -162,7 +162,7 @@ class JustificacionController extends Controller
             // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
             // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
             // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
-        
+
 
 
 
