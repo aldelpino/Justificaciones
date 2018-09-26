@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Justification;
-use Log;
-use DB;
-
 
 class CoordinadorController extends Controller
 {
@@ -53,6 +49,4 @@ class CoordinadorController extends Controller
         'listaJustificacionesAprobadas'  => $listaJustificacionesAprobadas
       ]);
     }
-
-
 }

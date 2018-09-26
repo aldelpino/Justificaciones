@@ -7,11 +7,11 @@
   <!-- Dropzone.js -->
   <link href="/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <style>
-        #loader{
+      #loader{
         visibility:hidden;
-        }
+      }
     </style>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -36,9 +36,8 @@
 
               <!-- Smart Wizard -->
               @if(count($errors))
-
               <div class="alert alert-danger">
-                <strong>Upss!</strong> Algo no anda bien con tu solicitud de justificación
+                <strong>Ups!</strong> Algo no anda bien con tu solicitud de justificación.
                 <br/>
                 <ul>
                   @foreach($errors->all() as $error)
@@ -46,7 +45,7 @@
                   @endforeach
                 </ul>
               </div>
-            @endif
+              @endif
               <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('alumno/store')}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="folio" name="folio" value="{{$folio}}">
@@ -61,36 +60,36 @@
                       <a href="#step-1">
                         <span class="step_no">1</span>
                         <span class="step_descr">
-                                          Paso 1<br />
-                                          <small>Mis Datos Académicos</small>
-                                      </span>
+                          Paso 1<br />
+                          <small>Mis Datos Académicos</small>
+                      </span>
                       </a>
                     </li>
                     <li>
                       <a href="#step-2">
                         <span class="step_no">2</span>
                         <span class="step_descr">
-                                          Paso 2<br />
-                                          <small>Datos Solicitud</small>
-                                      </span>
+                          Paso 2<br />
+                          <small>Datos Solicitud</small>
+                        </span>
                       </a>
                     </li>
                     <li>
                     <a href="#step-3">
                       <span class="step_no">3</span>
                       <span class="step_descr">
-                                        Paso 3<br />
-                                        <small>Cargar Certificado</small>
-                                    </span>
+                        Paso 3<br />
+                        <small>Cargar Certificado</small>
+                      </span>
                     </a>
                   </li>
                     <li>
                       <a href="#step-4">
                         <span class="step_no">4</span>
                         <span class="step_descr">
-                                          Paso 4<br />
-                                          <small>Comentario</small>
-                                      </span>
+                          Paso 4<br />
+                          <small>Comentario</small>
+                        </span>
                       </a>
                     </li>
                   </ul>
@@ -316,32 +315,30 @@
     };
   </script> --}}
     <script type="text/javascript">
-        function display_asignaturas(arr) {
-            var newHTML = "";
-            for (var i = 0; i < arr.length; i++) {
-                newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
-            }
-            $("#panel-asignaturas").html(newHTML);
-            $("#cursosArray").val(JSON.stringify(arr));
+      function display_asignaturas(arr) {
+        var newHTML = "";
+        for (var i = 0; i < arr.length; i++) {
+          newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
         }
+        $("#panel-asignaturas").html(newHTML);
+        $("#cursosArray").val(JSON.stringify(arr));
+      }
 
-        $(function() {
-            var arr = new Array();
-            $("#carrito").click( function()
-                {
-                var selectobject=document.getElementById("carritoJC");
-                if ($('#carritoJC').find(":selected").text() != 'Seleccionar asignatura') {
-                    arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
-                    display_asignaturas(arr);
-                    // console.log(arr);
-                    for (var i=0; i<selectobject.length; i++){
-                        if (selectobject.options[i].value == $('#carritoJC').find(":selected").text() )
-                        selectobject.remove(i);
-                        }
-                    }
-                }
-            );
-        });
+      $(function() {
+        var arr = [];
+        $("#carrito").click(function() {
+          var selectobject=document.getElementById("carritoJC");
+          if ($('#carritoJC').find(":selected").text() != 'Seleccionar asignatura') {
+            arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
+            display_asignaturas(arr);
+            for (var i=0; i<selectobject.length; i++){
+              if (selectobject.options[i].value == $('#carritoJC').find(":selected").text() )
+                selectobject.remove(i);
+              }
+            }
+          }
+        );
+      });
     </script>
     <script type="text/javascript">
         Dropzone.autoDiscover = false;
