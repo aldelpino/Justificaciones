@@ -21,7 +21,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         JustificationApproved::class => [
             'App\Listeners\Justification\Approved\SendEmailToStudent',
-            // 'App\Listeners\Justification\Approved\SendEmailToTeacher',
+            'App\Listeners\Justification\Approved\SendEmailToTeacher',
         ],
         JustificationRejected::class => [
             // 'App\Listeners\Justification\Rejected\SendEmailToStudent',
