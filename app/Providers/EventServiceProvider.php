@@ -2,9 +2,19 @@
 
 namespace App\Providers;
 
+// Event aliases
 use App\Events\Justification\Submitted as JustificationSubmitted;
 use App\Events\Justification\Approved as JustificationApproved;
 use App\Events\Justification\Rejected as JustificationRejected;
+
+// Submitted listener aliases
+use App\Listeners\Justification\Submitted\SendEmailToStudent as SubmittedSendEmailToStudent;
+use App\Listeners\Justification\Submitted\SendEmailToCoordinator as SubmittedSendEmailToCoordinator;
+
+// Approved listener aliases
+use App\Listeners\Justification\Approved\SendEmailToStudent as ApprovedSendEmailToStudent;
+use App\Listeners\Justification\Approved\SendEmailToTeacher as ApprovedSendEmailToTeacher;
+
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -16,12 +26,12 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         JustificationSubmitted::class => [
-            'App\Listeners\Justification\Submitted\SendEmailToStudent',
-            'App\Listeners\Justification\Submitted\SendEmailToCoordinator',
+            SubmittedSendEmailToStudent::class,
+            SubmittedSendEmailToCoordinator::class,
         ],
         JustificationApproved::class => [
-            'App\Listeners\Justification\Approved\SendEmailToStudent',
-            'App\Listeners\Justification\Approved\SendEmailToTeacher',
+            ApprovedSendEmailToStudent::class,
+            ApprovedSendEmailToTeacher::class,
         ],
         JustificationRejected::class => [
             // 'App\Listeners\Justification\Rejected\SendEmailToStudent',
