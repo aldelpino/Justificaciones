@@ -1,8 +1,9 @@
 @component('mail::message')
 # Estimado:
 
-Le informamos que la solicitud <strong>{{ $folio }}</strong> ha sido APROBADA por su coordinador(a)
-con fecha {{ date("d-m-Y") }}. Su docente <strong>{{ $nombreProfesor }}</strong> será informado
+Le informamos que la solicitud <strong>{{ $folio }}</strong> ha sido <strong>APROBADA</strong> por su coordinador(a)
+con fecha <strong>{{ date("d-m-Y", strtotime($fechaJustificacion)) }}</strong>.
+Su docente <strong>{{ $nombreProfesor }}</strong> será informado
 de esta situación. Debe coordinar con el docente si justifica alguna evaluación.
 
 ## Detalle Solicitud
