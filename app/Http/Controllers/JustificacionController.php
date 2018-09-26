@@ -209,15 +209,15 @@ class JustificacionController extends Controller
         $justificacion->estado = $request->estado;
         $justificacion->COMENTARIO_REC = request('comentarioRechazo');
         $justificacion->save();
-        // if ($request->estado == 'Aprobado') {
-        //     event(new JustificationApproved(
-        //         $justificacion->CORREO_ALUM,
-        //         $justificacion->CORREO_DOC,
-        //         $justificacion
-        //     ));
-        // } else {
-        //     event(new JustificationRejected());
-        // }
+        if ($request->estado == 'Aprobado') {
+            event(new JustificationApproved(
+                $justificacion->CORREO_ALUM,
+                $justificacion->CORREO_DOC,
+                $justificacion
+            ));
+        } else {
+            event(new JustificationRejected());
+        }
         return redirect()->action('CoordinadorController@index');
     }
 }
