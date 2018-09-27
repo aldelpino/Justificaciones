@@ -30,7 +30,7 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-          
+
             <div class="x_content">
 
 
@@ -197,7 +197,7 @@
                               @php $i = 1; @endphp
                               @else
                                 <div class="item ">
-                                  <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
+                                  <img src="{{'/storage/'."2018/09/201809yGPocycU.jpg"}}" style="width:1200px; height:420px;" alt="justificacion">
                                 </div>
                               @endif
                             @endforeach
@@ -213,7 +213,9 @@
                         </div>
                       </div>
 
-
+                    @foreach ($imagenes as $imagen)
+                      <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
+                    @endforeach
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
