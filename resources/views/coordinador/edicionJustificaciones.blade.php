@@ -31,10 +31,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
-
-
               <!-- Smart Wizard -->
-
               <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('coordinador/update', $justifications->ID_DATO)}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
@@ -194,6 +191,7 @@
                               @php $i = 1; @endphp
                               @else
                                 <div class="item ">
+
                                   <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
                                 </div>
                               @endif
