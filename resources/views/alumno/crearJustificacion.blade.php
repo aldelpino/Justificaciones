@@ -25,15 +25,10 @@
         </div>
       </div>
       <div class="clearfix"></div>
-
       <div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-            
             <div class="x_content">
-
-
               <!-- Smart Wizard -->
               @if(count($errors))
               <div class="alert alert-danger">
@@ -262,15 +257,6 @@
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
   {{-- <script type="text/javascript">
-    $(function () {
-      $('input[name="fechaJustificacion"]').daterangepicker({
-      "locale": {
-        "applyLabel": "Aplicar",
-        "cancelLabel": "Cancelar",
-        }});
-      });
-    </script> --}}
-  {{-- <script type="text/javascript">
     Dropzone.options.dropzone =
      {
         maxFilesize: 12,
@@ -314,22 +300,96 @@
     maxFilesize: 3,
     };
   </script> --}}
-    <script type="text/javascript">
-      function display_asignaturas(arr) {
-        var newHTML = "";
-        for (var i = 0; i < arr.length; i++) {
-          newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
+  <script type="text/javascript">
+    Dropzone.autoDiscover = false;
+    $(document).ready(function () {
+      $('input[name=fechaJustificacion]').daterangepicker({
+        "locale": {
+          "format": "MM/DD/YYYY",
+          "separator": " - ",
+          "applyLabel": "Aplicar",
+          "cancelLabel": "Deshacer",
+          "daysOfWeek": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+          ],
+          "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+          ],
+          "firstDay": 0
+        },
+        "startDate": "06/08/2018",
+        "endDate": "09/08/2018"
+      });
+      Dropzone.autoDiscover = false;
+      $("div#my-awesome-dropzone").dropzone({
+        url: "image/upload/store/",
+        maxFiles: 3,
+        maxFilesize: 2,
+        dictResponseError: "Error al subir el archivo",
+        dictInvalidFileType: "Solo archivos tipo Imagen",
+        dictMaxFilesExceeded: "Lo sentimos, solo puedes subir un maximo de 3 archivos!",
+        paramName: "file",
+        dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
+        acceptedFiles: "image/jpeg, image/png, image/jpg",
+        params: {
+          folio: $('#folio').val()
+        },
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-        $("#panel-asignaturas").html(newHTML);
-        $("#cursosArray").val(JSON.stringify(arr));
-      }
-
+      });
+      $('select[name="asignatura"]').on('change', function(){
+        var asignaturaId = $(this).val();
+        if(asignaturaId) {
+          $.ajax({
+            url: '/asignaturas/get/'+asignaturaId,
+            type:"GET",
+            dataType:"json",
+            beforeSend: function(){
+              $('#loader').css("visibility", "visible");
+              $('#carrito').attr("disabled", true);
+            },
+            success:function(data) {
+              $('input[name=correoDocente]').val(data[0].CORREO_DOC);
+              $('input[name=correoCoordinador]').val(data[0].CORREO_COR);
+              $('input[name=nombreDocente]').val(data[0].NOMBRE_DOC + ' ' + data[0].APEP_DOC);
+              $('input[name=nombreCoordinador]').val(data[0].NOMBRE_COR + ' ' + data[0].APEP_COR);
+            },
+            complete: function(){
+              $('#loader').css("visibility", "hidden");
+              $('#carrito').attr("disabled", false);
+            }
+          });
+        }
+      });
       $(function() {
         var arr = [];
         $("#carrito").click(function() {
           var selectobject=document.getElementById("carritoJC");
           if ($('#carritoJC').find(":selected").text() != 'Seleccionar asignatura') {
-            arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
+            arr.push({
+              asignatura: $('#carritoJC').find(":selected").text(),
+              correoDocente: $('input[name=correoDocente]').val(),
+              correoCoordinador: $('input[name=correoCoordinador]').val()
+            });
+            console.log(arr)
             display_asignaturas(arr);
             for (var i=0; i<selectobject.length; i++){
               if (selectobject.options[i].value == $('#carritoJC').find(":selected").text() )
@@ -339,97 +399,16 @@
           }
         );
       });
-    </script>
-    <script type="text/javascript">
-        Dropzone.autoDiscover = false;
-        jQuery(document).ready(function() {
-        // $(document).ready(function () {
-            var folio = $('#folio').val();
-            console.log(folio);
-            Dropzone.autoDiscover = false;
-            $("div#my-awesome-dropzone").dropzone({
-                url: "image/upload/store/",
-                maxFiles: 3,
-                maxFilesize: 2,
-                dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Lo sentimos, solo puedes subir un maximo de 3 archivos!",
-                paramName: "file",
-                dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
-                acceptedFiles: "image/jpeg, image/png, image/jpg",
-                params: {
-                    folio: folio
-                },
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                // init: function() {
-                //     this.on("sending", function(file, xhr, formData) {
-                //     formData.append("data", "loremipsum");
-                //     console.log(formData)
-                //     });
-                // },
-                },
-                init: function() {
-                  this.on("success", function(file, responseText) {
-                    // console.log(responseText);
-                    $("#subioArchivo").val('sip');
-                  });
-                },
-            });
-        });
-    </script>
-    <script type="text/javascript">
-    //   $(function() {
-    //      $('input[name="fechaJustificacion"]').daterangepicker({
-    //       timePicker: true,
-    // startDate: moment().startOf('hour'),
-    // endDate: moment().startOf('hour').add(168, 'hour'),
-    // locale: { cancelLabel: 'Clear' }
+      function display_asignaturas(arr) {
+        var newHTML = "";
+        for (var i = 0; i < arr.length; i++) {
+          newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
+        }
+        $("#panel-asignaturas").html(newHTML);
+        $("#cursosArray").val(JSON.stringify(arr));
+      }
+    });
   </script>
-
-    {{-- // locale: {
-    //   format: 'DD/M/YY'
-    // }
-    // applyLabel: "Aplicar",
-    //     cancelLabel: "Cancelar",
-    // locale: {
-    //   format: 'M/DD hh:mm A'
-    // },
-              // minDate: "08/06/2018",
-              // maxDate: "08/14/2018",
-              // locale: {
-              //     cancelLabel: 'Cancelar',
-              //     applyLabel: 'Aplicar',
-              //     // format: 'DD/MM/YYYY',
-              //     "daysOfWeek": [
-              //     "Dom",
-              //     "Lun",
-              //     "Mar",
-              //     "Mie",
-              //     "Jue",
-              //     "Vie",
-              //     "Sab"
-              //   ],
-              //   "monthNames": [
-              //       "Enero",
-              //       "Febrero",
-              //       "Marzo",
-              //       "Abril",
-              //       "Mayo",
-              //       "Junio",
-              //       "Julio",
-              //       "Agosto",
-              //       "Septiembre",
-              //       "Octubre",
-              //       "Noviembre",
-              //       "Diciembre"
-              //   ]
-              // }
-          });
-      }); --}}
-  <script src="{{ asset('js/selectProfeCord.js') }}"></script>
-
-
 @endsection
 
 {{-- Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop files here to upload";
