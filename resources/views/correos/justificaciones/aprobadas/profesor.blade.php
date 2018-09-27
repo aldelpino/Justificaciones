@@ -15,5 +15,5 @@ favor coordinar con alumno(a) para rendir evaluación si corresponde.
 * Coordinador: {{ $nombreCoordinador }}
 * Resolución: {{ $resolucion }}
 
-<i>Justificaciones DuocUC, 2018.</i>
+<i>Sistema de Justificaciones Duoc UC - Sede Antonio Varas, 2018.</i>
 @endcomponent
