@@ -39,6 +39,7 @@ class ToStudent extends Mailable
                 'nombreProfesor' => $this->alumno->NOMBRE_DOC.' '.$this->alumno->APEP_DOC,
                 'rutAlumno' => $this->alumno->rut_alu,
                 'nombreAlumno' => $this->alumno->NOMBRE_ALUM.' '.$this->alumno->APEP_ALUM,
+                'carreraAlumno' => $this->alumno->carrera,
                 'asignatura' => $this->justification->ASIGNATURA,
                 'resolucion' => $this->justification->COMENTARIO_REC,
                 'fechaJustificacion' => $this->justification->FEC_SOL,
