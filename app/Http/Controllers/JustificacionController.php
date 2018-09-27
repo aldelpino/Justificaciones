@@ -178,7 +178,7 @@ class JustificacionController extends Controller
      */
     public function edit($id)
     {
-        $justifications = DB::table('Justifications')->where('id_dato','like', $id)->first();
+        $justifications = DB::table('justifications')->where('id_dato','like', $id)->first();
 
         $datosAlumno = DB::table('datos_semestre')->where([
             ['correo_alum', 'like', $justifications->CORREO_ALUM],
