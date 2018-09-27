@@ -12,6 +12,22 @@
       }
     </style>
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#wizard').smartWizard({
+        enableFinishButton: false
+      });
+
+      // $("#wizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+      //   $('.next').hide();
+      // if($('button.sw-btn-next').hasClass('disabled')){
+      //     $('.sw-btn-group-extra').show(); // show the button extra only in the last page
+      // }else{
+      //     $('.sw-btn-group-extra').hide();                
+      // }
+
+  });
+</script>
 @endsection
 
 @section('content')
@@ -383,25 +399,7 @@
           previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("buttonPrevious"),
           finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("buttonFinish")
       }; --}}
-    <script type="text/javascript">
-      $(document).ready(function() {
-      
-      // Smart Wizard
-      $('#smartwizard').smartWizard({
-        disabledSteps: [1,2]
-        });
-      });
-      //  jQuery(document).ready(function() {
-      //   $('.buttonNext').prop('disabled', true);
-      //  });
 
-    //   $(function() {
-    //      $('input[name="fechaJustificacion"]').daterangepicker({
-    //       timePicker: true,
-    // startDate: moment().startOf('hour'),
-    // endDate: moment().startOf('hour').add(168, 'hour'),
-    // locale: { cancelLabel: 'Clear' }
-    </script>
 
     {{-- // locale: {
     //   format: 'DD/M/YY'

@@ -216,7 +216,7 @@ class JustificacionController extends Controller
                 $justificacion
             ));
         } else {
-            event(new JustificationRejected());
+            //event(new JustificationRejected());
         }
         return redirect()->action('CoordinadorController@index');
     }
