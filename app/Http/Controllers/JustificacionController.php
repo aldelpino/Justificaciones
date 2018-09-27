@@ -178,19 +178,23 @@ class JustificacionController extends Controller
      */
     public function edit($id)
     {
-        $justifications = DB::table('justifications')->where('id_dato','like', $id)->first();
+      $justifications = DB::table('justifications')->where('id_dato','like', $id)->first();
 
-        $datosAlumno = DB::table('datos_semestre')->where([
-            ['correo_alum', 'like', $justifications->CORREO_ALUM],
-            ['nom_asig', 'like', $justifications->ASIGNATURA]
-        ])->first();
+      $datosAlumno = DB::table('datos_semestre')->where([
+          ['correo_alum', 'like', $justifications->CORREO_ALUM],
+          ['nom_asig', 'like', $justifications->ASIGNATURA]
+      ])->first();
 
-        $imagenes = DB::table('documento')
-            ->select('url')
-            ->where('nfolio','like', $justifications->NFOLIO)
-            ->get();
+      $imagenes = DB::table('documento')
+          ->select('url')
+          ->where('nfolio','like', $justifications->NFOLIO)
+          ->get();
 
-        return ($justifications->NFOLIO);
+        return view('coordinador/edicionJustificaciones', [
+            'justifications' => $justifications,
+            'datosAlumno' => $datosAlumno,
+            'imagenes' => $imagenes,
+        ]);
     }
 
     /**
