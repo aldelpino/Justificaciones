@@ -197,6 +197,7 @@
                               @php $i = 1; @endphp
                               @else
                                 <div class="item ">
+
                                   <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
                                 </div>
                               @endif
@@ -213,7 +214,7 @@
                         </div>
                       </div>
 
-                    
+
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
