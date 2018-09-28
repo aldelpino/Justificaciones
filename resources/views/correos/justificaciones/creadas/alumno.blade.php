@@ -10,10 +10,13 @@ Su coordinador revisará la solicitud y la responderá a la brevedad.
 * Nombre: {{ $nombreAlumno }}
 * Carrera: {{ $carreraAlumno }}
 * Asignaturas:
-@foreach($resumenAsignaturas as $asignatura)
+@foreach($asignaturas as $asignatura)
   * {{ $asignatura }}
 @endforeach
-* Docentes: {{ $nombreProfes }}
+* Docentes:
+@foreach ($nombreProfes as $p)
+  * {{ $p }}
+@endforeach
 * Comentario de alumno: {{ $comentario }}
 
 ¡Gracias!

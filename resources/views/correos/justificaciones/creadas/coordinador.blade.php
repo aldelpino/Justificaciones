@@ -8,8 +8,14 @@ Favor, responder a la brevedad.
 
 * Rut: {{ $rutAlumno }}
 * Nombre: {{ $nombreAlumno }}
-* Asignatura: {{ $resumenAsignaturas[0] }}
-* Docente: {{ $nombreProfe }}
+* Asignaturas:
+@foreach ($asignaturas as $a)
+  * {{ $a }}
+@endforeach
+* Docentes:
+@foreach ($teachers as $t)
+  * {{ $t }}
+@endforeach
 * Comentario de alumno: {{ $comentario }}
 
 ¡Gracias!
