@@ -24,6 +24,14 @@ class CoordinadorController extends Controller
      */
     public function index()
     {
+
+      $verificar = DB::table('users')->select('activacion')->where('email', auth()->user()->email)->get();
+      logger(json_decode($verificar, true)[0]['activacion']);
+      if (!json_decode($verificar, true)[0]['activacion']) {
+          return view('contrasena.cambiar', []);
+      }else{
+
+
         $listaJustificacionesValidando = DB::table('justifications')
             ->select('justifications.ID_DATO','NFOLIO', 'RUT_ALU', 'justifications.NOMBRE_ALUM', 'FEC_SOL', 'FEC_JUS', 'ASIGNATURA','ESTADO')
             ->join('datos_semestre', 'justifications.correo_alum', 'datos_semestre.correo_alum')
@@ -50,5 +58,6 @@ class CoordinadorController extends Controller
             'listaJustificacionesRechazadas' => $listaJustificacionesRechazadas,
             'listaJustificacionesAprobadas' => $listaJustificacionesAprobadas
         ]);
+      }
     }
 }

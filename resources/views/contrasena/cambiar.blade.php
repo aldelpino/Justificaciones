@@ -1,4 +1,11 @@
-@extends('layouts.alumno')
+@if (auth()->user()->rol == 0)
+  @extends('layouts.alumno')
+@elseif (auth()->user()->rol == 1)
+  @extends('layouts.coordinador')
+@elseif (auth()->user()->rol == 2)
+  @extends('layouts.admin')
+@endif
+
 
 @section('utilitiesHead')
   <!-- bootstrap-daterangepicker -->
@@ -42,6 +49,7 @@
                                         @endif
                                         {{-- alumno/contrasena/cambiar --}}
                                         {{-- action="{{url('alumno/store')}}" --}}
+
                                         <form method="POST" action="{{url('alumno/contrasena/cambiar')}}" aria-label="{{ __('Reset Password') }}">
                                             {{-- <form method="POST" action="{{ route('contrasena.change') }}" aria-label="{{ __('Reset Password') }}"> --}}
                                             {{-- <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}"> --}}
