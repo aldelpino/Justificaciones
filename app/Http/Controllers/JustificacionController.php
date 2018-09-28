@@ -112,21 +112,21 @@ class JustificacionController extends Controller
         event(new JustificationSubmitted($request->correo_alum, $request->correoCoordinador, $request, $adjuntos, $resumenAsignaturas));
         logger($resumenAsignaturas);
         logger('#########################################################resumenAsignaturas');
-            // DESCOMENTAR EN PRODUCCION
-            //
-            // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
-            // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
-            // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
-            // EL profe recibe solo la resolucion del coordinador, sin datos de adjunto. Sacar desde justiController
-            // 1 solo correo con resumen de asignaturas para Coordinador
-            // 1 solo correo con resumen...Alumno recibe confirmacion de creacion con respaldo de los adjuntos
-            // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
-            // Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
-            // Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos));
-            // DESCOMENTAR EN PRODUCCION
-            // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
-            // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
-            // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+        // DESCOMENTAR EN PRODUCCION
+        //
+        // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+        // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+        // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+        // EL profe recibe solo la resolucion del coordinador, sin datos de adjunto. Sacar desde justiController
+        // 1 solo correo con resumen de asignaturas para Coordinador
+        // 1 solo correo con resumen...Alumno recibe confirmacion de creacion con respaldo de los adjuntos
+        // Mail::to('jcastillo@duoc.cl')->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+        // Mail::to('dseron@duoc.cl')->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+        // Mail::to('jcaguirrecl@gmail.com')->send(new EnviarCorreitoAlumnito($request, $adjuntos));
+        // DESCOMENTAR EN PRODUCCION
+        // Mail::to($curso['correoDocente'])->send(new EnviarCorreitoProfesorcito($request, $adjuntos));
+        // Mail::to($curso['correocorreoCoordinador'])->send(new EnviarCorreitoCoordinadorcito($request, $adjuntos));
+        // Mail::to($request['correo_alum'])->send(new EnviarCorreitoAlumnito($request, $adjuntos));
         // $justification->notify(new InboxMessage($request));
 
         // $result = $this->authorize('alumno/store', $post);

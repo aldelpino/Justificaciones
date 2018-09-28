@@ -3,7 +3,7 @@
 
 @section('utilitiesHead')
   <!-- bootstrap-daterangepicker -->
-  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Dropzone.js -->
   <link href="/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <style>
@@ -30,12 +30,8 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-
             <div class="x_content">
-
-
               <!-- Smart Wizard -->
-
               <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('coordinador/update', $justifications->ID_DATO)}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
@@ -177,13 +173,11 @@
                     </div>
                     <div id="step-3">
                       <h2 class="StepTitle">Paso 3 Certificado Alumno</h2>
-
                       <div class="container">
-
                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                           <!-- Indicators -->
-                          <ol class="carousel-indicators"
-                            @foreach ($imagenes as $imagen )
+                          <ol class="carousel-indicators">
+                            @foreach ($imagenes as $imagen)
                               <li data-target="#myCarousel" data-slide-to="0" ></li>
                             @endforeach
                           </ol>
@@ -256,10 +250,10 @@
   <!-- Dropzone.js -->
   <script src="/vendors/dropzone/dist/min/dropzone.min.js"></script>
   <!-- bootstrap-daterangepicker -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
-  <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="/vendors/moment/min/moment.min.js"></script>
+  <script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- bootstrap-datetimepicker -->
-  <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
   {{-- <script type="text/javascript">
     Dropzone.options.dropzone =
@@ -307,40 +301,31 @@
   </script> --}}
 
     <script type="text/javascript">
+      Dropzone.autoDiscover = false;
+      // jQuery(document).ready(function() {
+      $(document).ready(function () {
+        var folio = $('#folio').val();
+        console.log(folio);
         Dropzone.autoDiscover = false;
-        jQuery(document).ready(function() {
-        // $(document).ready(function () {
-            var folio = $('#folio').val();
-            console.log(folio);
-            Dropzone.autoDiscover = false;
-            $("div#my-awesome-dropzone").dropzone({
-                url: "image/upload/store/",
-                maxFiles: 3,
-                maxFilesize: 20,
-                dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
-                paramName: "file",
-                dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
-                acceptedFiles: "image/jpeg, image/png, image/jpg",
-                params: {
-                    folio: folio
-                },
-                // init: function() {
-                //     this.on("sending", function(file, xhr, formData) {
-                //     formData.append("data", "loremipsum");
-                //     console.log(formData)
-                //     });
-                // },
-                headers: {
-                    'X-CSRFToken': $('meta[name="token"]').attr('content')
-                },
-            });
+        $("div#my-awesome-dropzone").dropzone({
+          url: "image/upload/store/",
+          maxFiles: 3,
+          maxFilesize: 20,
+          dictResponseError: "Error al subir el archivo",
+          dictInvalidFileType: "Solo archivos tipo Imagen",
+          dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
+          paramName: "file",
+          dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
+          acceptedFiles: "image/jpeg, image/png, image/jpg",
+          params: {
+            folio: folio
+          },
+          headers: {
+            'X-CSRFToken': $('meta[name="token"]').attr('content')
+          },
         });
+      });
     </script>
-
-
-
 @endsection
 
 {{-- Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop files here to upload";

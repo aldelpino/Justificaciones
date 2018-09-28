@@ -6,6 +6,7 @@ Favor, responder a la brevedad.
 
 ## Detalle
 
+* Rut: {{ $rutAlumno }}
 * Nombre: {{ $nombreAlumno }}
 * Asignatura: {{ $resumenAsignaturas[0] }}
 * Docente: {{ $nombreProfe }}
@@ -13,5 +14,5 @@ Favor, responder a la brevedad.
 
 ¡Gracias!
 
-<i>Justificaciones DuocUC, 2018.</i>
+<i>Sistema de Justificaciones Duoc UC - Sede Antonio Varas, 2018.</i>
 @endcomponent

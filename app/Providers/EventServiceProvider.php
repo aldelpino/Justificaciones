@@ -15,6 +15,10 @@ use App\Listeners\Justification\Submitted\SendEmailToCoordinator as SubmittedSen
 use App\Listeners\Justification\Approved\SendEmailToStudent as ApprovedSendEmailToStudent;
 use App\Listeners\Justification\Approved\SendEmailToTeacher as ApprovedSendEmailToTeacher;
 
+// Rejected listener aliases
+use App\Listeners\Justification\Rejected\SendEmailToStudent as RejectedSendEmailToStudent;
+use App\Listeners\Justification\Rejected\SendEmailToTeacher as RejectedSendEmailToTeacher;
+
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -34,8 +38,8 @@ class EventServiceProvider extends ServiceProvider
             ApprovedSendEmailToTeacher::class,
         ],
         JustificationRejected::class => [
-            // 'App\Listeners\Justification\Rejected\SendEmailToStudent',
-            // 'App\Listeners\Justification\Rejected\SendEmailToTeacher',
+            RejectedSendEmailToStudent::class,
+            RejectedSendEmailToTeacher::class,
         ],
     ];
 

@@ -3,8 +3,9 @@
 namespace App\Listeners\Justification\Rejected;
 
 use App\Events\Justification\Rejected as JustificationRejected;
-use App\Mail\Justification\Rejected\ToTeacher as JustificationApprovedEmail;
+use App\Mail\Justification\Rejected\ToTeacher as JustificationRejectedEmail;
 use Mail;
+use DB;
 
 class SendEmailToTeacher
 {
@@ -26,6 +27,10 @@ class SendEmailToTeacher
      */
     public function handle(JustificationRejected $event)
     {
-        Mail::to($event->teacherEmail)->send(new JustificationApprovedEmail());
+        $alumno = DB::table('datos_semestre')
+            ->where('CORREO_ALUM', $event->studentEmail)
+            ->first(['rut_alu', 'carrera', 'NOMBRE_ALUM', 'APEP_ALUM', 'NOMBRE_DOC', 'APEP_DOC', 'NOMBRE_COR', 'APEP_COR']);
+        Mail::to($event->teacherEmail)
+            ->send(new JustificationRejectedEmail($event->justification, $alumno));
     }
 }

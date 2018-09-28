@@ -16,22 +16,18 @@ class Rejected
 
     public $studentEmail;
     public $teacherEmail;
-    public $message;
-    public $adjuntos;
-    public $resumenAsignaturas;
+    public $justification;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($studentEmail, $teacherEmail, $message, $adjuntos, $resumenAsignaturas)
+    public function __construct($studentEmail, $teacherEmail, $justification)
     {
         $this->studentEmail = $studentEmail;
         $this->teacherEmail = $teacherEmail;
-        $this->message = $message;
-        $this->adjuntos = $adjuntos;
-        $this->resumenAsignaturas = $resumenAsignaturas;
+        $this->justification = $justification;
     }
 
     /**

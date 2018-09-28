@@ -6,15 +6,17 @@ Su coordinador revisará la solicitud y la responderá a la brevedad.
 
 ## Detalle
 
+* Rut: {{ $rutAlumno }}
 * Nombre: {{ $nombreAlumno }}
+* Carrera: {{ $carreraAlumno }}
 * Asignaturas:
 @foreach($resumenAsignaturas as $asignatura)
   * {{ $asignatura }}
 @endforeach
-* Docente: {{ $nombreProfe }}
+* Docentes: {{ $nombreProfes }}
 * Comentario de alumno: {{ $comentario }}
 
 ¡Gracias!
 
-<i>Justificaciones DuocUC, 2018.</i>
+<i>Sistema de Justificaciones Duoc UC - Sede Antonio Varas, 2018.</i>
 @endcomponent
