@@ -3,7 +3,7 @@
 namespace App\Listeners\Justification\Submitted;
 
 use App\Events\Justification\Submitted as JustificationSubmitted;
-use App\Mail\Justification\Submitted\ToCoordinator;
+use App\Mail\Justification\Submitted\ToCoordinator as JustificationSubmittedEmail;
 use Mail;
 use DB;
 
@@ -27,10 +27,19 @@ class SendEmailToCoordinator
      */
     public function handle(JustificationSubmitted $event)
     {
-        $alumno = DB::table('datos_semestre')
-            ->where('CORREO_ALUM', $event->studentEmail)
-            ->first(['rut_alu', 'carrera']);
-        Mail::to($event->coordinatorEmail)
-            ->send(new ToCoordinator($event->message, $event->adjuntos, $event->resumenAsignaturas, $alumno));
+        $justifications = DB::table('justifications')->where('NFOLIO', $event->folio)->get();
+        $student = DB::table('datos_semestre')
+            ->where('correo_alum', $justifications[0]->CORREO_ALUM)
+            ->whereIn('CORREO_DOC', $justifications->unique('CORREO_DOC')->pluck('CORREO_DOC'))
+            ->get();
+
+        $teachers = [];
+        foreach ($student as $a) {
+            array_push($teachers, $a->NOMBRE_DOC.' '.$a->APEP_DOC);
+        }
+
+        Mail::to($justifications[0]->CORREO_COR)->send(new JustificationSubmittedEmail(
+            $student, $teachers, $justifications[0], $justifications->pluck('ASIGNATURA')->all()
+        ));
     }
 }

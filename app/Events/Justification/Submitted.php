@@ -14,24 +14,16 @@ class Submitted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $studentEmail;
-    public $coordinatorEmail;
-    public $message;
-    public $adjuntos;
-    public $resumenAsignaturas;
+    public $folio;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($studentEmail, $coordinatorEmail, $message, $adjuntos, $resumenAsignaturas)
+    public function __construct($folio)
     {
-        $this->studentEmail = $studentEmail;
-        $this->coordinatorEmail = $coordinatorEmail;
-        $this->message = $message;
-        $this->adjuntos = $adjuntos;
-        $this->resumenAsignaturas = $resumenAsignaturas;
+        $this->folio = $folio;
     }
 
     /**

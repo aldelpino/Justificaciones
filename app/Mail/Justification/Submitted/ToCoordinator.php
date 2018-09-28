@@ -12,22 +12,22 @@ class ToCoordinator extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
-    public $adjuntos;
-    public $resumenAsignaturas;
-    public $alumno;
+    public $student;
+    public $teachers;
+    public $justification;
+    public $subjects;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(ContactFormRequest $message, $adjuntos, $resumenAsignaturas, $alumno)
+    public function __construct($student, $teachers, $justification, $subjects)
     {
-        $this->message = $message;
-        $this->adjuntos = $adjuntos;
-        $this->resumenAsignaturas = $resumenAsignaturas;
-        $this->alumno = $alumno;
+        $this->student = $student;
+        $this->teachers = $teachers;
+        $this->justification = $justification;
+        $this->subjects = $subjects;
     }
 
     /**
@@ -40,14 +40,13 @@ class ToCoordinator extends Mailable
         return $this->subject('Justificación ingresada')
             ->markdown('correos.justificaciones.creadas.coordinador')
             ->with([
-                'rutAlumno' => $this->alumno->rut_alu,
-                'nombreAlumno' => $this->message->nombre_alum.' '.$this->message->apep_alum.' '.$this->message->apem_alum,
-                'nombreProfe' => $this->message->nombreDocente,
-                'nombreCoordinador' => $this->message->nombreCoordinador,
-                'carreraAlumno' => $this->alumno->carrera,
-                'folio' => $this->message->folio,
-                'comentario' => $this->message->comentario,
-                'resumenAsignaturas' => $this->resumenAsignaturas,
+                'rutAlumno' => $this->student[0]->RUT_ALU,
+                'nombreAlumno' => $this->student[0]->NOMBRE_ALUM.' '.$this->student[0]->APEP_ALUM.' '.$this->student[0]->APEM_ALUM,
+                'nombreProfes' => $this->teachers,
+                'carreraAlumno' => $this->student[0]->CARRERA,
+                'folio' => $this->justification->NFOLIO,
+                'comentario' => $this->justification->COMENTARIO,
+                'asignaturas' => $this->subjects,
             ]);
     }
 }
