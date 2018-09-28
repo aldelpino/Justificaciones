@@ -27,10 +27,18 @@ class SendEmailToTeacher
      */
     public function handle(JustificationRejected $event)
     {
+        $justifications = DB::table('justifications')->where('nfolio', $event->justification->NFOLIO)->get();
+        $filteredTeacherEmails = $justifications->unique('CORREO_DOC')->pluck('CORREO_DOC');
         $alumno = DB::table('datos_semestre')
-            ->where('CORREO_ALUM', $event->studentEmail)
-            ->first(['rut_alu', 'carrera', 'NOMBRE_ALUM', 'APEP_ALUM', 'NOMBRE_DOC', 'APEP_DOC', 'NOMBRE_COR', 'APEP_COR']);
-        Mail::to($event->teacherEmail)
-            ->send(new JustificationRejectedEmail($event->justification, $alumno));
+            ->where('CORREO_ALUM', $event->justification->CORREO_ALUM)
+            ->where('NOM_ASIG', $event->justification->ASIGNATURA)
+            ->get();
+
+        foreach ($filteredTeacherEmails as $email) {
+            Mail::to($email)->send(new JustificationRejectedEmail(
+                $event->justification,
+                $alumno[0]
+            ));
+        }
     }
 }

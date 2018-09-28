@@ -27,13 +27,29 @@ class SendEmailToStudent
      */
     public function handle(JustificationApproved $event)
     {
+        $justifications = DB::table('justifications')->where('nfolio', $event->justification->NFOLIO)->get();
+        $filteredJustifications = $justifications->unique('CORREO_DOC')->pluck('CORREO_DOC');
         $alumno = DB::table('datos_semestre')
-            ->where('CORREO_ALUM', $event->studentEmail)
-            ->first(['rut_alu', 'carrera', 'NOMBRE_ALUM', 'APEP_ALUM', 'NOMBRE_DOC', 'APEP_DOC']);
-        Mail::to($event->studentEmail)
+            ->where('CORREO_ALUM', $event->justification->CORREO_ALUM)
+            ->whereIn('CORREO_DOC', $filteredJustifications)
+            ->get();
+
+        $profesores = [];
+        foreach ($alumno as $a) {
+            array_push($profesores, $a->NOMBRE_DOC.' '.$a->APEP_DOC);
+        }
+
+        $alumnoFinal = [
+            'RUT_ALU' => $alumno[0]->RUT_ALU,
+            'CARRERA' => $alumno[0]->CARRERA,
+        ];
+
+        Mail::to($event->justification->CORREO_ALUM)
             ->send(new JustificationApprovedEmail(
                 $event->justification,
-                $alumno
+                $profesores,
+                $justifications->pluck('ASIGNATURA')->all(),
+                $alumnoFinal
             ));
     }
 }
