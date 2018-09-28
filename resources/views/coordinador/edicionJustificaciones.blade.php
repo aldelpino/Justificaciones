@@ -45,36 +45,36 @@
                       <a href="#step-1">
                         <span class="step_no">1</span>
                         <span class="step_descr">
-                                          Paso 1<br />
-                                          <small>Datos Academicos Alumno</small>
-                                      </span>
+                          Paso 1<br />
+                          <small>Datos Academicos Alumno</small>
+                        </span>
                       </a>
                     </li>
                     <li>
                       <a href="#step-2">
                         <span class="step_no">2</span>
                         <span class="step_descr">
-                                          Paso 2<br />
-                                          <small>Datos Solicitud Alumno</small>
-                                      </span>
+                          Paso 2<br />
+                          <small>Datos Solicitud Alumno</small>
+                        </span>
                       </a>
                     </li>
                     <li>
                     <a href="#step-3">
                       <span class="step_no">3</span>
                       <span class="step_descr">
-                                        Paso 3<br />
-                                        <small>Certificados Alumno</small>
-                                    </span>
+                        Paso 3<br />
+                        <small>Certificados Alumno</small>
+                      </span>
                     </a>
                   </li>
                     <li>
                       <a href="#step-4">
                         <span class="step_no">4</span>
                         <span class="step_descr">
-                                          Paso 4<br />
-                                          <small>Evaluacion y Comentarios</small>
-                                      </span>
+                          Paso 4<br />
+                          <small>Evaluacion y Comentarios</small>
+                        </span>
                       </a>
                     </li>
                   </ul>
@@ -130,8 +130,6 @@
                     </div>
                     <div id="step-2">
                       <h2 class="StepTitle">Datos Solicitud Alumno</h2><br>
-
-
                       <div class="col-md-12">
                         <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback" >
                           <label for="fechaFalta" class="control-label">Fechas Falta:</label>
