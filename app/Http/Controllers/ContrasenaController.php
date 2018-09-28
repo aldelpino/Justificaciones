@@ -62,6 +62,7 @@ class ContrasenaController extends Controller
         // {
             $request_data = $request->All();
             $validator = $this->admin_credential_rules($request_data);
+            $usuario = '';
             if($validator->fails())
             {
             return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
@@ -77,7 +78,14 @@ class ContrasenaController extends Controller
                 $obj_user->password = Hash::make($request_data['nueva']);;
                 $obj_user->activacion = 1;
                 $obj_user->save();
-                return redirect()->intended('alumno/index')->with('success', 'CONTRASEÑA MODIFICADA CORRECTAMENTE !!!                      Presiona x para cerrar');;
+                if (auth()->user()->rol == 0) {
+                  $usuario = 'alumno';
+                }elseif (auth()->user()->rol == 1) {
+                  $usuario = 'coordinador';
+                }elseif (auth()->user()->rol == 3) {
+                  $usuario = 'administrador';
+                }
+                return redirect()->intended($usuario.'/index')->with('success', 'CONTRASEÑA MODIFICADA CORRECTAMENTE !!!                      Presiona x para cerrar');;
             }
             else
             {
