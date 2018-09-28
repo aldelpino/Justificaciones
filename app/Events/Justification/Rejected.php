@@ -14,8 +14,6 @@ class Rejected
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $studentEmail;
-    public $teacherEmail;
     public $justification;
 
     /**
@@ -23,10 +21,8 @@ class Rejected
      *
      * @return void
      */
-    public function __construct($studentEmail, $teacherEmail, $justification)
+    public function __construct($justification)
     {
-        $this->studentEmail = $studentEmail;
-        $this->teacherEmail = $teacherEmail;
         $this->justification = $justification;
     }
 
