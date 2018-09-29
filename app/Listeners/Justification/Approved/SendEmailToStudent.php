@@ -4,6 +4,7 @@ namespace App\Listeners\Justification\Approved;
 
 use App\Events\Justification\Approved as JustificationApproved;
 use App\Mail\Justification\Approved\ToStudent as JustificationApprovedEmail;
+use App\Justification;
 use Mail;
 use DB;
 
@@ -27,7 +28,7 @@ class SendEmailToStudent
      */
     public function handle(JustificationApproved $event)
     {
-        $justifications = DB::table('justifications')->where('nfolio', $event->justification->NFOLIO)->get();
+        $justifications = Justification::whereFolio($event->justification->NFOLIO)->get();
         $filteredJustifications = $justifications->unique('CORREO_DOC')->pluck('CORREO_DOC');
         $alumno = DB::table('datos_semestre')
             ->where('CORREO_ALUM', $event->justification->CORREO_ALUM)

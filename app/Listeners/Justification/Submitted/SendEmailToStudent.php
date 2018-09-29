@@ -4,6 +4,7 @@ namespace App\Listeners\Justification\Submitted;
 
 use App\Events\Justification\Submitted as JustificationSubmitted;
 use App\Mail\Justification\Submitted\ToStudent as JustificationSubmittedEmail;
+use App\Justification;
 use Mail;
 use DB;
 
@@ -27,7 +28,7 @@ class SendEmailToStudent
      */
     public function handle(JustificationSubmitted $event)
     {
-        $justifications = DB::table('justifications')->where('NFOLIO', $event->folio)->get();
+        $justifications = Justification::whereFolio($event->folio)->get();
         $student = DB::table('datos_semestre')
             ->where('correo_alum', $justifications[0]->CORREO_ALUM)
             ->whereIn('CORREO_DOC', $justifications->unique('CORREO_DOC')->pluck('CORREO_DOC'))
