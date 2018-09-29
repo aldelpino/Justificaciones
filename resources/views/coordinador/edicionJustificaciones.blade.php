@@ -34,7 +34,7 @@
               <!-- Smart Wizard -->
               <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('coordinador/update', $justifications->ID_DATO)}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-
+                <input type="hidden" id="folio" name="folio" value="{{$folio}}">
                 <input type="hidden" id="inputSuccess3" name="apem_alum" value="{{$datosAlumno->APEM_ALUM}}">
                 <input type="hidden" id="cursosArray" name="cursosArray">
                 <input type="hidden" id="correoDocente" name="correoDocente">
