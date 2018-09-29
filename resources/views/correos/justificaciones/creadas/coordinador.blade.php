@@ -13,7 +13,7 @@ Favor, responder a la brevedad.
   * {{ $a }}
 @endforeach
 * Docentes:
-@foreach ($teachers as $t)
+@foreach ($nombreProfes as $t)
   * {{ $t }}
 @endforeach
 * Comentario de alumno: {{ $comentario }}
