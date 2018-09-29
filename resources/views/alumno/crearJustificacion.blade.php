@@ -353,7 +353,12 @@
         },
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+        },
+        init: function() {
+          this.on("success", function(file, responseText) {
+            $("#subioArchivo").val('sip');
+          });
+        },
       });
       $('select[name="asignatura"]').on('change', function(){
         var asignaturaId = $(this).val();
