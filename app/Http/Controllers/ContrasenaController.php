@@ -28,13 +28,6 @@ class ContrasenaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index(Request $request)
-    // {
-    //     Log::Debug($request->session()->all());
-    //     Log::Debug(auth()->user());
-
-    //     return view('alumno/index');
-    // }
     public function admin_credential_rules(array $data)
     {
         $messages = [
@@ -55,24 +48,17 @@ class ContrasenaController extends Controller
     {
         return view('contrasena.cambiar');
     }
+
     public function cambiar(Request $request)
     {
-        Log::Debug("##############################################################PASSWD");
-        // if(Auth::Check())
-        // {
-            $request_data = $request->All();
-            $validator = $this->admin_credential_rules($request_data);
-            $usuario = '';
-            if($validator->fails())
-            {
+        $request_data = $request->all();
+        $validator = $this->admin_credential_rules($request_data);
+        $usuario = '';
+        if ($validator->fails()) {
             return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-            }
-            else
-            {
+        } else {
             $current_password = Auth::User()->password;
-            Log::Debug($current_password);
-            if(Hash::check($request_data['actual'], $current_password))
-            {
+            if (Hash::check($request_data['actual'], $current_password)) {
                 $user_id = Auth::User()->id;
                 $obj_user = User::find($user_id);
                 $obj_user->password = Hash::make($request_data['nueva']);;
@@ -80,23 +66,16 @@ class ContrasenaController extends Controller
                 $obj_user->save();
                 if (auth()->user()->rol == 0) {
                   $usuario = 'alumno';
-                }elseif (auth()->user()->rol == 1) {
+                } elseif (auth()->user()->rol == 1) {
                   $usuario = 'coordinador';
-                }elseif (auth()->user()->rol == 3) {
+                } elseif (auth()->user()->rol == 3) {
                   $usuario = 'administrador';
                 }
                 return redirect()->intended($usuario.'/index')->with('success', 'CONTRASEÑA MODIFICADA CORRECTAMENTE !!!                      Presiona x para cerrar');;
-            }
-            else
-            {
+            } else {
                 $error = array('current-password' => 'Please enter correct current password');
                 return response()->json(array('error' => $error), 400);
             }
-            }
-        // }
-        // else
-        // {
-        //     return redirect()->to('/');
-        // }
+        }
     }
 }
