@@ -8,6 +8,5 @@ class Justification extends Model
 {
     const CREATED_AT = 'fec_sol';
     const UPDATED_AT = 'updated_at';
-    protected $table = 'justifications';
-    public $primaryKey = 'NFOLIO';
+    public $primaryKey = 'ID_DATO';
 }
