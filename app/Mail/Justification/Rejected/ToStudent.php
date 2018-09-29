@@ -12,17 +12,21 @@ class ToStudent extends Mailable
     use Queueable, SerializesModels;
 
     public $justification;
-    public $alumno;
+    public $teachers;
+    public $subjects;
+    public $student;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($justification, $alumno)
+    public function __construct($justification, $teachers, $subjects, $student)
     {
         $this->justification = $justification;
-        $this->alumno = $alumno;
+        $this->teachers = $teachers;
+        $this->subjects = $subjects;
+        $this->student = $student;
     }
 
     /**
@@ -36,11 +40,11 @@ class ToStudent extends Mailable
             ->markdown('correos.justificaciones.rechazadas.alumno')
             ->with([
                 'folio' => $this->justification->nfolio,
-                'nombreProfesor' => $this->alumno->NOMBRE_DOC.' '.$this->alumno->APEP_DOC,
-                'rutAlumno' => $this->alumno->rut_alu,
-                'nombreAlumno' => $this->alumno->NOMBRE_ALUM.' '.$this->alumno->APEP_ALUM,
-                'carreraAlumno' => $this->alumno->carrera,
-                'asignatura' => $this->justification->ASIGNATURA,
+                'nombreProfesores' => $this->teachers,
+                'rutAlumno' => $this->student['RUT_ALU'],
+                'nombreAlumno' => $this->student['NOMBRE'],
+                'carreraAlumno' => $this->student['CARRERA'],
+                'asignaturas' => $this->subjects,
                 'resolucion' => $this->justification->COMENTARIO_REC,
                 'fechaJustificacion' => $this->justification->FEC_SOL,
             ]);

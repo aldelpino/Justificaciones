@@ -36,9 +36,9 @@ class ToTeacher extends Mailable
             ->markdown('correos.justificaciones.rechazadas.profesor')
             ->with([
                 'fechaJustificacion' => $this->justification->FEC_SOL,
-                'rutAlumno' => $this->alumno->rut_alu,
+                'rutAlumno' => $this->alumno->RUT_ALU,
                 'nombreAlumno' => $this->alumno->NOMBRE_ALUM.' '.$this->alumno->APEP_ALUM,
-                'carreraAlumno' => $this->alumno->carrera,
+                'carreraAlumno' => $this->alumno->CARRERA,
                 'asignatura' => $this->justification->ASIGNATURA,
                 'nombreCoordinador' => $this->alumno->NOMBRE_COR.' '.$this->alumno->APEP_COR,
                 'resolucion' => $this->justification->COMENTARIO_REC,

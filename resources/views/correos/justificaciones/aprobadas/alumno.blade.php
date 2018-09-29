@@ -4,15 +4,22 @@
 Le informamos que la solicitud <strong>{{ $folio }}</strong> de justificación
 ha sido <strong>APROBADA</strong> por su coordinador(a)
 con fecha <strong>{{ date("d-m-Y", strtotime($fechaJustificacion)) }}</strong>.
-Su docente <strong>{{ $nombreProfesor }}</strong> será informado
-de esta situación. Si justifica alguna evaluación, debe coordinar con el docente.
+Su docente será informado de esta situación.
+Si justifica alguna evaluación, debe coordinar con el docente.
 
 ## Detalle Solicitud
 
 * Rut: {{ $rutAlumno }}
 * Nombre: {{ $nombreAlumno }}
 * Carrera: {{ $carreraAlumno }}
-* Asignatura: {{ $asignatura }}
+* Docentes:
+@foreach($nombreProfesores as $p)
+  * {{ $p }}
+@endforeach
+* Asignaturas:
+@foreach ($asignaturas as $a)
+  * {{ $a }}
+@endforeach
 * Resolución: {{ $resolucion }}
 
 Favor, conservar este mail.

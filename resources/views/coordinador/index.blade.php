@@ -12,15 +12,9 @@
 
 
 @section('content')
-
-
-
   <!-- page content -->
   <div class="right_col" role="main">
     <div class="">
-
-
-
     <div class="page-title">
         <div class="title_left">
           <h3>Lista de Solicitudes</small></h3>
@@ -162,9 +156,10 @@
 
 
   <script type="text/javascript">
-  $(document).ready(function() {
-  $('table.display').DataTable({
-        language: {
+    $(document).ready(function() {
+      $('table.display').DataTable({
+        "order": [[ 4, "asc" ]],
+        "language": {
           "sProcessing":     "Procesando...",
           "sLengthMenu":     "Mostrar _MENU_ registros",
           "sZeroRecords":    "No se encontraron resultados",
@@ -177,22 +172,19 @@
           "sUrl":            "",
           "sInfoThousands":  ",",
           "sLoadingRecords": "Cargando...",
-          "oPaginate": {
+            "oPaginate": {
               "sFirst":    "Primero",
               "sLast":     "Último",
               "sNext":     "Siguiente",
               "sPrevious": "Anterior"
-          },
-          "oAria": {
+            },
+            "oAria": {
               "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
               "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
           }
-      }
-    }
-  );
-
-  } );
+        }
+      );
+    });
   </script>
-
-
 @endsection
