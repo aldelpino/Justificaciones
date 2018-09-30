@@ -47,7 +47,7 @@
                 <div class="container imagenLogo  col-md-offset-3">
                   <img src="..\build\images\LOGO_iVARAS.png" class="img-responsive" alt="Cinque Terre" width="40%" >
                 </div>
-                <h1>Sistema de Justificaciones</h1>
+                <h1>Sistemas de Justificaciones</h1>
                 <div>
                   <input type="email" class="form-control" placeholder="Correo Institucional" required="" name="email" value="{{ old('email') }}" />
                   @if($errors->has('email'))
