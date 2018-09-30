@@ -24,5 +24,5 @@ Si justifica alguna evaluación, debe coordinar con el docente.
 
 Favor, conservar este mail.
 
-<i>Sistema de Justificaciones Duoc UC - Sede Antonio Varas, 2018.</i>
+<i>Sistema de Justificaciones, {{ date('Y') }}.</i>
 @endcomponent
