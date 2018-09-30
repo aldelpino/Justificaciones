@@ -1,5 +1,5 @@
 @component('mail::message')
-# Estimado:
+# Estimado(a):
 
 Le informamos que la solicitud <strong>{{ $folio }}</strong> ha sido ingresada con éxito.
 Su coordinador revisará la solicitud y la responderá a la brevedad.

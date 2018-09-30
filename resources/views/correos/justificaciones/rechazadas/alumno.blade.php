@@ -1,5 +1,5 @@
 @component('mail::message')
-# Estimado:
+# Estimado(a):
 
 Le informamos que la solicitud <strong>{{ $folio }}</strong> ha sido <strong>RECHAZADA</strong> por su coordinador(a)
 con fecha <strong>{{ date("d-m-Y", strtotime($fechaJustificacion)) }}</strong>.

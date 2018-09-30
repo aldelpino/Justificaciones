@@ -1,5 +1,5 @@
 @component('mail::message')
-# Estimado:
+# Estimado(a):
 
 Le informamos que la justificación realizada por el alumno <strong>{{ $nombreAlumno }}</strong>
 con fecha <strong>{{ date('d-m-Y', strtotime($fechaJustificacion)) }}</strong>

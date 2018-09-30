@@ -1,5 +1,5 @@
 @component('mail::message')
-# Estimado coordinador:
+# Estimado(a):
 
 Le informamos que ha sido ingresada una nueva solicitud de justificación <strong>{{ $folio }}</strong>.
 Favor, responder a la brevedad.

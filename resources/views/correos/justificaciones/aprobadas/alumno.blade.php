@@ -1,5 +1,5 @@
 @component('mail::message')
-# Estimado:
+# Estimado(a):
 
 Le informamos que la solicitud <strong>{{ $folio }}</strong> de justificación
 ha sido <strong>APROBADA</strong> por su coordinador(a)
