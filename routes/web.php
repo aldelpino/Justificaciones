@@ -21,6 +21,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
     // Route::post('/short', 'UrlMapperController@store');
     // Route::post('alumno/store', 'JustificacionController@store');
 });
+
 //Imagen
 Route::middleware(['auth'])->group(function(){
 
