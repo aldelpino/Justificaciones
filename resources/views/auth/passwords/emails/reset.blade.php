@@ -11,5 +11,5 @@ Si no fuiste tú el que hizo esta petición, solo ignora este mensaje.
 
 ¡Gracias!
 
-<i>Justificaciones Duoc, 2018.</i>
+<i>Sistema de Justificaciones, {{ date('Y') }}.</i>
 @endcomponent

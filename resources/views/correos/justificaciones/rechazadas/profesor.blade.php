@@ -15,5 +15,5 @@ El alumno también fue informado de esta resolución.
 * Coordinador: {{ $nombreCoordinador }}
 * Resolución: {{ $resolucion }}
 
-<i>Sistema de Justificaciones Duoc UC - Sede Antonio Varas, 2018.</i>
+<i>Sistema de Justificaciones, {{ date('Y') }}.</i>
 @endcomponent
