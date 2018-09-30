@@ -3,7 +3,7 @@
 
 @section('utilitiesHead')
   <!-- bootstrap-daterangepicker -->
-  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Dropzone.js -->
   <link href="/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <style>
@@ -30,24 +30,11 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-            <div class="x_title">
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
             <div class="x_content">
-
-
               <!-- Smart Wizard -->
-
               <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('coordinador/update', $justifications->ID_DATO)}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-
+                <input type="hidden" id="folio" name="folio" value="{{$folio}}">
                 <input type="hidden" id="inputSuccess3" name="apem_alum" value="{{$datosAlumno->APEM_ALUM}}">
                 <input type="hidden" id="cursosArray" name="cursosArray">
                 <input type="hidden" id="correoDocente" name="correoDocente">
@@ -58,36 +45,36 @@
                       <a href="#step-1">
                         <span class="step_no">1</span>
                         <span class="step_descr">
-                                          Paso 1<br />
-                                          <small>Datos Academicos Alumno</small>
-                                      </span>
+                          Paso 1<br />
+                          <small>Datos Academicos Alumno</small>
+                        </span>
                       </a>
                     </li>
                     <li>
                       <a href="#step-2">
                         <span class="step_no">2</span>
                         <span class="step_descr">
-                                          Paso 2<br />
-                                          <small>Datos Solicitud Alumno</small>
-                                      </span>
+                          Paso 2<br />
+                          <small>Datos Solicitud Alumno</small>
+                        </span>
                       </a>
                     </li>
                     <li>
                     <a href="#step-3">
                       <span class="step_no">3</span>
                       <span class="step_descr">
-                                        Paso 3<br />
-                                        <small>Certificados Alumno</small>
-                                    </span>
+                        Paso 3<br />
+                        <small>Certificados Alumno</small>
+                      </span>
                     </a>
                   </li>
                     <li>
                       <a href="#step-4">
                         <span class="step_no">4</span>
                         <span class="step_descr">
-                                          Paso 4<br />
-                                          <small>Evaluacion y Comentarios</small>
-                                      </span>
+                          Paso 4<br />
+                          <small>Evaluacion y Comentarios</small>
+                        </span>
                       </a>
                     </li>
                   </ul>
@@ -143,8 +130,6 @@
                     </div>
                     <div id="step-2">
                       <h2 class="StepTitle">Datos Solicitud Alumno</h2><br>
-
-
                       <div class="col-md-12">
                         <div class="col-md-6 col-sm-6 col-xs-12  form-group has-feedback" >
                           <label for="fechaFalta" class="control-label">Fechas Falta:</label>
@@ -185,7 +170,42 @@
                       </div>
                     </div>
                     <div id="step-3">
-                      <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
+                      <h2 class="StepTitle">Paso 3 Certificado Alumno</h2>
+                      <div class="container">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                          <!-- Indicators -->
+                          <ol class="carousel-indicators">
+                            @foreach ($imagenes as $imagen)
+                              <li data-target="#myCarousel" data-slide-to="0" ></li>
+                            @endforeach
+                          </ol>
+                          <div class="carousel-inner">
+                            @php $i = 0; @endphp
+                            @foreach ($imagenes as $imagen )
+                              @if ($i == 0)
+                              <div class="item active">
+                                <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
+                              </div>
+                              @php $i = 1; @endphp
+                              @else
+                                <div class="item ">
+
+                                  <img src="{{'/storage/'.$imagen->url}}" style="width:1200px; height:420px;" alt="justificacion">
+                                </div>
+                              @endif
+                            @endforeach
+                          </div>
+                          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Anterior</span>
+                          </a>
+                          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Siguiente</span>
+                          </a>
+                        </div>
+                      </div>
+
 
                       <img src="/public/storage/2018/09/201804213710670.jpg" alt="asdas">
 
@@ -230,10 +250,10 @@
   <!-- Dropzone.js -->
   <script src="/vendors/dropzone/dist/min/dropzone.min.js"></script>
   <!-- bootstrap-daterangepicker -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
-  <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="/vendors/moment/min/moment.min.js"></script>
+  <script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- bootstrap-datetimepicker -->
-  <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
   {{-- <script type="text/javascript">
     Dropzone.options.dropzone =
@@ -281,40 +301,31 @@
   </script> --}}
 
     <script type="text/javascript">
+      Dropzone.autoDiscover = false;
+      // jQuery(document).ready(function() {
+      $(document).ready(function () {
+        var folio = $('#folio').val();
+        console.log(folio);
         Dropzone.autoDiscover = false;
-        jQuery(document).ready(function() {
-        // $(document).ready(function () {
-            var folio = $('#folio').val();
-            console.log(folio);
-            Dropzone.autoDiscover = false;
-            $("div#my-awesome-dropzone").dropzone({
-                url: "image/upload/store/",
-                maxFiles: 3,
-                maxFilesize: 20,
-                dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
-                paramName: "file",
-                dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
-                acceptedFiles: "image/jpeg, image/png, image/jpg",
-                params: {
-                    folio: folio
-                },
-                // init: function() {
-                //     this.on("sending", function(file, xhr, formData) {
-                //     formData.append("data", "loremipsum");
-                //     console.log(formData)
-                //     });
-                // },
-                headers: {
-                    'X-CSRFToken': $('meta[name="token"]').attr('content')
-                },
-            });
+        $("div#my-awesome-dropzone").dropzone({
+          url: "image/upload/store/",
+          maxFiles: 3,
+          maxFilesize: 20,
+          dictResponseError: "Error al subir el archivo",
+          dictInvalidFileType: "Solo archivos tipo Imagen",
+          dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
+          paramName: "file",
+          dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
+          acceptedFiles: "image/jpeg, image/png, image/jpg",
+          params: {
+            folio: folio
+          },
+          headers: {
+            'X-CSRFToken': $('meta[name="token"]').attr('content')
+          },
         });
+      });
     </script>
-
-
-
 @endsection
 
 {{-- Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop files here to upload";

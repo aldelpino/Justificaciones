@@ -6,9 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>JUSTIFICACIONES - AVARAS</title>
-
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -24,62 +22,80 @@
   </head>
 
   <body class="login">
-    <div class="row">
+
+    <div class="row encabezado">
+
+    </div>
+
+    <div class="row cuerpo">
+
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
 
-      <div class="container col-md-offset-1">
-        <img src="..\build\images\LOGO_iVARAS.png" class="img-responsive" alt="Cinque Terre" width="304" height="236">
-      </div>
-        <div class="login_wrapper">
-          <div class="animate form login_form">
+      <div class="login_wrapper">
+
+        <div class="animate form login_form" style="position:relative">
+          @if (session('status'))
+          <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+          </div>
+          @endif
+          <div class="panel panel-default">
             <section class="login_content">
               <form method="post" action="{{ route('login') }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <div class="container imagenLogo  col-md-offset-3">
+                  <img src="..\build\images\LOGO_iVARAS.png" class="img-responsive" alt="Cinque Terre" width="40%" >
+                </div>
                 <h1>Sistema de Justificaciones</h1>
                 <div>
-                  <input type="email" class="form-control" placeholder="Correo" required="" name="email" value="{{ old('email') }}" />
-                  {{ $errors->first('email', ':message') }}
+                  <input type="email" class="form-control" placeholder="Correo Institucional" required="" name="email" value="{{ old('email') }}" />
+                  @if($errors->has('email'))
+                    {{ $errors->first('email', ':message') }}
+                  @endif
                 </div>
                 <div>
-                  <input type="password" class="form-control" placeholder="Contraseña" required="" name="password" />
-                  {{ $errors->first('password', '<span class="help-block">:message</span>') }}
+                  <input type="password" class="form-control" placeholder="Contraseña (primeros 5 dígitos del RUT )" required="" name="password" />
+                  @if($errors->has('password'))
+                  <span class="help-block">
+                    {{ $errors->first('password') }}
+                  </span>
+                  @endif
                 </div>
                 <div>
                   <button class="btn btn-primary btn-block">Acceder</button>
-                  <a class="reset_pass" href="#signup">Perdiste tu contraseña?</a>
+                  <a class="reset_pass" href="#signup">¿Perdiste tu contraseña?</a>
                 </div>
-
                 <div class="clearfix"></div>
-
               </form>
             </section>
           </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form>
-              <h1>Olvido de contraseña</h1>
-
-              <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="#signin">Recuperar</a>
-              </div>
-
-              <div class="clearfix"></div>
-
-            </form>
-          </section>
         </div>
+        <div id="register" class="animate form registration_form">
+          <div class="panel panel-default">
+            <div class="container imagenLogoRegistro  col-md-offset-3">
+              <img src="..\build\images\LOGO_iVARAS.png" class="img-responsive" alt="Cinque Terre" width="40%" >
+            </div>
+            <section class="login_content">
+              <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+                <h1>Reestablecer contraseña</h1>
+
+                <div>
+                  <input type="email" class="form-control" placeholder="Email" name="email" required />
+                </div>
+                <div>
+                  <button class="btn btn-primary btn-block">Recuperar</button>
+                  <a class="reset_pass" href="#signin">Volver</a>
+                </div>
+                <div class="clearfix"></div>
+              </form>
+            </section>
+          </div>
+        </div>
+
       </div>
+
     </div>
-    
-
-
-
-
-
   </body>
 </html>

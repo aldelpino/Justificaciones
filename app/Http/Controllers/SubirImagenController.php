@@ -29,6 +29,7 @@ class SubirImagenController extends Controller
         Log::Debug($input);
         Log::Debug(request()->route()->parameter('userId'));
         Log::Debug($request->folio);
+        Log::Debug("SUBIR ARCHIVOS##############################################################");
         $time = Carbon::now();
         $image = $request->file('file');
         $extension = $image->getClientOriginalExtension();

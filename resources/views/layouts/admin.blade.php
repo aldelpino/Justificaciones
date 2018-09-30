@@ -35,8 +35,9 @@
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
-  @if (auth()->user()->rol == 0)
-  <body class="nav-md">
+
+  @if (auth()->user()->rol == 2)
+    <body class="nav-md">
       <div class="container body">
         <div class="main_container">
           <div class="col-md-3 left_col">
@@ -118,7 +119,7 @@
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Antonio Varas
+              Sistema de Justificaciones - Sede Antonio Varas
             </div>
             <div class="clearfix"></div>
           </footer>
@@ -182,14 +183,8 @@
       <script src="../vendors/jszip/dist/jszip.min.js"></script>
       <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
       <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
-
       <!-- Custom Theme Scripts -->
       <script src="/build/js/custom.min.js"></script>
-
-
-
-
     </body>
   @endif
 </html>

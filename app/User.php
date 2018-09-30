@@ -2,14 +2,13 @@
 
 namespace App;
 
+use App\Notifications\MyOwnResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    public $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -28,10 +27,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public $timestamps = false;
-    public function getAuthPassword()
 
-{
-    return $this->password;
-}
+    public $timestamps = false;
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MyOwnResetPassword($this->name, $this->email, $token));
+    }
 }

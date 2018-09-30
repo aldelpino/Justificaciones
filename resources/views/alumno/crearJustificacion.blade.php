@@ -3,15 +3,31 @@
 
 @section('utilitiesHead')
   <!-- bootstrap-daterangepicker -->
-  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  {{-- <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"> --}}
   <!-- Dropzone.js -->
   <link href="/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <style>
-        #loader{
+      #loader{
         visibility:hidden;
-        }
+      }
     </style>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#wizard').smartWizard({
+        enableFinishButton: false
+      });
+
+      // $("#wizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+      //   $('.next').hide();
+      // if($('button.sw-btn-next').hasClass('disabled')){
+      //     $('.sw-btn-group-extra').show(); // show the button extra only in the last page
+      // }else{
+      //     $('.sw-btn-group-extra').hide();                
+      // }
+
+  });
+</script>
 @endsection
 
 @section('content')
@@ -25,26 +41,22 @@
         </div>
       </div>
       <div class="clearfix"></div>
-
       <div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-            <div class="x_title">
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
             <div class="x_content">
-
-
               <!-- Smart Wizard -->
-
+              @if(count($errors))
+              <div class="alert alert-danger">
+                <strong>Ups!</strong> Algo no anda bien con tu solicitud de justificación.
+                <br/>
+                <ul>
+                  @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <form enctype="multipart/form-data" id="my-awesome-dropzone" class="dropzone" action="{{url('alumno/store')}}" method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <input type="hidden" id="folio" name="folio" value="{{$folio}}">
@@ -52,42 +64,43 @@
                 <input type="hidden" id="cursosArray" name="cursosArray">
                 <input type="hidden" id="correoDocente" name="correoDocente">
                 <input type="hidden" id="correoCoordinador" name="correoCoordinador">
+                <input type="hidden" id="subioArchivo" name="subioArchivo">
                 <div id="wizard" class="form_wizard wizard_horizontal">
                   <ul class="wizard_steps">
                     <li>
                       <a href="#step-1">
                         <span class="step_no">1</span>
                         <span class="step_descr">
-                                          Paso 1<br />
-                                          <small>Mis Datos Academicos</small>
-                                      </span>
+                          Paso 1<br />
+                          <small>Mis Datos Académicos</small>
+                      </span>
                       </a>
                     </li>
                     <li>
                       <a href="#step-2">
                         <span class="step_no">2</span>
                         <span class="step_descr">
-                                          Paso 2<br />
-                                          <small>Datos Solicitud</small>
-                                      </span>
+                          Paso 2<br />
+                          <small>Datos Solicitud</small>
+                        </span>
                       </a>
                     </li>
                     <li>
                     <a href="#step-3">
                       <span class="step_no">3</span>
                       <span class="step_descr">
-                                        Paso 3<br />
-                                        <small>Cargar Certificado</small>
-                                    </span>
+                        Paso 3<br />
+                        <small>Cargar Certificado</small>
+                      </span>
                     </a>
                   </li>
                     <li>
                       <a href="#step-4">
                         <span class="step_no">4</span>
                         <span class="step_descr">
-                                          Paso 4<br />
-                                          <small>Comentario</small>
-                                      </span>
+                          Paso 4<br />
+                          <small>Comentario</small>
+                        </span>
                       </a>
                     </li>
                   </ul>
@@ -104,7 +117,7 @@
                         {{-- {{ print_r($datosAlumno, true) }} --}}
                         {{-- {{ print_r($infoCursos, true) }} --}}
                         {{-- {{$datosAlumno->'correo_alum'}} --}}
-                        <h2 class="StepTitle">Mis datos Academicos</h2>
+                        <h2 class="StepTitle">Mis datos Académicos</h2>
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                           <input type="text" class="form-control has-feedback-left" id="inputSuccess2" readonly="readonly" name='nombre_alum' placeholder="{{$datosAlumno->NOMBRE_ALUM}}" value="{{$datosAlumno->NOMBRE_ALUM}}">
                           <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
@@ -121,7 +134,7 @@
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          <input type="number" class="form-control" id="inputSuccess5"  placeholder="Telefono/Celular" name="celular_alum" value="{{$datosAlumno->CELULAR}}">
+                          <input type="text" class="form-control" id="inputSuccess5"  placeholder="Telefono/Celular" name="celular_alum" value="{{$datosAlumno->CELULAR}}" maxlength="9">
                           <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         </div>
 
@@ -142,14 +155,14 @@
 
                       </div>
                     </div>
-                    <div id="step-2">
+                    <div id="step-2" style="overflow:auto; height:480px">
                       <h2 class="StepTitle">Datos Solicitud</h2><br>
 
                       <div class="col-md-12">
                         ¿Qué fechas faltaste?
                         <div class="input-prepend input-group">
-                          <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                          <input type="text" style="width: 200px" name="fechaJustificacion" id="reservation" class="form-control" value="01/01/2018 - 01/25/2018" />
+                          <span id="reservation1" class="add-on input-group-addon"><i id="miCalendario" class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                          <input type="text" style="width: 200px" name="fechaJustificacion" id="reservation-time" class="form-control"/>
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -163,71 +176,59 @@
                         <span class="fa fa-institution form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            {{-- {!! Form::label('item', 'Item:') !!} --}}
-                            {{-- {!! Form::select('asignatura', ['L' => 'Large', 'S' => 'Small'], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
-                            {{-- {!! Form::select('asignatura', [$infoCursos['NOM_ASIG']], null, ['placeholder' => 'Pick a size...', 'class' => 'form-control']) !!} --}}
-
-                        {{-- FUNCIONA OK --}}
                         <select class="form-control" id="carritoJC" name="asignatura" placeholder="Asignatura">
-                            <option value=''>Seleccionar asignatura</option>
+                            <option value='null'>Seleccionar asignatura</option>
                             @foreach($infoCursos as $item)
                                 <option value="{{$item['NOM_ASIG']}}">{{$item['NOM_ASIG']}}</option>
                             @endforeach
                         </select>
-
-                        {{-- // echo Form::checkbox('name', 'value'); --}}
-                        {{-- // echo '<br/>'; --}}
-                        {{-- {!! Form::checkbox('is_ok[]',  false,  isset($model->checkbox) ? : 0) !!} --}}
-
-                        {{-- <select class="form-control" name="asignatura">
-                            <option>Seleciona una asignatura</option>
-                            <option>Programacion de base de datos</option>
-                            <option>DAI</option>
-                            <option>Soporte en hardware</option>
-                            <option>Desarrollo en Java</option>
-                        </select> --}}
                         <span class="fa fa-folder form-control-feedback right" aria-hidden="true"></span>
-                        <span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
-                        <div id="panel-asignaturas">No has seleccionado Asignaturas</div>
+                        <span id="loader"><i class="form-control-feedback fa fa-spinner fa-3x fa-spin"></i></span>
+                      </div>
+                            {{-- <div class="col-md-9">
+                              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                Asignaturas que serán justificadas
+                              </div>
+                            </div> --}}
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <select class="form-control" name="motivo">
+                          <option value=''>Seleciona un motivo</option>
+                          <option value='Medico'>Médico</option>
+                          <option value='Laboral'>Laboral</option>
+                          <option value='Otros'>Otros</option>
+                        </select>
+                        <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label for="panel-asignaturas" class="control-label has-feedback">Asignaturas que serán justificadas:</label>
+                        <div id="panel-asignaturas" class="form-group has-feedback">No has seleccionado Asignaturas</div>
                         <div class="form-group">
-                          <div class="col-sm-offset-3 col-sm-6">
-                              <button class="btn btn-default" id="carrito">
-                                  <i class="fa fa-plus"></i> Agregar Asignatura a la justificacion
-                              </button>
-                          </div>
+                          {{-- <div class="col-sm-offset-3 col-sm-6"> --}}
+                            <button class="btn btn-default form-group has-feedback" id="carrito">
+                                <i class="fa fa-plus"></i> Agregar Asignatura a la justificacion
+                            </button>
+                          {{-- </div> --}}
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <select class="form-control" name="motivo">
-                               <option>Seleciona un motivo</option>
-                               <option>Médico</option>
-                               <option>Laboral</option>
-                               <option>Otros</option>
-                             </select>
-                        <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-
-
-
-
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                          ¿A que faltaste?
-                        <div class="checkbox">
-                                <label>
-                                  <input name="tipoInasistencia" type="checkbox" value="evaluacion"> Evaluaciones
-                                </label>
-                              </div>
-                              <div class="checkbox">
-                                <label>
-                                  <input name="tipoInasistencia" type="checkbox" value="clases"> Clases
-                                </label>
-                              </div>
+                          ¿Faltaste a alguna evaluación?
+                        <div class="checkbox form-group">
+                          <label>
+                            <input name="tipoInasistencia" type="checkbox" value="SI"> SI
+                          </label>
+                        </div>
+                        <div class="checkbox form-group">
+                          <label>
+                            <input name="tipoInasistencia" type="checkbox" value="NO"> NO
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div id="step-3">
                       <h2 class="StepTitle">Paso 3 Cargar Certificado</h2>
                       <div class="x_content">
                         <p>Arrastre las fotos que necesita subir o haga click en el panel</p>
+                        <p><h5> Restricciones: img/jpg, img/png, tamaño máximo 3MB, cantidad máxima 3 documentos</h5></p>
                         {{-- <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" class="dropzone dropzone-previews" id="my-awesome-dropzone">
                             @csrf
                         </form> --}}
@@ -240,7 +241,7 @@
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Paso 4 Comentario</h2>
-                      <label for="message">Ingrese máximo 500 caracteres:</label>
+                      <label for="message">Ingrese mínimo 30 caracteres y máximo 500:</label>
                       <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentario"></textarea>
                     </div>
                     {{-- <div class="form-group">
@@ -269,6 +270,7 @@
   <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- bootstrap-datetimepicker -->
   <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
   {{-- <script type="text/javascript">
     Dropzone.options.dropzone =
@@ -314,64 +316,120 @@
     maxFilesize: 3,
     };
   </script> --}}
-    <script type="text/javascript">
-        function display_locations(arr) {
-            // var array = ['london', 'ontario', 'san francisco', 'new york'];
-            var newHTML = "";
-            for (var i = 0; i < arr.length; i++) {
-                newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
+  <script type="text/javascript">
+    Dropzone.autoDiscover = false;
+    $(document).ready(function () {
+      $('input[name=fechaJustificacion]').daterangepicker({
+        "locale": {
+          "format": "MM/DD/YYYY",
+          "separator": " - ",
+          "applyLabel": "Aplicar",
+          "cancelLabel": "Deshacer",
+          "daysOfWeek": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+          ],
+          "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+          ],
+          "firstDay": 0
+        },
+        "startDate": "06/08/2018",
+        "endDate": "09/08/2018"
+      });
+      Dropzone.autoDiscover = false;
+      $("div#my-awesome-dropzone").dropzone({
+        url: "image/upload/store/",
+        maxFiles: 3,
+        maxFilesize: 2,
+        dictResponseError: "Error al subir el archivo",
+        dictInvalidFileType: "Solo archivos tipo Imagen",
+        dictMaxFilesExceeded: "Lo sentimos, solo puedes subir un maximo de 3 archivos!",
+        paramName: "file",
+        dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
+        acceptedFiles: "image/jpeg, image/png, image/jpg",
+        params: {
+          folio: $('#folio').val()
+        },
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        init: function() {
+          this.on("success", function(file, responseText) {
+            $("#subioArchivo").val('sip');
+          });
+        },
+      });
+      $('select[name="asignatura"]').on('change', function(){
+        var asignaturaId = $(this).val();
+        if(asignaturaId) {
+          $.ajax({
+            url: '/asignaturas/get/'+asignaturaId,
+            type:"GET",
+            dataType:"json",
+            beforeSend: function(){
+              $('#loader').css("visibility", "visible");
+              $('#carrito').attr("disabled", true);
+            },
+            success:function(data) {
+              $('input[name=correoDocente]').val(data[0].CORREO_DOC);
+              $('input[name=correoCoordinador]').val(data[0].CORREO_COR);
+              $('input[name=nombreDocente]').val(data[0].NOMBRE_DOC + ' ' + data[0].APEP_DOC);
+              $('input[name=nombreCoordinador]').val(data[0].NOMBRE_COR + ' ' + data[0].APEP_COR);
+            },
+            complete: function(){
+              $('#loader').css("visibility", "hidden");
+              $('#carrito').attr("disabled", false);
             }
-            $("#panel-asignaturas").html(newHTML);
-            $("#cursosArray").val(JSON.stringify(arr));
+          });
         }
-
-        $(function() {
-            var arr = new Array();
-            $("#carrito").click( function()
-                {
-                arr.push({asignatura: $('#carritoJC').find(":selected").text(), correoDocente: $('input[name=correoDocente]').val(), correoCoordinador: $('input[name=correoCoordinador]').val()});
-                display_locations(arr);
-                console.log(arr);
-                }
-            );
-        });
-    </script>
-    <script type="text/javascript">
-        Dropzone.autoDiscover = false;
-        jQuery(document).ready(function() {
-        // $(document).ready(function () {
-            var folio = $('#folio').val();
-            console.log(folio);
-            Dropzone.autoDiscover = false;
-            $("div#my-awesome-dropzone").dropzone({
-                url: "image/upload/store/",
-                maxFiles: 3,
-                maxFilesize: 20,
-                dictResponseError: "Error al subir el archivo",
-                dictInvalidFileType: "Solo archivos tipo Imagen",
-                dictMaxFilesExceeded: "Disculpa, solo puedes subir un maximo de 3 archivos!",
-                paramName: "file",
-                dictFileTooBig: "Archivo demasiado largo, tamaño maximo 2MB.",
-                acceptedFiles: "image/jpeg, image/png, image/jpg",
-                params: {
-                    folio: folio
-                },
-                // init: function() {
-                //     this.on("sending", function(file, xhr, formData) {
-                //     formData.append("data", "loremipsum");
-                //     console.log(formData)
-                //     });
-                // },
-                headers: {
-                    'X-CSRFToken': $('meta[name="token"]').attr('content')
-                },
+      });
+      $(function() {
+        var arr = [];
+        $("#carrito").click(function() {
+          var selectobject=document.getElementById("carritoJC");
+          if ($('#carritoJC').find(":selected").text() != 'Seleccionar asignatura') {
+            arr.push({
+              asignatura: $('#carritoJC').find(":selected").text(),
+              correoDocente: $('input[name=correoDocente]').val(),
+              correoCoordinador: $('input[name=correoCoordinador]').val()
             });
-        });
-    </script>
-
-  <script src="{{ asset('js/selectProfeCord.js') }}"></script>
-
-
+            console.log(arr)
+            display_asignaturas(arr);
+            for (var i=0; i<selectobject.length; i++){
+              if (selectobject.options[i].value == $('#carritoJC').find(":selected").text() )
+                selectobject.remove(i);
+              }
+            }
+          }
+        );
+      });
+      function display_asignaturas(arr) {
+        var newHTML = "";
+        for (var i = 0; i < arr.length; i++) {
+          newHTML = newHTML + '<span>' + arr[i].asignatura + '</span>';
+        }
+        $("#panel-asignaturas").html(newHTML);
+        $("#cursosArray").val(JSON.stringify(arr));
+      }
+    });
+  </script>
 @endsection
 
 {{-- Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop files here to upload";

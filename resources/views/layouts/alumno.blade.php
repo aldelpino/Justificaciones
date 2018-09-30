@@ -45,6 +45,11 @@
                         <li><a href="{{url('/alumno/revisarJustificacion')}}">Revisar Justificaciones</a></li>
                       </ul>
                     </li>
+                    <li><a><i class="fa fa-cog" aria-hidden="true"></i> Configuraciones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{url('/alumno/cambiarContrasena')}}">Cambiar contraseña</a></li>
+                        </ul>
+                      </li>
                   </ul>
                 </div>
               </div>
@@ -64,7 +69,7 @@
                 <ul class="nav navbar-nav navbar-right">
                   <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <img src="images/img.jpg" alt="">{{ auth()->user()->name }}
+                      {{-- <img src="images/img.jpg" alt=""> --}}{{ auth()->user()->name }}
                       <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -87,15 +92,13 @@
           <!-- /top navigation -->
 
           <!-- page content -->
-
           @yield('content')
-
           <!-- /page content -->
 
           <!-- footer content -->
           <footer>
             <div class="pull-right">
-              Justificaciones Antonio Varas 
+              Sistema de Justificaciones - Sede Antonio Varas
             </div>
             <div class="clearfix"></div>
           </footer>
@@ -115,7 +118,6 @@
 
       <!-- Custom Theme Scripts -->
       <script src="/build/js/custom.min.js"></script>
-
     </body>
   @endif
 </html>

@@ -24,7 +24,24 @@ class ContactFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'asignatura' => 'required',
+            'tipoInasistencia' => 'required',
+            'motivo' => 'required',
+            'subioArchivo' => 'required',
+            'comentario' => 'required|min:30|max:200',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'asignatura.required' => 'Debes mencionar asignatura',
+            'tipoInasistencia.required' => 'Debes marcar si faltaste a prueba o no',
+            'motivo.required' => 'Debes indicar un motivo',
+            'subioArchivo.required' => 'Debes adjuntar una imagen',
+            'comentario.required' => 'El comentario es obligatorio',
+            'comentario.min' => 'El largo mínimo del comentario es de :min caracteres',
+            'comentario.max' => 'El largo máximo del comentario es de :max caracteres',
         ];
     }
 }

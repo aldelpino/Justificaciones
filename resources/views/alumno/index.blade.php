@@ -32,12 +32,19 @@
           <span class="count_top"><i class="fa fa-clock-o"></i> Total Pendientes</span>
           <div class="count">{{ $cantValidando }}</div>
         </div>
-
+        <div class="col-md-1 " style="padding-top:20px">
+          <a href="{{ url('/alumno/nuevaJustificacion') }}"  class="btn btn-round btn-success">Crear Justificación</a>
+        </div>
       </div>
     </div>
     <!-- /top tiles -->
 
-
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+    </div>
+    @endif
     <div class="">
         <div class="page-title">
           <div class="clearfix"></div>
