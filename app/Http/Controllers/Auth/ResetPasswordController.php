@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use \Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
