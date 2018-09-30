@@ -35,7 +35,8 @@ class ToTeacher extends Mailable
         return $this->subject('Resolución de justificación')
             ->markdown('correos.justificaciones.aprobadas.profesor')
             ->with([
-                'fechaJustificacion' => $this->justification->FEC_SOL,
+                'fechaSolicitud' => $this->justification->FEC_SOL,
+                'fechaJustificacion' => $this->justification->FEC_JUS,
                 'rutAlumno' => $this->alumno->RUT_ALU,
                 'nombreAlumno' => $this->alumno->NOMBRE_ALUM.' '.$this->alumno->APEP_ALUM,
                 'carreraAlumno' => $this->alumno->CARRERA,

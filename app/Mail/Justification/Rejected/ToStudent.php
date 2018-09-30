@@ -46,7 +46,8 @@ class ToStudent extends Mailable
                 'carreraAlumno' => $this->student['CARRERA'],
                 'asignaturas' => $this->subjects,
                 'resolucion' => $this->justification->COMENTARIO_REC,
-                'fechaJustificacion' => $this->justification->FEC_SOL,
+                'fechaSolicitud' => $this->justification->FEC_SOL,
+                'fechaJustificacion' => $this->justification->FEC_JUS,
             ]);
     }
 }

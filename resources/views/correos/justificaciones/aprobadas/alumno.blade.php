@@ -3,7 +3,7 @@
 
 Le informamos que la solicitud <strong>{{ $folio }}</strong> de justificación
 ha sido <strong>APROBADA</strong> por su coordinador(a)
-con fecha <strong>{{ date("d-m-Y", strtotime($fechaJustificacion)) }}</strong>.
+ingresada el dia <strong>{{ date("d-m-Y", strtotime($fechaSolicitud)) }}</strong>.
 Su docente será informado de esta situación.
 Si justifica alguna evaluación, debe coordinar con el docente.
 
@@ -12,6 +12,7 @@ Si justifica alguna evaluación, debe coordinar con el docente.
 * Rut: {{ $rutAlumno }}
 * Nombre: {{ $nombreAlumno }}
 * Carrera: {{ $carreraAlumno }}
+* Fecha justificada: {{ $fechaJustificacion }}
 * Docentes:
 @foreach($nombreProfesores as $p)
   * {{ $p }}
