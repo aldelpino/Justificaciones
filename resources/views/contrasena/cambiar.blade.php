@@ -47,22 +47,16 @@
                                                 {{ session('success') }}
                                             </div>
                                         @endif
-                                        {{-- alumno/contrasena/cambiar --}}
-                                        {{-- action="{{url('alumno/store')}}" --}}
 
                                         <form method="POST" action="{{url('alumno/contrasena/cambiar')}}" aria-label="{{ __('Reset Password') }}">
-                                            {{-- <form method="POST" action="{{ route('contrasena.change') }}" aria-label="{{ __('Reset Password') }}"> --}}
-                                            {{-- <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}"> --}}
                                             @csrf
-                                            {{-- <input type="hidden" name="token" value="{{ $token }}"> --}}
-                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <div class="form-group row">
                                                 <label for="actual" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña Actual') }}</label>
                                                 <div class="col-md-6">
-                                                    <input id="actual" type="password" class="form-control" name="actual" required autofocus>
-                                                    @if ($errors->has('email'))
+                                                    <input id="actual" type="password" class="form-control" name="actual" required>
+                                                    @if ($errors->has('actual'))
                                                         <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $errors->first('email') }}</strong>
+                                                            <strong>{{ $errors->first('actual') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -74,9 +68,9 @@
                                                 <div class="col-md-6">
                                                     <input id="nueva" type="password" class="form-control" name="nueva" required>
 
-                                                    @if ($errors->has('password'))
+                                                    @if ($errors->has('nueva'))
                                                         <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $errors->first('password') }}</strong>
+                                                            <strong>{{ $errors->first('nueva') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -86,7 +80,7 @@
                                                 <label for="renueva" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
 
                                                 <div class="col-md-6">
-                                                    <input id="renueva" type="password" class="form-control" name="renueva" required>
+                                                    <input id="renueva" type="password" class="form-control" name="nueva_confirmation" required>
                                                 </div>
                                             </div>
 

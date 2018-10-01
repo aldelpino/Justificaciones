@@ -1,8 +1,8 @@
 @component('mail::message')
-# Estimado:
+# Estimado(a):
 
 Le informamos que la solicitud <strong>{{ $folio }}</strong> ha sido <strong>RECHAZADA</strong> por su coordinador(a)
-con fecha <strong>{{ date("d-m-Y", strtotime($fechaJustificacion)) }}</strong>.
+ingresada el día <strong>{{ date("d-m-Y", strtotime($fechaSolicitud)) }}</strong>.
 Su docente será informado de esta situación.
 
 ## Detalle Solicitud
@@ -10,6 +10,7 @@ Su docente será informado de esta situación.
 * Rut: {{ $rutAlumno }}
 * Nombre: {{ $nombreAlumno }}
 * Carrera: {{ $carreraAlumno }}
+* Fecha justificada: {{ $fechaJustificacion }}
 * Docentes:
 @foreach($nombreProfesores as $p)
   * {{ $p }}
@@ -22,5 +23,5 @@ Su docente será informado de esta situación.
 
 Favor, conservar este mail.
 
-<i>Sistema de Justificaciones Duoc UC - Sede Antonio Varas, 2018.</i>
+<i>Sistema de Justificaciones, {{ date('Y') }}.</i>
 @endcomponent

@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ config('app.name') }}.
+            © Duoc UC - Sede Antonio Varas.
         @endcomponent
     @endslot
 @endcomponent

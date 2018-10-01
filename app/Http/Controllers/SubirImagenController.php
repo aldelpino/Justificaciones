@@ -9,7 +9,6 @@ use Carbon\Carbon;
 
 class SubirImagenController extends Controller
 {
-    //
     public function fileStore(Request $request)
     {
         Log::Debug($request->file('file')->getClientOriginalName() + '######################################################REQUEST');

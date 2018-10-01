@@ -29,9 +29,7 @@
   </head>
 
   @if (auth()->user()->rol == 1)
-
-
-  <body class="nav-md">
+    <body class="nav-md">
       <div class="container body">
         <div class="main_container">
           <div class="col-md-3 left_col">
@@ -53,7 +51,6 @@
                 </div>
               </div>
               <!-- /sidebar menu -->
-
             </div>
           </div>
 
@@ -91,9 +88,7 @@
           <!-- /top navigation -->
 
           <!-- page content -->
-
           @yield('content')
-
           <!-- /page content -->
 
           <!-- footer content -->
@@ -123,5 +118,4 @@
 
     </body>
   @endif
-
 </html>

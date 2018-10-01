@@ -1,5 +1,5 @@
 @component('mail::message')
-# Estimado:
+# Estimado(a):
 
 Le informamos que la solicitud <strong>{{ $folio }}</strong> ha sido ingresada con éxito.
 Su coordinador revisará la solicitud y la responderá a la brevedad.
@@ -21,5 +21,5 @@ Su coordinador revisará la solicitud y la responderá a la brevedad.
 
 ¡Gracias!
 
-<i>Sistema de Justificaciones Duoc UC - Sede Antonio Varas, 2018.</i>
+<i>Sistema de Justificaciones, {{ date('Y') }}.</i>
 @endcomponent
