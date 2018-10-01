@@ -41,7 +41,7 @@ class ContrasenaController extends Controller
                 $usuario = 'alumno';
             } elseif (auth()->user()->rol == 1) {
                 $usuario = 'coordinador';
-            } elseif (auth()->user()->rol == 3) {
+            } elseif (auth()->user()->rol == 2) {
                 $usuario = 'administrador';
             }
             return redirect()->intended($usuario.'/index')->with('success', 'CONTRASEÑA MODIFICADA CORRECTAMENTE !!!                      Presiona x para cerrar');;
