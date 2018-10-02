@@ -12,22 +12,7 @@
       }
     </style>
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#wizard').smartWizard({
-        enableFinishButton: false
-      });
 
-      // $("#wizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
-      //   $('.next').hide();
-      // if($('button.sw-btn-next').hasClass('disabled')){
-      //     $('.sw-btn-group-extra').show(); // show the button extra only in the last page
-      // }else{
-      //     $('.sw-btn-group-extra').hide();                
-      // }
-
-  });
-</script>
 @endsection
 
 @section('content')
@@ -46,6 +31,7 @@
           <div class="x_panel">
             <div class="x_content">
               <!-- Smart Wizard -->
+              <div id ="alertBox" class="alert alert-danger" style="opacity: 0" onclick="ocultarAlerta()"></div>
               @if(count($errors))
               <div class="alert alert-danger">
                 <strong>Ups!</strong> Algo no anda bien con tu solicitud de justificación.
@@ -65,6 +51,7 @@
                 <input type="hidden" id="correoDocente" name="correoDocente">
                 <input type="hidden" id="correoCoordinador" name="correoCoordinador">
                 <input type="hidden" id="subioArchivo" name="subioArchivo">
+                <input type="hidden" id="seleccionoFecha" name="seleccionoFecha">
                 <div id="wizard" class="form_wizard wizard_horizontal">
                   <ul class="wizard_steps">
                     <li>
@@ -183,7 +170,6 @@
                             @endforeach
                         </select>
                         <span class="fa fa-folder form-control-feedback right" aria-hidden="true"></span>
-                        <span id="loader"><i class="form-control-feedback fa fa-spinner fa-3x fa-spin"></i></span>
                       </div>
                             {{-- <div class="col-md-9">
                               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -191,7 +177,7 @@
                               </div>
                             </div> --}}
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <select class="form-control" name="motivo">
+                        <select class="form-control" name="motivo" id="motivoId">
                           <option value=''>Seleciona un motivo</option>
                           <option value='Medico'>Médico</option>
                           <option value='Laboral'>Laboral</option>
@@ -200,6 +186,7 @@
                         <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <span id="loader"><i class="form-control-feedback fa fa-spinner fa-3x fa-spin"></i></span>
                         <label for="panel-asignaturas" class="control-label has-feedback">Asignaturas que serán justificadas:</label>
                         <div id="panel-asignaturas" class="form-group has-feedback">No has seleccionado Asignaturas</div>
                         <div class="form-group">
@@ -214,12 +201,12 @@
                           ¿Faltaste a alguna evaluación?
                         <div class="checkbox form-group">
                           <label>
-                            <input name="tipoInasistencia" type="checkbox" value="SI"> SI
+                            <input name="tipoInasistencia" type="checkbox" value="SI" id="siprueba" class="validarStep"> SI
                           </label>
                         </div>
                         <div class="checkbox form-group">
                           <label>
-                            <input name="tipoInasistencia" type="checkbox" value="NO"> NO
+                            <input name="tipoInasistencia" type="checkbox" value="NO" id="noprueba" class="validarStep"> NO
                           </label>
                         </div>
                       </div>
@@ -241,7 +228,9 @@
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Paso 4 Comentario</h2>
-                      <label for="message">Ingrese mínimo 30 caracteres y máximo 500:</label>
+                      <label for="message">Ingrese mínimo 30 caracteres y máximo 500: (caracteres ingresados </label>
+                      <label for="message"><div id="count"></div></label>
+                      <label for="message">)</label>
                       <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentario"></textarea>
                     </div>
                     {{-- <div class="form-group">
@@ -272,50 +261,97 @@
   <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
-  {{-- <script type="text/javascript">
-    Dropzone.options.dropzone =
-     {
-        maxFilesize: 12,
-        renameFile: function(file) {
-            var dt = new Date();
-            var time = dt.getTime();
-           return time+file.name;
-        },
-        acceptedFiles: ".pdf",
-        addRemoveLinks: true,
-        timeout: 5000,
-        success: function(file, response)
-        {
-            console.log(response);
-        },
-        error: function(file, response)
-        {
-           return false;
-        }
-}; --}}
-{{-- <script>
-    // CSRF for all ajax call
-    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-</script>
   <script type="text/javascript">
-    Dropzone.autoDiscover = false;
-    jQuery(document).ready(function() {
+    function ocultarAlerta() {
+        document.getElementById("alertBox").style.opacity=0;
+    }
+    $(document).ready(function(){
+        $("#message").keyup(function(){
+            $("#count").text($(this).val().length);
+        });
+        $('input[name=fechaJustificacion]').daterangepicker();
+            $(document).on("click",".applyBtn",function() {
+                $("#seleccionoFecha").val('sip');
+            });
+        // Smart Wizard
+        $('#wizard').smartWizard({
+            onLeaveStep:leaveAStepCallback,
+            onFinish:onFinishCallback
+        });
 
-      $("div#my-awesome-dropzone").dropzone({
-        url: "image/upload/store"
-      });
+        function leaveAStepCallback(obj, context){
+            return validateSteps(context.fromStep)
+            // if (context.fromStep != 1){
+            // }
+            // if (validateSteps(context.fromStep)){
+            //     return true;
+            // } else {
+            //     // alert("Te faltan datos por completar, por favor vuelve a revisar");
+            //     return false;
+            // }
+            // return validateSteps(context.fromStep); // return false to stay on step and true to continue navigation
+        }
+
+        function onFinishCallback(objs, context){
+            console.log(document.getElementById('message').value.length);
+            if( document.getElementById('message').value.length > 30 && document.getElementById('message').value.length < 500) {
+                $('form').submit();
+            } else {
+                document.getElementById("alertBox").style.opacity=1;
+                document.getElementById("alertBox").innerHTML="Debes completar el comentario de forma correcta...(Click para cerrar)";
+                // alert("Debes completar el comentario de forma correcta");
+            }
+        }
+
+        // Your Step validation logic
+        function validateSteps(stepnumber){
+            var isStepValid = true;
+            if(stepnumber == 1){
+                return true;
+            }
+            if(stepnumber == 2){
+                var m = document.getElementById("motivoId");
+                if( document.getElementById('seleccionoFecha').value === "" ) {
+                    document.getElementById("alertBox").style.opacity=1;
+                    document.getElementById("alertBox").innerHTML="Debes indicar las fechas de tu inasistencia...(Click para cerrar)";
+                    // alert("Debes indicar un rango de fechas");
+                    isStepValid = false;
+                } else if( document.getElementById('panel-asignaturas').innerHTML === "No has seleccionado Asignaturas" ) {
+                    document.getElementById("alertBox").style.opacity=1;
+                    document.getElementById("alertBox").innerHTML="Debes seleccionar al menos una asignatura...(Click para cerrar)";
+                    // alert("Debes seleccionar al menos una asignatura");
+                    isStepValid = false;
+                } else if ( m.options[m.selectedIndex].value === '') {
+                    document.getElementById("alertBox").style.opacity=1;
+                    document.getElementById("alertBox").innerHTML="Debes seleccionar un motivo...(Click para cerrar)";
+                    // alert("Debes seleccionar un motivo");
+                    isStepValid = false;
+                } else if ( !document.getElementById("siprueba").checked && !document.getElementById("noprueba").checked) {
+                    document.getElementById("alertBox").style.opacity=1;
+                    document.getElementById("alertBox").innerHTML="Debes indicar si faltaste o no a alguna evaluación...(Click para cerrar)";
+                    // alert("Debes indicar si faltaste a alguna evaluación");
+                    isStepValid = false;
+                }
+                return isStepValid;
+            }
+            if(stepnumber == 3){
+                if( document.getElementById('subioArchivo').value === "" ) {
+                    document.getElementById("alertBox").style.opacity=1;
+                    document.getElementById("alertBox").innerHTML="Debes subir al menos una imagen a tu justificación...(Click para cerrar)";
+                    // alert("Debes subir al menos ua imagen a tu justificación");
+                    isStepValid = false;
+                }
+                return isStepValid;
+            }
+            return isStepValid;
+        }
+        // function validateAllSteps(){
+        //     var isStepValid = true;
+        //     return isStepValid;
+        // }
     });
+    </script>
 
-    Dropzone.options.myAwesomeDropzone =
-    {
-    acceptedFiles: ".pdf",
-    autoProcessQueue: true,
-    uploadMultiple: true,
-    parallelUploads: 2,
-    maxFiles: 2,
-    maxFilesize: 3,
-    };
-  </script> --}}
   <script type="text/javascript">
     Dropzone.autoDiscover = false;
     $(document).ready(function () {
@@ -442,3 +478,4 @@ Dropzone.prototype.defaultOptions.dictCancelUpload = "Cancel upload";
 Dropzone.prototype.defaultOptions.dictCancelUploadConfirmation = "Are you sure you want to cancel this upload?";
 Dropzone.prototype.defaultOptions.dictRemoveFile = "Remove file";
 Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "You can not upload any more files."; --}}
+
