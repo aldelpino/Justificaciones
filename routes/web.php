@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function(){
 
   // Coordinador
   Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
-
+  Route::get('coordinador/cambiarContrasena', 'ContrasenaController@index')->name('contrasena.create')->middleware('auth:web');
   //Roles
 //   Route::post('roles/store', 'RoleController@store')->name('roles.store')->middleware('permission:roles.create');
 //   Route::get('roles', 'RoleController@index')->name('roles.index')->middleware('permission:roles.index');

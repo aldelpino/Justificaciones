@@ -47,6 +47,11 @@
                   <h3>General</h3>
                   <ul class="nav side-menu">
                     <li><a href="{{ url('/coordinador/index') }}"><i class="fa fa-home"></i> Inicio </a></li>
+                    <li><a><i class="fa fa-cog" aria-hidden="true"></i> Configuraciones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{url('/coordinador/cambiarContrasena')}}">Cambiar contraseña</a></li>
+                        </ul>
+                      </li>
                   </ul>
                 </div>
               </div>
