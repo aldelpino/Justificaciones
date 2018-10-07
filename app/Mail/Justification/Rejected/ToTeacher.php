@@ -35,14 +35,17 @@ class ToTeacher extends Mailable
         return $this->subject('Resolución de justificación')
             ->markdown('correos.justificaciones.rechazadas.profesor')
             ->with([
+                // justification
                 'fechaJustificacion' => $this->justification->FEC_JUS,
                 'fechaSolicitud' => $this->justification->FEC_SOL,
+                'asignatura' => $this->justification->ASIGNATURA,
+                'resolucion' => $this->justification->COMENTARIO_REC,
+
+                // student
                 'rutAlumno' => $this->alumno->RUT_ALU,
                 'nombreAlumno' => $this->alumno->NOMBRE_ALUM.' '.$this->alumno->APEP_ALUM,
                 'carreraAlumno' => $this->alumno->CARRERA,
-                'asignatura' => $this->justification->ASIGNATURA,
                 'nombreCoordinador' => $this->alumno->NOMBRE_COR.' '.$this->alumno->APEP_COR,
-                'resolucion' => $this->justification->COMENTARIO_REC,
             ]);
     }
 }
