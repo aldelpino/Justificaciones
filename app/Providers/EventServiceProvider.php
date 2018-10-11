@@ -31,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         JustificationSubmitted::class => [
             SubmittedSendEmailToStudent::class,
-            SubmittedSendEmailToCoordinator::class,
+            // SubmittedSendEmailToCoordinator::class,
         ],
         JustificationApproved::class => [
             ApprovedSendEmailToStudent::class,
