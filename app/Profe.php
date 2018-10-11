@@ -8,6 +8,11 @@ class Profe extends Model
 {
     use Notifiable;
 
+
+
+
+
+    
     protected $admin;
     protected $email;
 
