@@ -33,15 +33,15 @@ class ContrasenaController extends Controller
     {
         $current_password = Auth::User()->password;
         if (Hash::check($request['actual'], $current_password)) {
-            User::find(auth()->user()->id)->update([
+            User::where('email', auth()->user()->email)->update([
+                'activacion' => 1,
                 'password' => Hash::make($request['nueva']),
-                'activacion' => 1
             ]);
             if (auth()->user()->rol == 0) {
                 $usuario = 'alumno';
             } elseif (auth()->user()->rol == 1) {
                 $usuario = 'coordinador';
-            } elseif (auth()->user()->rol == 3) {
+            } elseif (auth()->user()->rol == 2) {
                 $usuario = 'administrador';
             }
             return redirect()->intended($usuario.'/index')->with('success', 'CONTRASEÑA MODIFICADA CORRECTAMENTE !!!                      Presiona x para cerrar');;

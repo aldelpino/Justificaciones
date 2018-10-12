@@ -49,6 +49,7 @@ class CoordinadorController extends Controller
             ->where([['justifications.correo_cor','like', auth()->user()->email],['estado', 'like', 'Rechazado']])
             ->groupBy('justifications.ID_DATO','NFOLIO', 'RUT_ALU', 'justifications.NOMBRE_ALUM', 'FEC_SOL', 'FEC_JUS', 'ASIGNATURA','ESTADO')
             ->limit(1000)->get();
+
         return view('coordinador/index', [
             'listaJustificacionesValidando' => $listaJustificacionesValidando,
             'listaJustificacionesRechazadas' => $listaJustificacionesRechazadas,
