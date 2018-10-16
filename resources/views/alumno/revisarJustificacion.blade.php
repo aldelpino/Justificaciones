@@ -42,8 +42,8 @@
                         <tr>
                                 <td>{{ $obj->FEC_SOL }}</td>
                                 <td>{{ $obj->ASIGNATURA }}</td>
-                                <td>{{ $obj->FEC_SOL }}</td>
-                                <td>{{ $obj->UPDATED_AT }}</td>
+                                <td>{{ substr($obj->FEC_JUS,0, 10) }}</td>
+                                <td>{{ substr($obj->FEC_JUS,12, 22) }}</td>
                                 <td>{{ $obj->ESTADO }}</td>
                         </tr>
                     @endforeach

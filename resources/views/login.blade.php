@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JUSTIFICACIONES - AVARAS</title>
+    <title>Justificaciones - Antonio Varas</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- NProgress -->
@@ -36,7 +36,7 @@
                 <div class="container imagenLogo  col-md-offset-3">
                   <img src="{{ asset('build/images/ivaras.png') }}" class="img-responsive" alt="Cinque Terre" width="40%" >
                 </div>
-                <h1>Sistema de Justificaciones</h1>
+                <h1>Sistemas de Justificaciones</h1>
                 <div>
                   <input type="email" class="form-control" placeholder="Correo Institucional" required="" name="email" value="{{ old('email') }}" />
                   @if($errors->has('email'))

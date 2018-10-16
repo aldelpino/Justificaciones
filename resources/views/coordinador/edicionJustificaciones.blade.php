@@ -207,6 +207,8 @@
                       </div>
 
 
+                      <img src="/public/storage/2018/09/201804213710670.jpg" alt="asdas">
+
                     </div>
                     <div id="step-4">
                       <h2 class="StepTitle">Evaluación y Comentarios</h2><br><br>
