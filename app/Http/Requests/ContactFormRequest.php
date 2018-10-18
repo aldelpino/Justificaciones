@@ -28,7 +28,7 @@ class ContactFormRequest extends FormRequest
             'tipoInasistencia' => 'required',
             'motivo' => 'required',
             'subioArchivo' => 'required',
-            'comentario' => 'required|min:30|max:200',
+            'comentario' => 'required|min:30|max:500',
         ];
     }
 
