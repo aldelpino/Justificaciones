@@ -231,6 +231,7 @@
                       <label for="message">Ingrese mínimo 30 caracteres y máximo 500: (caracteres ingresados </label>
                       <label for="message"><div id="count"></div></label>
                       <label for="message">)</label>
+                      <label for="message">CUANDO TU SOLICITUD SE ENCUENTRE TERMINADA PRESIONA EL BOTON FINALIZAR</label>
                       <textarea cols="40" rows="5" id="message" required="required" class="form-control" name="comentario"></textarea>
                     </div>
                     {{-- <div class="form-group">
