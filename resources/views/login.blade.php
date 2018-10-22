@@ -51,9 +51,10 @@
                   </span>
                   @endif
                 </div>
-                <div>
+                <div >
                   <button class="btn btn-primary btn-block">Acceder</button>
-                  <a class="reset_pass" href="#signup">¿Perdiste tu contraseña?</a>
+                  <a class="reset_pass" href="#signup" style="margin-right: 80px">¿Perdiste tu contraseña?</a>
+                  <a class="reset_pass" href="https://youtu.be/DRsjrkHLQN0" target="_blank" style="margin-right: 105px">Ve tutorial aquí</a>
                 </div>
                 <div class="clearfix"></div>
               </form>
