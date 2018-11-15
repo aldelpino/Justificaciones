@@ -39,15 +39,18 @@ class ToStudent extends Mailable
         return $this->subject('Resolución de justificación')
             ->markdown('correos.justificaciones.aprobadas.alumno')
             ->with([
+                // justification data
                 'folio' => $this->justification->nfolio,
-                'nombreProfesores' => $this->teachers,
-                'rutAlumno' => $this->student['RUT_ALU'],
                 'nombreAlumno' => $this->justification->NOMBRE_ALUM.' '.$this->justification->APEP_ALUM,
-                'carreraAlumno' => $this->student['CARRERA'],
-                'asignaturas' => $this->subjects,
                 'fechaJustificacion' => $this->justification->FEC_JUS,
                 'resolucion' => $this->justification->COMENTARIO_REC,
                 'fechaSolicitud' => $this->justification->FEC_SOL,
+
+                // extra data
+                'nombreProfesores' => $this->teachers,
+                'rutAlumno' => $this->student['RUT_ALU'],
+                'carreraAlumno' => $this->student['CARRERA'],
+                'asignaturas' => $this->subjects,
             ]);
     }
 }

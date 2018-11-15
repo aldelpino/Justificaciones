@@ -131,7 +131,6 @@
     </div>
   </div>
   <!-- /page content -->
-
 @endsection
 
 @section('utilities')

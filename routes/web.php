@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function(){
 
   // Administrador
   Route::get('/administrador/index','AdministradorController@index')->name('administrador');
-
+  Route::get('/administrador/justificaciones','AdministradorController@justificacionesTotal')->name('administrador');
   // Coordinador
   Route::get('/coordinador/index','CoordinadorController@index')->name('coordinador');
   Route::get('coordinador/cambiarContrasena', 'ContrasenaController@index')->name('contrasena.create')->middleware('auth:web');

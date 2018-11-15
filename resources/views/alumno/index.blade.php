@@ -53,8 +53,8 @@
               <div class="x_panel">
 
                 <div class="x_content">
-                  <table id="datatable" class="table table-striped table-bordered">
-                    <thead>
+                  <table id="datatable" class="table table-striped table-bordered" style="text-align:center">
+                    <thead >
                       <tr>
                         <th>Fecha Solicitud</th>
                         <th>Asignatura</th>
@@ -67,11 +67,11 @@
                     <tbody>
                         {{-- {{ $justificacion }} --}}
                       @foreach ($justificacion as $obj)
-                        <tr>
+                        <tr >
                           <td>{{ $obj->FEC_SOL }}</td>
                           <td>{{ $obj->ASIGNATURA }}</td>
-                          <td>{{ $obj->FEC_SOL }}</td>
-                          <td>{{ $obj->UPDATED_AT }}</td>
+                          <td>{{ substr($obj->FEC_JUS,0, 10) }}</td>
+                          <td>{{ substr($obj->FEC_JUS,12, 22) }}</td>
                           <td>{{ $obj->ESTADO }}</td>
                         </tr>
                       @endforeach

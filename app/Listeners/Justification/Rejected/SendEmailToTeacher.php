@@ -29,16 +29,15 @@ class SendEmailToTeacher
     public function handle(JustificationRejected $event)
     {
         $justifications = Justification::whereFolio($event->justification->NFOLIO)->get();
-        $filteredTeacherEmails = $justifications->unique('CORREO_DOC')->pluck('CORREO_DOC');
-        $alumno = DB::table('datos_semestre')
+        $student = DB::table('datos_semestre')
             ->where('CORREO_ALUM', $event->justification->CORREO_ALUM)
             ->where('NOM_ASIG', $event->justification->ASIGNATURA)
-            ->get();
+            ->first();
 
-        foreach ($filteredTeacherEmails as $email) {
+        foreach ($justifications as $justification) {
+            $email = $justification->CORREO_DOC;
             Mail::to($email)->send(new JustificationRejectedEmail(
-                $event->justification,
-                $alumno[0]
+                $justification, $student
             ));
         }
     }

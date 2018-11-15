@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JUSTIFICACIONES - AVARAS</title>
+    <title>Justificaciones - Antonio Varas</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- NProgress -->
@@ -51,9 +51,10 @@
                   </span>
                   @endif
                 </div>
-                <div>
+                <div >
                   <button class="btn btn-primary btn-block">Acceder</button>
-                  <a class="reset_pass" href="#signup">¿Perdiste tu contraseña?</a>
+                  <a class="reset_pass" href="#signup" style="margin-right: 80px">¿Perdiste tu contraseña?</a>
+                  <a class="reset_pass" href="https://youtu.be/DRsjrkHLQN0" target="_blank" style="margin-right: 104px">Ve tutorial aquí</a>
                 </div>
                 <div class="clearfix"></div>
               </form>
