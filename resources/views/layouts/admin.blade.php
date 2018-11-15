@@ -56,10 +56,6 @@
                     <li><a><i class="fa fa-bar-chart-o"></i> Datos y Estadisticas <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="{{ url('/administrador/justificaciones') }}">Datos Por Justificacion</a></li>
-                        <li><a href="{{ url('/administrador/estadisticas2') }}">Datos Por Carrera</a></li>
-                        <li><a href="{{ url('/administrador/estadisticas3') }}">Datos Por Periodo</a></li>
-                        <li><a href="{{ url('/administrador/estadisticas4') }}">Datos Historicos</a></li>
-                        <li><a href="other_charts.html">Otros Datos</a></li>
                       </ul>
                     </li>
                   </ul>
