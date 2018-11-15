@@ -87,7 +87,8 @@
       $('table.display').DataTable({
         "scrollX": true,
         "columnDefs": [{ "width": "300px", "targets": 2 },
-                       { "width": "50%", "targets": 8 }
+                       { "width": "600px", "targets": 8 },
+                       { "width": "600px", "targets": 11 }
 
                       ],
         "order": [[ 4, "asc" ]],
